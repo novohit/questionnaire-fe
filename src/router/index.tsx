@@ -12,6 +12,7 @@ import Recycle from '../pages/manage/Recycle';
 import Star from '../pages/manage/Star';
 import Edit from '../pages/question/Edit';
 import Stats from '../pages/question/Stats';
+import QuestionLayout from '../layouts/QuestionLayout';
 
 const router = createBrowserRouter([
   {
@@ -31,15 +32,15 @@ const router = createBrowserRouter([
           { path: 'star', element: <Star /> },
         ],
       },
-      {
-        path: '/question',
-        element: <ManageLayout />,
-        children: [
-          { path: 'edit', element: <Edit /> },
-          { path: 'stats', element: <Stats /> },
-        ],
-      },
       { path: '*', element: <NotFound /> },
+    ],
+  },
+  {
+    path: '/question',
+    element: <QuestionLayout />,
+    children: [
+      { path: 'edit/:id', element: <Edit /> },
+      { path: 'stats/:id', element: <Stats /> },
     ],
   },
 ]);

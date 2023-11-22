@@ -1,9 +1,20 @@
 import React, { FC } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Home: FC = () => {
+  const nav = useNavigate();
+  function clickHandler() {
+    nav({ pathname: '/login', search: 'name=test' });
+  }
+
   return (
     <>
-      <p>Home</p>
+      <div>
+        <p>Home</p>
+        {/* 两种路由跳转方式 */}
+        <button onClick={clickHandler}>登录</button>
+        <Link to={'/register?name=aa'}>注册</Link>
+      </div>
     </>
   );
 };
