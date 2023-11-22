@@ -1,6 +1,7 @@
 import React, { FC, useState } from 'react';
 import styles from './List.module.scss';
 import QuestionCard from '../../components/QuestionCard';
+// import { useSearchParams } from 'react-router-dom';
 
 const mockQuestionList = [
   {
@@ -38,6 +39,8 @@ const mockQuestionList = [
 ];
 
 const List: FC = () => {
+  // const [searchParams] = useSearchParams();
+  // console.log('keyword', searchParams.get('keyword'));
   const [questionList, setQuestionList] = useState(mockQuestionList);
   console.log(questionList, setQuestionList);
 
