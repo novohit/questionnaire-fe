@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styles from './ManageLayout.module.scss';
 import { Button, Divider, Space } from 'antd';
 import {
@@ -10,6 +10,9 @@ import {
 } from '@ant-design/icons';
 
 const ManageLayout: FC = () => {
+  const nav = useNavigate();
+  const { pathname } = useLocation();
+  // console.log(pathname);
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -18,13 +21,31 @@ const ManageLayout: FC = () => {
             创建问卷
           </Button>
           <Divider />
-          <Button type="default" icon={<BarsOutlined />}>
+          <Button
+            type={pathname.startsWith('/manage/list') ? 'default' : 'text'}
+            icon={<BarsOutlined />}
+            onClick={() => {
+              nav('/manage/list');
+            }}
+          >
             我的问卷
           </Button>
-          <Button type="default" icon={<StarOutlined />}>
+          <Button
+            type={pathname.startsWith('/manage/star') ? 'default' : 'text'}
+            icon={<StarOutlined />}
+            onClick={() => {
+              nav('/manage/star');
+            }}
+          >
             星标问卷
           </Button>
-          <Button type="default" icon={<DeleteOutlined />}>
+          <Button
+            type={pathname.startsWith('/manage/recycle') ? 'default' : 'text'}
+            icon={<DeleteOutlined />}
+            onClick={() => {
+              nav('/manage/recycle');
+            }}
+          >
             回收站
           </Button>
         </Space>
