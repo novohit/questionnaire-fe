@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import styles from './QuestionCard.module.scss';
-import { Button, Divider, Space, Tag } from 'antd';
+import { Button, Divider, Modal, Popconfirm, Space, Tag, message } from 'antd';
 import {
   CopyOutlined,
   DeleteOutlined,
   EditOutlined,
+  ExclamationCircleFilled,
   LineChartOutlined,
   StarOutlined,
   StarTwoTone,
@@ -21,9 +22,27 @@ type PropsType = {
   createdAt: string;
 };
 
+const { confirm } = Modal;
+
 const QuestionCard: FC<PropsType> = (props: PropsType) => {
   const { _id, title, answerCount, isPublished, isStar, createdAt } = props;
   const nav = useNavigate();
+
+  function deleteQuestion() {
+    confirm({
+      title: '确认删除该问卷？',
+      icon: <ExclamationCircleFilled />,
+      content: '删除后可从回收站恢复',
+      okText: '确认',
+      cancelText: '取消',
+      onOk() {
+        console.log('OK');
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
 
   console.log(_id);
   return (
@@ -83,13 +102,31 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
           </div>
           <div className={styles.right}>
             <Space>
-              <Button type="text" icon={<StarOutlined />} onClick={() => {}}>
+              <Button
+                type="text"
+                icon={<StarOutlined />}
+                onClick={() => {
+                  message.success('收藏成功');
+                }}
+              >
                 {isStar ? '取消收藏' : '点击收藏'}
               </Button>
-              <Button type="text" icon={<CopyOutlined />} onClick={() => {}}>
-                复制
-              </Button>
-              <Button type="text" icon={<DeleteOutlined />} onClick={() => {}}>
+              <Popconfirm
+                title="确认复制该问卷"
+                onConfirm={() => {}}
+                onCancel={() => {}}
+                okText="确认"
+                cancelText="取消"
+              >
+                <Button type="text" icon={<CopyOutlined />}>
+                  复制
+                </Button>
+              </Popconfirm>
+              <Button
+                type="text"
+                icon={<DeleteOutlined />}
+                onClick={deleteQuestion}
+              >
                 删除
               </Button>
             </Space>
