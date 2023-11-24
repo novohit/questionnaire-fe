@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react';
-import styles from './List.module.scss';
+import styles from './Common.module.scss';
 import QuestionCard from '../../components/QuestionCard';
 import { useTitle } from 'ahooks';
+import { Typography } from 'antd';
 // import { useSearchParams } from 'react-router-dom';
 
 const mockQuestionList = [
@@ -39,6 +40,8 @@ const mockQuestionList = [
   },
 ];
 
+const { Title } = Typography;
+
 const List: FC = () => {
   useTitle('问卷星 - 我的问卷');
   // const [searchParams] = useSearchParams();
@@ -49,7 +52,9 @@ const List: FC = () => {
   return (
     <>
       <div className={styles.header}>
-        <div className={styles.left}>我的问卷</div>
+        <div className={styles.left}>
+          <Title level={3}>我的问卷</Title>
+        </div>
         <div className={styles.right}>(搜索)</div>
       </div>
       <div className={styles.content}>
@@ -58,7 +63,7 @@ const List: FC = () => {
           return <QuestionCard key={_id} {...q} />;
         })}
       </div>
-      <div className={styles.footer}>分页</div>
+      <div className={styles.footer}>Load more</div>
     </>
   );
 };
