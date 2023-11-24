@@ -17,7 +17,7 @@ const ManageLayout: FC = () => {
     <div className={styles.container}>
       <div className={styles.left}>
         <Space direction="vertical">
-          <Button type="primary" icon={<PlusOutlined />}>
+          <Button type="primary" icon={<PlusOutlined />} size="large">
             创建问卷
           </Button>
           <Divider />
@@ -27,6 +27,7 @@ const ManageLayout: FC = () => {
             onClick={() => {
               nav('/manage/list');
             }}
+            size="large"
           >
             我的问卷
           </Button>
@@ -36,8 +37,9 @@ const ManageLayout: FC = () => {
             onClick={() => {
               nav('/manage/star');
             }}
+            size="large"
           >
-            星标问卷
+            收藏问卷
           </Button>
           <Button
             type={pathname.startsWith('/manage/recycle') ? 'default' : 'text'}
@@ -45,6 +47,7 @@ const ManageLayout: FC = () => {
             onClick={() => {
               nav('/manage/recycle');
             }}
+            size="large"
           >
             回收站
           </Button>
