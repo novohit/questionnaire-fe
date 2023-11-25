@@ -1,7 +1,17 @@
-import { Empty, Table, Tag, Typography } from 'antd';
+import { Button, Empty, Space, Table, Tag, Typography } from 'antd';
 import React, { FC, useState } from 'react';
 import styles from './Common.module.scss';
 import { useTitle } from 'ahooks';
+import { ColumnsType } from 'antd/es/table';
+
+interface Question {
+  _id: string;
+  title: string;
+  isPublished: boolean;
+  isStar: boolean;
+  answerCount: number;
+  createdAt: string;
+}
 
 const mockRecycleList = [
   {
@@ -22,7 +32,7 @@ const mockRecycleList = [
   },
 ];
 
-const columns = [
+const columns: ColumnsType<Question> = [
   {
     title: '标题',
     dataIndex: 'title',
@@ -53,6 +63,25 @@ const columns = [
     title: '创建时间',
     dataIndex: 'createdAt',
   },
+  {
+    title: '操作',
+    dataIndex: 'operation',
+    // render 第二个参数可以拿到每一行的对象信息
+    render: (_, record) => {
+      return (
+        <>
+          <Space>
+            <Button type="text" size="small">
+              恢复 {record._id}
+            </Button>
+            <Button danger type="link" size="small">
+              彻底删除
+            </Button>
+          </Space>
+        </>
+      );
+    },
+  },
 ];
 
 const { Title } = Typography;
@@ -61,7 +90,12 @@ const Recycle: FC = () => {
   useTitle('问卷星 - 回收站');
 
   const [recycleList, setRecycleList] = useState(mockRecycleList);
+  const [selectedIds, setSelectedIds] = useState<React.Key[]>([]);
   console.log(recycleList, setRecycleList);
+
+  function onSelectChange(selectedIds: React.Key[]) {
+    setSelectedIds(selectedIds);
+  }
 
   return (
     <>
@@ -77,6 +111,10 @@ const Recycle: FC = () => {
           <Table
             rowKey={q => q._id}
             dataSource={recycleList}
+            rowSelection={{
+              selectedRowKeys: selectedIds,
+              onChange: onSelectChange,
+            }}
             columns={columns}
             pagination={false}
           />
