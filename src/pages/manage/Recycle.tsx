@@ -75,6 +75,7 @@ const Recycle: FC = () => {
         {recycleList.length === 0 && <Empty description="暂无数据" />}
         {recycleList.length > 0 && (
           <Table
+            rowKey={q => q._id}
             dataSource={recycleList}
             columns={columns}
             pagination={false}
