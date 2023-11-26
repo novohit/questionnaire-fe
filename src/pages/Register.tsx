@@ -43,7 +43,7 @@ const Register: FC = () => {
           <Form.Item label="确认密码" name="rePassword">
             <Input.Password />
           </Form.Item>
-          <Form.Item wrapperCol={{ offset: 6, span: 20 }}>
+          <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
             <Space direction="horizontal">
               <Button type="primary" htmlType="submit">
                 注册
