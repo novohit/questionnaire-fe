@@ -1,27 +1,18 @@
 import { Button, Typography } from 'antd';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MANAGE_INDEX_PATH } from '../router';
 import styles from './Home.module.scss';
+import axios from 'axios';
+import '../mock/index'; // 需要引用 mockjs 才会劫持
 
 const { Title, Paragraph } = Typography;
 const Home: FC = () => {
   const nav = useNavigate();
-  // function clickHandler() {
-  //   nav({ pathname: '/login', search: 'name=test' });
-  // }
 
-  // return (
-  //   <>
-  //     <div>
-  //       <p>Home</p>
-  //       <Button type="primary">登录</Button>
-  //       {/* 两种路由跳转方式 */}
-  //       <button onClick={clickHandler}>登录</button>
-  //       <Link to={'/register?name=aa'}>注册</Link>
-  //     </div>
-  //   </>
-  // );
+  useEffect(() => {
+    axios.get('/api/test').then(res => console.log('res ', res));
+  }, []);
 
   return (
     <div className={styles.container}>
