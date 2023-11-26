@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react';
 import styles from './Common.module.scss';
 import QuestionCard from '../../components/QuestionCard';
 import { useTitle } from 'ahooks';
+import ListSearch from '../../components/ListSearch';
 
 const mockStarList = [
   {
@@ -37,7 +38,9 @@ const Star: FC = () => {
         <div className={styles.left}>
           <Title level={3}>收藏问卷</Title>
         </div>
-        <div className={styles.right}>(搜索)</div>
+        <div className={styles.right}>
+          <ListSearch />
+        </div>
       </div>
       <div className={styles.content}>
         {starList.length === 0 && <Empty description="暂无数据" />}
