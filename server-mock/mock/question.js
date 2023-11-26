@@ -16,7 +16,8 @@ module.exports = [
                 data: {
                     id: Random.id(),
                     title: Random.ctitle(),
-                }
+                },
+                message: 'hello'
             }
         }
     },
