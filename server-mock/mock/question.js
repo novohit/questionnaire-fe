@@ -19,5 +19,16 @@ module.exports = [
                 }
             }
         }
-    }
+    },
+    {
+        // 创建问卷
+        url: '/api/question',
+        method: 'post',
+        response() {
+            return {
+                code: 0,
+                message: 'success'
+            }
+        }
+    },
 ]
