@@ -3,16 +3,16 @@ import { SEARCH_KEY } from '../constants';
 import { getQuestionList } from '../services/question';
 import { useRequest } from 'ahooks';
 
-function useLoadQuestionList(opt: { isStar?: boolean; isRecycle?: boolean }) {
+function useLoadQuestionList(opt: { isStar?: boolean; isDeleted?: boolean }) {
   const [searchParams] = useSearchParams();
-  const { isStar, isRecycle } = opt;
+  const { isStar, isDeleted } = opt;
   const { data, loading, error } = useRequest(
     async () => {
       const keyword = searchParams.get(SEARCH_KEY);
       if (keyword) {
-        return await getQuestionList({ keyword, isStar, isRecycle });
+        return await getQuestionList({ keyword, isStar, isDeleted });
       } else {
-        return await getQuestionList({ isStar, isRecycle });
+        return await getQuestionList({ isStar, isDeleted });
       }
     },
     {

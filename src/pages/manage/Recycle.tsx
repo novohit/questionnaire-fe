@@ -67,6 +67,10 @@ const columns: ColumnsType<Question> = [
     dataIndex: 'createdAt',
   },
   {
+    title: '删除时间',
+    dataIndex: 'deletedAt',
+  },
+  {
     title: '操作',
     dataIndex: 'operation',
     // render 第二个参数可以拿到每一行的对象信息
@@ -96,7 +100,7 @@ const Recycle: FC = () => {
   // console.log(recycleList, setRecycleList);
 
   const [selectedIds, setSelectedIds] = useState<React.Key[]>([]);
-  const { data, loading, error } = useLoadQuestionList({ isRecycle: true });
+  const { data, loading, error } = useLoadQuestionList({ isDeleted: true });
   const recycleList = data?.list || [];
 
   function onSelectChange(selectedIds: React.Key[]) {

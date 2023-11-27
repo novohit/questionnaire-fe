@@ -17,5 +17,5 @@ export interface PageResponse<T> {
 export interface SearchOption {
   keyword: string;
   isStar: boolean;
-  isRecycle: boolean;
+  isDeleted: boolean;
 }
