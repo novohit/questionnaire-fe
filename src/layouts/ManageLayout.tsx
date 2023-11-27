@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styles from './ManageLayout.module.scss';
 import { Button, Divider, Space, message } from 'antd';
@@ -14,12 +14,16 @@ const ManageLayout: FC = () => {
   const nav = useNavigate();
   const { pathname } = useLocation();
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleCreateQuestion = async () => {
+    setLoading(true);
     const id = (await createQuestion()) || {};
     if (id) {
       nav(`/question/edit/${id}`);
       message.success('创建成功');
     }
+    setLoading(false);
   };
 
   return (
@@ -31,6 +35,7 @@ const ManageLayout: FC = () => {
             icon={<PlusOutlined />}
             size="large"
             onClick={handleCreateQuestion}
+            disabled={loading}
           >
             创建问卷
           </Button>
