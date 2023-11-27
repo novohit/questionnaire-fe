@@ -44,7 +44,6 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
     });
   }
 
-  console.log(_id);
   return (
     <>
       <div className={styles.container}>
