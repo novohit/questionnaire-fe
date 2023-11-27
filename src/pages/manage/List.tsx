@@ -1,11 +1,14 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styles from './Common.module.scss';
 import QuestionCard from '../../components/QuestionCard';
 import { useTitle } from 'ahooks';
 import { Typography } from 'antd';
 import ListSearch from '../../components/ListSearch';
+import { getQuestionList } from '../../services/question';
+import { Question } from '../../model';
 // import { useSearchParams } from 'react-router-dom';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mockQuestionList = [
   {
     _id: 'q1',
@@ -47,8 +50,17 @@ const List: FC = () => {
   useTitle('问卷星 - 我的问卷');
   // const [searchParams] = useSearchParams();
   // console.log('keyword', searchParams.get('keyword'));
-  const [questionList, setQuestionList] = useState(mockQuestionList);
-  console.log(questionList, setQuestionList);
+  const [questionList, setQuestionList] = useState<Question[]>([]);
+
+  useEffect(() => {
+    async function load() {
+      const data = await getQuestionList();
+      const { list, total } = data;
+      console.log(total);
+      setQuestionList(list);
+    }
+    load();
+  }, []);
 
   return (
     <>

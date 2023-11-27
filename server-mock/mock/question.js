@@ -3,6 +3,7 @@
 /* eslint-disable prettier/prettier */
 const Mock = require('mockjs')
 
+const getQuestionList = require('./data/getQuestionList')
 const Random = Mock.Random
 
 module.exports = [
@@ -28,6 +29,21 @@ module.exports = [
             return {
                 code: 0,
                 data: Random.id(),
+                message: 'success'
+            }
+        }
+    },
+    {
+        // 问卷列表
+        url: '/api/question',
+        method: 'get',
+        response() {
+            return {
+                code: 0,
+                data: {
+                    list: getQuestionList(),
+                    total: 100
+                },
                 message: 'success'
             }
         }

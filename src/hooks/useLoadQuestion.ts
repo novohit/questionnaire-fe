@@ -4,13 +4,14 @@ import { useParams } from 'react-router-dom';
 
 function useLoadQuestion() {
   // 获取动态路由的参数
-  const { id = '' } = useParams();
+  const { _id = '' } = useParams();
   const [loading, setLoading] = useState(true);
   const [question, setQuestion] = useState({});
 
   useEffect(() => {
     async function get() {
-      const data = await getQuestion(id);
+      console.log('tst', _id);
+      const data = await getQuestion(_id);
       setQuestion(data);
       setLoading(false);
     }

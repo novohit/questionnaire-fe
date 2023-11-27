@@ -18,9 +18,9 @@ const ManageLayout: FC = () => {
 
   const handleCreateQuestion = async () => {
     setLoading(true);
-    const id = (await createQuestion()) || {};
-    if (id) {
-      nav(`/question/edit/${id}`);
+    const _id = (await createQuestion()) || {};
+    if (_id) {
+      nav(`/question/edit/${_id}`);
       message.success('创建成功');
     }
     setLoading(false);
