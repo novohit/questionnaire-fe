@@ -3,12 +3,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import styles from './Common.module.scss';
 import QuestionCard from '../../components/QuestionCard';
-import { useRequest, useTitle } from 'ahooks';
+import { useTitle } from 'ahooks';
 import { Empty, Spin, Typography } from 'antd';
 import ListSearch from '../../components/ListSearch';
 import { getQuestionList } from '../../services/question';
 import { Question } from '../../model';
-import { useSearchParams } from 'react-router-dom';
+import useLoadQuestionList from '../../hooks/useLoadQuestionList';
 
 const mockQuestionList = [
   {
@@ -49,8 +49,6 @@ const { Title } = Typography;
 
 const List: FC = () => {
   useTitle('问卷星 - 我的问卷');
-  // const [searchParams] = useSearchParams();
-  // console.log('keyword', searchParams.get('keyword'));
   // const [questionList, setQuestionList] = useState<Question[]>([]);
 
   // useEffect(() => {
@@ -63,7 +61,7 @@ const List: FC = () => {
   //   load();
   // }, []);
 
-  const { data, loading } = useRequest(getQuestionList);
+  const { data, loading, error } = useLoadQuestionList();
   const questionList = data?.list || [];
 
   return (
