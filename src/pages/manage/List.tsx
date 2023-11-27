@@ -61,7 +61,7 @@ const List: FC = () => {
   //   load();
   // }, []);
 
-  const { data, loading, error } = useLoadQuestionList();
+  const { data, loading, error } = useLoadQuestionList({});
   const questionList = data?.list || [];
 
   return (

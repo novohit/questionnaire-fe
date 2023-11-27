@@ -1,9 +1,11 @@
-import { Button, Empty, Space, Table, Tag, Typography } from 'antd';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Button, Empty, Space, Spin, Table, Tag, Typography } from 'antd';
 import React, { FC, useState } from 'react';
 import styles from './Common.module.scss';
 import { useTitle } from 'ahooks';
 import { ColumnsType } from 'antd/es/table';
 import ListSearch from '../../components/ListSearch';
+import useLoadQuestionList from '../../hooks/useLoadQuestionList';
 
 interface Question {
   _id: string;
@@ -90,9 +92,12 @@ const { Title } = Typography;
 const Recycle: FC = () => {
   useTitle('问卷星 - 回收站');
 
-  const [recycleList, setRecycleList] = useState(mockRecycleList);
+  // const [recycleList, setRecycleList] = useState(mockRecycleList);
+  // console.log(recycleList, setRecycleList);
+
   const [selectedIds, setSelectedIds] = useState<React.Key[]>([]);
-  console.log(recycleList, setRecycleList);
+  const { data, loading, error } = useLoadQuestionList({ isRecycle: true });
+  const recycleList = data?.list || [];
 
   function onSelectChange(selectedIds: React.Key[]) {
     setSelectedIds(selectedIds);
@@ -109,8 +114,15 @@ const Recycle: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {recycleList.length === 0 && <Empty description="暂无数据" />}
-        {recycleList.length > 0 && (
+        {loading && (
+          <div style={{ textAlign: 'center' }}>
+            <Spin />
+          </div>
+        )}
+        {!loading && recycleList.length === 0 && (
+          <Empty description="暂无数据" />
+        )}
+        {!loading && recycleList.length > 0 && (
           <Table
             rowKey={q => q._id}
             dataSource={recycleList}

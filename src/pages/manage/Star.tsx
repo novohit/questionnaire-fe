@@ -1,9 +1,11 @@
-import { Empty, Typography } from 'antd';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Empty, Spin, Typography } from 'antd';
 import React, { FC, useState } from 'react';
 import styles from './Common.module.scss';
 import QuestionCard from '../../components/QuestionCard';
 import { useTitle } from 'ahooks';
 import ListSearch from '../../components/ListSearch';
+import useLoadQuestionList from '../../hooks/useLoadQuestionList';
 
 const mockStarList = [
   {
@@ -29,8 +31,9 @@ const { Title } = Typography;
 const Star: FC = () => {
   useTitle('问卷星 - 收藏问卷');
 
-  const [starList, setStarList] = useState(mockStarList);
-  console.log(starList, setStarList);
+  // const [starList, setStarList] = useState(mockStarList);
+  const { data, loading, error } = useLoadQuestionList({ isStar: true });
+  const starList = data?.list || [];
 
   return (
     <>
@@ -43,8 +46,14 @@ const Star: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {starList.length === 0 && <Empty description="暂无数据" />}
-        {starList.length > 0 &&
+        {loading && (
+          <div style={{ textAlign: 'center' }}>
+            <Spin />
+          </div>
+        )}
+        {!loading && starList.length === 0 && <Empty description="暂无数据" />}
+        {!loading &&
+          starList.length > 0 &&
           starList.map(q => {
             const { _id } = q;
             return <QuestionCard key={_id} {...q} />;
