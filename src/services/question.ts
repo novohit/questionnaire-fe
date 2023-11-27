@@ -11,3 +11,9 @@ export async function getQuestion(id: string) {
   const data = (await http.get(url)) as Question;
   return data;
 }
+
+export async function createQuestion() {
+  const url = '/api/question';
+  const data = (await http.post(url)) as number;
+  return data;
+}

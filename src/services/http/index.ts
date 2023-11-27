@@ -10,7 +10,7 @@ instance.interceptors.response.use(
   (res: AxiosResponse) => {
     const resp = (res.data || {}) as DataType;
     const { code, data, message = '系统异常' } = resp;
-    if (code === 0) {
+    if (code !== 0) {
       Message.error(message);
       // return Promise.reject(new Error(message));
       // TODO reject 异常处理

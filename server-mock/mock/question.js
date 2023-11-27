@@ -28,6 +28,7 @@ module.exports = [
         response() {
             return {
                 code: 0,
+                data: Random.id(),
                 message: 'success'
             }
         }
