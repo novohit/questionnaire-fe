@@ -13,7 +13,7 @@ async function getRes(fn, ctx) {
         setTimeout(() => {
             const res = fn(ctx)
             resolve(res)
-        }, 100) // ms
+        }, 1000) // ms
     })
 }
 
