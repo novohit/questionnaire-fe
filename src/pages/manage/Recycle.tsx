@@ -6,6 +6,7 @@ import { useTitle } from 'ahooks';
 import { ColumnsType } from 'antd/es/table';
 import ListSearch from '../../components/ListSearch';
 import useLoadQuestionList from '../../hooks/useLoadQuestionList';
+import ListPage from '../../components/ListPage';
 
 interface Question {
   _id: string;
@@ -139,7 +140,7 @@ const Recycle: FC = () => {
           />
         )}
       </div>
-      <div className={styles.footer}>分页</div>
+      <div className={styles.footer}>{!loading && <ListPage />}</div>
     </>
   );
 };

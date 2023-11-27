@@ -6,6 +6,7 @@ import QuestionCard from '../../components/QuestionCard';
 import { useTitle } from 'ahooks';
 import ListSearch from '../../components/ListSearch';
 import useLoadQuestionList from '../../hooks/useLoadQuestionList';
+import ListPage from '../../components/ListPage';
 
 const mockStarList = [
   {
@@ -59,7 +60,7 @@ const Star: FC = () => {
             return <QuestionCard key={_id} {...q} />;
           })}
       </div>
-      <div className={styles.footer}>分页</div>
+      <div className={styles.footer}>{!loading && <ListPage />}</div>
     </>
   );
 };

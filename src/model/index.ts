@@ -18,4 +18,6 @@ export interface SearchOption {
   keyword: string;
   isStar: boolean;
   isDeleted: boolean;
+  page: number;
+  size: number;
 }
