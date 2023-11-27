@@ -1,21 +1,9 @@
-import React, { FC, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getQuestion } from '../../../services/question';
+import React, { FC } from 'react';
+import useLoadQuestion from '../../../hooks/useLoadQuestion';
 
 const Edit: FC = () => {
-  // 获取动态路由的参数
-  const { id = '' } = useParams();
-  const [loading, setLoading] = useState(true);
-  const [question, setQuestion] = useState({});
-
-  useEffect(() => {
-    async function get() {
-      const data = await getQuestion(id);
-      setQuestion(data);
-      setLoading(false);
-    }
-    get();
-  }, []);
+  // 用 hooks 抽取公共逻辑
+  const { loading, question } = useLoadQuestion();
 
   return (
     <>
