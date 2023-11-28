@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './Common.module.scss';
 import QuestionCard from '../../components/QuestionCard';
 import { useTitle } from 'ahooks';
@@ -9,6 +9,7 @@ import ListSearch from '../../components/ListSearch';
 import { getQuestionList } from '../../services/question';
 import { Question } from '../../model';
 import useLoadQuestionList from '../../hooks/useLoadQuestionList';
+import { useSearchParams } from 'react-router-dom';
 
 const mockQuestionList = [
   {
@@ -49,20 +50,50 @@ const { Title } = Typography;
 
 const List: FC = () => {
   useTitle('问卷星 - 我的问卷');
-  // const [questionList, setQuestionList] = useState<Question[]>([]);
+  const [questionList, setQuestionList] = useState<Question[]>([]);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
 
-  // useEffect(() => {
-  //   async function load() {
-  //     const data = await getQuestionList();
-  //     const { list, total } = data;
-  //     console.log(total);
-  //     setQuestionList(list);
-  //   }
-  //   load();
-  // }, []);
+  const [searchParams] = useSearchParams();
 
-  const { data, loading, error } = useLoadQuestionList({});
-  const questionList = data?.list || [];
+  const haveMore = total > questionList.length;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const prevY = useRef<number>(0);
+  const loading = true;
+
+  // 如何判断一个元素是否在可视区域中 https://vue3js.cn/interview/JavaScript/visible.html
+  function tryLoadMore() {
+    // 判断是否向下滑
+    if (window.scrollY > prevY.current) {
+      const element = containerRef.current;
+      if (element == null) return;
+      const domRect = element.getBoundingClientRect();
+      if (domRect == null) return;
+      const { bottom } = domRect;
+      const viewHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+      if (bottom <= viewHeight) {
+        console.log(bottom, viewHeight);
+        console.log('load more');
+      }
+    }
+    prevY.current = window.scrollY;
+  }
+
+  // 1. 监控路由参数
+  useEffect(() => {
+    tryLoadMore();
+  }, [searchParams]);
+
+  // 2.
+  useEffect(() => {
+    // 绑定
+    window.addEventListener('scroll', tryLoadMore);
+    // 解绑
+    return () => {
+      window.removeEventListener('scroll', tryLoadMore);
+    };
+  }, []);
 
   return (
     <>
@@ -75,6 +106,7 @@ const List: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
+        <div style={{ height: '2000px' }}></div>
         {loading && (
           <div style={{ textAlign: 'center' }}>
             <Spin />
@@ -90,7 +122,9 @@ const List: FC = () => {
             return <QuestionCard key={_id} {...q} />;
           })}
       </div>
-      <div className={styles.footer}>Load more</div>
+      <div className={styles.footer}>
+        <div ref={containerRef}>Load more</div>
+      </div>
     </>
   );
 };
