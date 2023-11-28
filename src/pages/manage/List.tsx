@@ -3,7 +3,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './Common.module.scss';
 import QuestionCard from '../../components/QuestionCard';
-import { useTitle } from 'ahooks';
+import { useDebounceFn, useTitle } from 'ahooks';
 import { Empty, Spin, Typography } from 'antd';
 import ListSearch from '../../components/ListSearch';
 import { getQuestionList } from '../../services/question';
@@ -61,24 +61,28 @@ const List: FC = () => {
   const prevY = useRef<number>(0);
   const loading = true;
 
-  // 如何判断一个元素是否在可视区域中 https://vue3js.cn/interview/JavaScript/visible.html
-  function tryLoadMore() {
-    // 判断是否向下滑
-    if (window.scrollY > prevY.current) {
-      const element = containerRef.current;
-      if (element == null) return;
-      const domRect = element.getBoundingClientRect();
-      if (domRect == null) return;
-      const { bottom } = domRect;
-      const viewHeight =
-        window.innerHeight || document.documentElement.clientHeight;
-      if (bottom <= viewHeight) {
-        console.log(bottom, viewHeight);
-        console.log('load more');
+  // 防抖函数
+  const { run: tryLoadMore } = useDebounceFn(
+    () => {
+      // 如何判断一个元素是否在可视区域中 https://vue3js.cn/interview/JavaScript/visible.html
+      // 判断是否向下滑
+      if (window.scrollY > prevY.current) {
+        const element = containerRef.current;
+        if (element == null) return;
+        const domRect = element.getBoundingClientRect();
+        if (domRect == null) return;
+        const { bottom } = domRect;
+        const viewHeight =
+          window.innerHeight || document.documentElement.clientHeight;
+        if (bottom <= viewHeight) {
+          console.log(bottom, viewHeight);
+          console.log('load more');
+        }
       }
-    }
-    prevY.current = window.scrollY;
-  }
+      prevY.current = window.scrollY;
+    },
+    { wait: 200 }
+  );
 
   // 1. 监控路由参数
   useEffect(() => {
