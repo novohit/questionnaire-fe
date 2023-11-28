@@ -3,13 +3,14 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './Common.module.scss';
 import QuestionCard from '../../components/QuestionCard';
-import { useDebounceFn, useTitle } from 'ahooks';
+import { useDebounceFn, useRequest, useTitle } from 'ahooks';
 import { Empty, Spin, Typography } from 'antd';
 import ListSearch from '../../components/ListSearch';
 import { getQuestionList } from '../../services/question';
 import { Question } from '../../model';
 import useLoadQuestionList from '../../hooks/useLoadQuestionList';
 import { useSearchParams } from 'react-router-dom';
+import { DEFAULT_PAGE_SIZE, SEARCH_KEY } from '../../constants';
 
 const mockQuestionList = [
   {
@@ -59,7 +60,30 @@ const List: FC = () => {
   const haveMore = total > questionList.length;
   const containerRef = useRef<HTMLDivElement>(null);
   const prevY = useRef<number>(0);
-  const loading = true;
+
+  const {
+    run: loadMore,
+    loading,
+    error,
+  } = useRequest(
+    async () => {
+      const data = await getQuestionList({
+        keyword: searchParams.get(SEARCH_KEY) || '',
+        page,
+        size: DEFAULT_PAGE_SIZE,
+      });
+      return data;
+    },
+    {
+      manual: true,
+      onSuccess: res => {
+        const { list, total } = res;
+        setQuestionList(questionList.concat(list));
+        setPage(page + 1);
+        setTotal(total);
+      },
+    }
+  );
 
   // 防抖函数
   const { run: tryLoadMore } = useDebounceFn(
@@ -75,8 +99,7 @@ const List: FC = () => {
         const viewHeight =
           window.innerHeight || document.documentElement.clientHeight;
         if (bottom <= viewHeight) {
-          console.log(bottom, viewHeight);
-          console.log('load more');
+          loadMore();
         }
       }
       prevY.current = window.scrollY;
@@ -89,15 +112,17 @@ const List: FC = () => {
     tryLoadMore();
   }, [searchParams]);
 
-  // 2.
+  // 2. 监听页面滚动
   useEffect(() => {
     // 绑定
-    window.addEventListener('scroll', tryLoadMore);
+    if (haveMore) {
+      window.addEventListener('scroll', tryLoadMore);
+    }
     // 解绑
     return () => {
       window.removeEventListener('scroll', tryLoadMore);
     };
-  }, []);
+  }, [searchParams, haveMore]);
 
   return (
     <>
@@ -110,7 +135,6 @@ const List: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        <div style={{ height: '2000px' }}></div>
         {loading && (
           <div style={{ textAlign: 'center' }}>
             <Spin />
