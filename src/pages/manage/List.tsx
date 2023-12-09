@@ -66,16 +66,20 @@ const List: FC = () => {
     loading,
     error,
   } = useRequest(
-    async () => {
+    async (type: string) => {
+      if (type === 'route') {
+        setPage(1);
+      }
       const data = await getQuestionList({
         keyword: searchParams.get(SEARCH_KEY) || '',
         page,
         size: DEFAULT_PAGE_SIZE,
       });
-      return data;
+      return { type, data };
     },
     {
       manual: true,
+      defaultParams: ['scroll'],
       onSuccess: res => {
         const { list, total } = res;
         setQuestionList(questionList.concat(list));
@@ -99,7 +103,7 @@ const List: FC = () => {
         const viewHeight =
           window.innerHeight || document.documentElement.clientHeight;
         if (bottom <= viewHeight) {
-          loadMore();
+          loadMore('scroll');
         }
       }
       prevY.current = window.scrollY;
@@ -109,7 +113,7 @@ const List: FC = () => {
 
   // 1. 监控路由参数
   useEffect(() => {
-    tryLoadMore();
+    loadMore('route');
   }, [searchParams]);
 
   // 2. 监听页面滚动
