@@ -67,24 +67,30 @@ const List: FC = () => {
     error,
   } = useRequest(
     async (type: string) => {
+      let p = page;
       if (type === 'route') {
-        setPage(1);
+        p = 1;
       }
       const data = await getQuestionList({
         keyword: searchParams.get(SEARCH_KEY) || '',
-        page,
+        page: p,
         size: DEFAULT_PAGE_SIZE,
       });
       return { type, data };
     },
     {
       manual: true,
-      defaultParams: ['scroll'],
       onSuccess: res => {
-        const { list, total } = res;
-        setQuestionList(questionList.concat(list));
-        setPage(page + 1);
+        const { type, data } = res;
+        const { list, total } = data;
         setTotal(total);
+        if (type === 'scroll') {
+          setPage(page + 1);
+          setQuestionList(questionList.concat(list));
+        } else {
+          setPage(2);
+          setQuestionList(list);
+        }
       },
     }
   );
