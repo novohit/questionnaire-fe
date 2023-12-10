@@ -12,11 +12,8 @@ import {
 } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRequest } from 'ahooks';
-import {
-  copyQuestion,
-  deleteQuestion,
-  updateQuestion,
-} from '../services/question';
+import { copyQuestion, updateQuestion } from '../services/question';
+import dayjs from 'dayjs';
 
 // ts 自定义类型
 type PropsType = {
@@ -51,7 +48,10 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
   );
 
   const { loading: deleteLoading, run: deleteRequest } = useRequest(
-    async () => await deleteQuestion(_id),
+    async () =>
+      await updateQuestion(_id, {
+        deletedAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+      }),
     {
       manual: true,
       onSuccess() {
