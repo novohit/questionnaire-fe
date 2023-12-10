@@ -64,4 +64,16 @@ module.exports = [
             }
         }
     },
+    {
+        // 复制问卷
+        url: '/api/question/copy/:id',
+        method: 'post',
+        response() {
+            return {
+                code: 0,
+                data: Random.id(),
+                message: 'success'
+            }
+        }
+    },
 ]

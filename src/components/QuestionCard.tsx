@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRequest } from 'ahooks';
-import { updateQuestion } from '../services/question';
+import { copyQuestion, updateQuestion } from '../services/question';
 
 // ts 自定义类型
 type PropsType = {
@@ -32,7 +32,18 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
   const [starState, setStarState] = useState(isStar);
   const nav = useNavigate();
 
-  const { loading, run: updateStar } = useRequest(
+  const { loading: copyLoading, run: copy } = useRequest(
+    async () => await copyQuestion(_id),
+    {
+      manual: true,
+      onSuccess(_id) {
+        message.success('复制成功');
+        nav(`/question/edit/${_id}`);
+      },
+    }
+  );
+
+  const { loading: starLoading, run: updateStar } = useRequest(
     async () => {
       await updateQuestion(_id, {
         _id,
@@ -77,9 +88,7 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
               {starState && (
                 <StarTwoTone
                   // twoToneColor="gray"
-                  onClick={() => {
-                    console.log('标星');
-                  }}
+                  onClick={updateStar}
                 />
               )}
               <Link to={`/question/edit/${_id}`}>{title}</Link>
@@ -129,18 +138,21 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
                 type="text"
                 icon={<StarOutlined />}
                 onClick={updateStar}
-                disabled={loading}
+                disabled={starLoading}
               >
                 {starState ? '取消收藏' : '点击收藏'}
               </Button>
               <Popconfirm
                 title="确认复制该问卷"
-                onConfirm={() => {}}
-                onCancel={() => {}}
+                onConfirm={copy}
                 okText="确认"
                 cancelText="取消"
               >
-                <Button type="text" icon={<CopyOutlined />}>
+                <Button
+                  type="text"
+                  icon={<CopyOutlined />}
+                  disabled={copyLoading}
+                >
                   复制
                 </Button>
               </Popconfirm>

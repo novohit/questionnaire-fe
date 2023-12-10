@@ -10,7 +10,7 @@ export async function getQuestion(_id: string) {
 
 export async function createQuestion() {
   const url = '/api/question';
-  const data = (await http.post(url)) as number;
+  const data = (await http.post(url)) as string;
   return data;
 }
 
@@ -23,6 +23,12 @@ export async function getQuestionList(opt: Partial<SearchOption>) {
 
 export async function updateQuestion(_id: string, opt: Question) {
   const url = `/api/question/${_id}`;
-  const data = (await http.put(url, opt)) as number;
+  const data = (await http.put(url, opt)) as string;
+  return data;
+}
+
+export async function copyQuestion(_id: string) {
+  const url = `/api/question/copy/${_id}`;
+  const data = (await http.post(url)) as string;
   return data;
 }
