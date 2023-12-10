@@ -2,6 +2,7 @@
 import {
   Button,
   Empty,
+  Modal,
   Space,
   Spin,
   Table,
@@ -17,6 +18,7 @@ import ListSearch from '../../components/ListSearch';
 import useLoadQuestionList from '../../hooks/useLoadQuestionList';
 import ListPage from '../../components/ListPage';
 import { deleteQuestion, recoverQuestion } from '../../services/question';
+import { ExclamationCircleFilled } from '@ant-design/icons';
 
 interface Question {
   _id: string;
@@ -104,6 +106,7 @@ const columns: ColumnsType<Question> = [
 ];
 
 const { Title } = Typography;
+const { confirm } = Modal;
 
 const Recycle: FC = () => {
   useTitle('问卷星 - 回收站');
@@ -147,6 +150,20 @@ const Recycle: FC = () => {
     }
   );
 
+  function deleteConfirm() {
+    confirm({
+      title: '确认删除该问卷？',
+      icon: <ExclamationCircleFilled />,
+      content: '删除后无法恢复',
+      okText: '确认',
+      cancelText: '取消',
+      onOk() {
+        deleteRequest();
+      },
+      onCancel() {},
+    });
+  }
+
   function onSelectChange(selectedIds: React.Key[]) {
     setSelectedIds(selectedIds);
   }
@@ -167,7 +184,7 @@ const Recycle: FC = () => {
             <Button
               danger
               disabled={selectedIds.length === 0 || deleteLoading}
-              onClick={deleteRequest}
+              onClick={deleteConfirm}
             >
               彻底删除
             </Button>
