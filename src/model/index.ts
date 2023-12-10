@@ -5,6 +5,7 @@ export interface Question {
   isStar: boolean;
   answerCount: number;
   createdAt: string;
+  deletedAt: string;
 }
 
 export interface PageResponse<T> {

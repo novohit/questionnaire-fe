@@ -21,7 +21,7 @@ export async function getQuestionList(opt: Partial<SearchOption>) {
   return data;
 }
 
-export async function updateQuestion(_id: string, opt: Question) {
+export async function updateQuestion(_id: string, opt: Partial<Question>) {
   const url = `/api/question/${_id}`;
   const data = (await http.put(url, opt)) as string;
   return data;
@@ -30,5 +30,11 @@ export async function updateQuestion(_id: string, opt: Question) {
 export async function copyQuestion(_id: string) {
   const url = `/api/question/copy/${_id}`;
   const data = (await http.post(url)) as string;
+  return data;
+}
+
+export async function deleteQuestion(_id: string) {
+  const url = `/api/question/${_id}`;
+  const data = (await http.delete(url)) as string;
   return data;
 }

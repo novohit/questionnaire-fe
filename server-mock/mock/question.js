@@ -76,4 +76,15 @@ module.exports = [
             }
         }
     },
+    {
+        // 删除问卷
+        url: '/api/question/:id',
+        method: 'delete',
+        response() {
+            return {
+                code: 0,
+                message: 'success'
+            }
+        }
+    },
 ]
