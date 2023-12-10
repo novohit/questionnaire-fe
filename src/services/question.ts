@@ -38,3 +38,8 @@ export async function deleteQuestion(_id: string) {
   const data = (await http.delete(url)) as string;
   return data;
 }
+
+export async function recoverQuestion(_ids: React.Key[]) {
+  const url = '/api/question/recover';
+  await http.put(url, _ids);
+}

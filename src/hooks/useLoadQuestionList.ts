@@ -11,7 +11,7 @@ import { useRequest } from 'ahooks';
 function useLoadQuestionList(opt: { isStar?: boolean; isDeleted?: boolean }) {
   const [searchParams] = useSearchParams();
   const { isStar, isDeleted } = opt;
-  const { data, loading, error } = useRequest(
+  const { data, loading, error, refresh } = useRequest(
     async () => {
       const keyword = searchParams.get(SEARCH_KEY);
       const page = parseInt(searchParams.get(PAGE_NUM_KEY) || '') || 1;
@@ -34,7 +34,7 @@ function useLoadQuestionList(opt: { isStar?: boolean; isDeleted?: boolean }) {
     }
   );
 
-  return { data, loading, error };
+  return { data, loading, error, refresh };
 }
 
 export default useLoadQuestionList;

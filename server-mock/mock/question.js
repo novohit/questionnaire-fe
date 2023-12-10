@@ -87,4 +87,15 @@ module.exports = [
             }
         }
     },
+    {
+        // 恢复问卷
+        url: '/api/question/recover',
+        method: 'post',
+        response() {
+            return {
+                code: 0,
+                message: 'success'
+            }
+        }
+    },
 ]

@@ -1,12 +1,22 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button, Empty, Space, Spin, Table, Tag, Typography } from 'antd';
+import {
+  Button,
+  Empty,
+  Space,
+  Spin,
+  Table,
+  Tag,
+  Typography,
+  message,
+} from 'antd';
 import React, { FC, useState } from 'react';
 import styles from './Common.module.scss';
-import { useTitle } from 'ahooks';
+import { useRequest, useTitle } from 'ahooks';
 import { ColumnsType } from 'antd/es/table';
 import ListSearch from '../../components/ListSearch';
 import useLoadQuestionList from '../../hooks/useLoadQuestionList';
 import ListPage from '../../components/ListPage';
+import { recoverQuestion } from '../../services/question';
 
 interface Question {
   _id: string;
@@ -101,8 +111,25 @@ const Recycle: FC = () => {
   // console.log(recycleList, setRecycleList);
 
   const [selectedIds, setSelectedIds] = useState<React.Key[]>([]);
-  const { data, loading, error } = useLoadQuestionList({ isDeleted: true });
+  const { data, loading, error, refresh } = useLoadQuestionList({
+    isDeleted: true,
+  });
   const recycleList = data?.list || [];
+
+  const { loading: recoverLoading, run: recover } = useRequest(
+    async () => {
+      await recoverQuestion(selectedIds);
+    },
+    {
+      manual: true,
+      onSuccess() {
+        message.success('恢复成功');
+        // 手动刷新列表
+        refresh();
+        setSelectedIds([]);
+      },
+    }
+  );
 
   function onSelectChange(selectedIds: React.Key[]) {
     setSelectedIds(selectedIds);
@@ -113,6 +140,22 @@ const Recycle: FC = () => {
       <div className={styles.header}>
         <div className={styles.left}>
           <Title level={3}>回收站</Title>
+          <Space>
+            <Button
+              type="primary"
+              disabled={selectedIds.length === 0 || recoverLoading}
+              onClick={recover}
+            >
+              恢复
+            </Button>
+            <Button
+              danger
+              disabled={selectedIds.length === 0}
+              onClick={() => {}}
+            >
+              彻底删除
+            </Button>
+          </Space>
         </div>
         <div className={styles.right}>
           <ListSearch />
@@ -140,7 +183,9 @@ const Recycle: FC = () => {
           />
         )}
       </div>
-      <div className={styles.footer}>{!loading && <ListPage />}</div>
+      <div className={styles.footer}>
+        {!loading && recycleList.length > 0 && <ListPage />}
+      </div>
     </>
   );
 };
