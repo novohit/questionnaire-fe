@@ -77,8 +77,8 @@ module.exports = [
         }
     },
     {
-        // 删除问卷
-        url: '/api/question/:id',
+        // 批量删除问卷
+        url: '/api/question',
         method: 'delete',
         response() {
             return {
@@ -88,9 +88,9 @@ module.exports = [
         }
     },
     {
-        // 恢复问卷
+        // 批量恢复问卷
         url: '/api/question/recover',
-        method: 'post',
+        method: 'put',
         response() {
             return {
                 code: 0,

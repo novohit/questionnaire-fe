@@ -16,7 +16,7 @@ import { ColumnsType } from 'antd/es/table';
 import ListSearch from '../../components/ListSearch';
 import useLoadQuestionList from '../../hooks/useLoadQuestionList';
 import ListPage from '../../components/ListPage';
-import { recoverQuestion } from '../../services/question';
+import { deleteQuestion, recoverQuestion } from '../../services/question';
 
 interface Question {
   _id: string;
@@ -81,25 +81,26 @@ const columns: ColumnsType<Question> = [
     title: '删除时间',
     dataIndex: 'deletedAt',
   },
-  {
-    title: '操作',
-    dataIndex: 'operation',
-    // render 第二个参数可以拿到每一行的对象信息
-    render: (_, record) => {
-      return (
-        <>
-          <Space>
-            <Button type="text" size="small">
-              恢复 {record._id}
-            </Button>
-            <Button danger type="link" size="small">
-              彻底删除
-            </Button>
-          </Space>
-        </>
-      );
-    },
-  },
+  // 用原生的onClick，这里拿不到selectedId 无法操作 得封装起来
+  // {
+  //   title: '操作',
+  //   dataIndex: 'operation',
+  //   // render 第二个参数可以拿到每一行的对象信息
+  //   render: (_, record) => {
+  //     return (
+  //       <>
+  //         <Space>
+  //           <Button type="text" size="small">
+  //             恢复 {record._id}
+  //           </Button>
+  //           <Button danger type="link" size="small">
+  //             彻底删除
+  //           </Button>
+  //         </Space>
+  //       </>
+  //     );
+  //   },
+  // },
 ];
 
 const { Title } = Typography;
@@ -131,6 +132,21 @@ const Recycle: FC = () => {
     }
   );
 
+  const { loading: deleteLoading, run: deleteRequest } = useRequest(
+    async () => {
+      await deleteQuestion(selectedIds);
+    },
+    {
+      manual: true,
+      onSuccess() {
+        message.success('删除成功');
+        // 手动刷新列表
+        refresh();
+        setSelectedIds([]);
+      },
+    }
+  );
+
   function onSelectChange(selectedIds: React.Key[]) {
     setSelectedIds(selectedIds);
   }
@@ -150,8 +166,8 @@ const Recycle: FC = () => {
             </Button>
             <Button
               danger
-              disabled={selectedIds.length === 0}
-              onClick={() => {}}
+              disabled={selectedIds.length === 0 || deleteLoading}
+              onClick={deleteRequest}
             >
               彻底删除
             </Button>

@@ -33,10 +33,10 @@ export async function copyQuestion(_id: string) {
   return data;
 }
 
-export async function deleteQuestion(_id: string) {
-  const url = `/api/question/${_id}`;
-  const data = (await http.delete(url)) as string;
-  return data;
+export async function deleteQuestion(_ids: React.Key[]) {
+  const url = '/api/question';
+  // https://stackoverflow.com/questions/60482505/axios-deleteurl-config-type-has-no-properties-in-common-with-type-axiosreq
+  await http.delete(url, { data: _ids });
 }
 
 export async function recoverQuestion(_ids: React.Key[]) {
