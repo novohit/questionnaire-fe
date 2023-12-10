@@ -17,7 +17,8 @@ module.exports = [
                 data: {
                     id: Random.id(),
                     title: Random.ctitle(),
-                }
+                },
+                message: 'success'
             }
         }
     },
@@ -48,6 +49,17 @@ module.exports = [
                     list: getQuestionList({ len: size, isDeleted, isStar }),
                     total: 100
                 },
+                message: 'success'
+            }
+        }
+    },
+    {
+        // 更新问卷
+        url: '/api/question/:id',
+        method: 'put',
+        response() {
+            return {
+                code: 0,
                 message: 'success'
             }
         }

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styles from './QuestionCard.module.scss';
 import { Button, Divider, Modal, Popconfirm, Space, Tag, message } from 'antd';
 import {
@@ -11,6 +11,8 @@ import {
   StarTwoTone,
 } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
+import { useRequest } from 'ahooks';
+import { updateQuestion } from '../services/question';
 
 // ts 自定义类型
 type PropsType = {
@@ -26,7 +28,29 @@ const { confirm } = Modal;
 
 const QuestionCard: FC<PropsType> = (props: PropsType) => {
   const { _id, title, answerCount, isPublished, isStar, createdAt } = props;
+  // 更新收藏后，不加载list接口，直接修改页面 维护star的状态
+  const [starState, setStarState] = useState(isStar);
   const nav = useNavigate();
+
+  const { loading, run: updateStar } = useRequest(
+    async () => {
+      await updateQuestion(_id, {
+        _id,
+        title,
+        answerCount,
+        isPublished,
+        isStar: !isStar,
+        createdAt,
+      });
+    },
+    {
+      manual: true,
+      onSuccess() {
+        setStarState(!starState);
+        message.success('更新成功');
+      },
+    }
+  );
 
   function deleteQuestion() {
     confirm({
@@ -50,7 +74,7 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
         <div className={styles.title}>
           <div className={styles.left}>
             <Space>
-              {isStar && (
+              {starState && (
                 <StarTwoTone
                   // twoToneColor="gray"
                   onClick={() => {
@@ -104,11 +128,10 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
               <Button
                 type="text"
                 icon={<StarOutlined />}
-                onClick={() => {
-                  message.success('收藏成功');
-                }}
+                onClick={updateStar}
+                disabled={loading}
               >
-                {isStar ? '取消收藏' : '点击收藏'}
+                {starState ? '取消收藏' : '点击收藏'}
               </Button>
               <Popconfirm
                 title="确认复制该问卷"

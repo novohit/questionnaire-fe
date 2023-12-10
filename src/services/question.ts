@@ -20,3 +20,9 @@ export async function getQuestionList(opt: Partial<SearchOption>) {
   const data = (await http.get(url, { params: opt })) as PageResponse<Question>;
   return data;
 }
+
+export async function updateQuestion(_id: string, opt: Question) {
+  const url = `/api/question/${_id}`;
+  const data = (await http.put(url, opt)) as number;
+  return data;
+}
