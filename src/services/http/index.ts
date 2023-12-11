@@ -1,9 +1,19 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { message as Message } from 'antd';
+import { getToken } from '../../utils/token';
 
 const instance = axios.create({
   timeout: 10 * 1000,
 });
+
+// request 拦截器
+instance.interceptors.request.use(
+  config => {
+    config.headers['Authorization'] = `Bearer ${getToken()}`;
+    return config;
+  },
+  error => Promise.reject(error)
+);
 
 // response 拦截器：统一处理 code 和 message
 instance.interceptors.response.use(
