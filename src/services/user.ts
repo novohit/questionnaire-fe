@@ -1,4 +1,4 @@
-import { User } from '../model';
+import { User, UserLogin } from '../model';
 import http from './http';
 
 export async function getUserInfo(_id: string) {
@@ -13,7 +13,7 @@ export async function register(body: Partial<User>) {
   return _id;
 }
 
-export async function login(body: { username: string; password: string }) {
+export async function login(body: UserLogin) {
   const url = '/api/user/login';
   const token = (await http.post(url, body)) as string;
   return token;

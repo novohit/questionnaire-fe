@@ -22,6 +22,12 @@ export interface UserRegister {
   rePassword: string;
 }
 
+export interface UserLogin {
+  username: string;
+  password: string;
+  remember?: boolean;
+}
+
 export interface PageResponse<T> {
   list: Array<T>;
   total: number;

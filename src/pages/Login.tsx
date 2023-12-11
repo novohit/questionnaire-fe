@@ -1,21 +1,38 @@
 import { UserAddOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, Space, Typography } from 'antd';
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Space,
+  Typography,
+  message,
+} from 'antd';
 import React, { FC } from 'react';
 import styles from './Login.module.scss';
-import { Link } from 'react-router-dom';
-import { REGISTER_PATH } from '../router';
+import { Link, useNavigate } from 'react-router-dom';
+import { MANAGE_INDEX_PATH, REGISTER_PATH } from '../router';
+import { UserLogin } from '../model';
+import { useRequest } from 'ahooks';
+import { login } from '../services/user';
+import { setToken } from '../utils/token';
 
 const { Title } = Typography;
 
-interface UserLogin {
-  username: string;
-  password: string;
-  remember?: boolean;
-}
-
 const Login: FC = () => {
+  const nav = useNavigate();
+
+  const { run } = useRequest(async (values: UserLogin) => await login(values), {
+    manual: true,
+    onSuccess(token: string) {
+      message.success('登录成功');
+      // 存储 token
+      setToken(token);
+      nav(MANAGE_INDEX_PATH);
+    },
+  });
   const onFinish = (values: UserLogin) => {
-    console.log('Success:', values);
+    run(values);
   };
 
   return (

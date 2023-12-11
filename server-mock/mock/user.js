@@ -38,7 +38,7 @@ module.exports = [
         response() {
             return {
                 code: 0,
-                data: Random.word(32),
+                data: Random.word(36) + '.' + Random.word(75) + '.' + Random.word(43),
                 message: 'success'
             }
         }
