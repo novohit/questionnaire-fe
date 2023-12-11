@@ -1,8 +1,8 @@
 import { User, UserLogin } from '../model';
 import http from './http';
 
-export async function getUserInfo(_id: string) {
-  const url = `/api/user/${_id}`;
+export async function getUserInfo() {
+  const url = '/api/user/info';
   const user = (await http.get(url)) as User;
   return user;
 }
