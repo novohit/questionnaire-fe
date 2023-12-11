@@ -1,21 +1,32 @@
 import { UserAddOutlined } from '@ant-design/icons';
-import { Button, Form, Input, Space, Typography } from 'antd';
+import { Button, Form, Input, Space, Typography, message } from 'antd';
 import React, { FC } from 'react';
 import styles from './Register.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LOGIN_PATH } from '../router';
+import { UserRegister } from '../model';
+import { useRequest } from 'ahooks';
+import { register } from '../services/user';
 
 const { Title } = Typography;
 
-interface UserRegister {
-  username: string;
-  password: string;
-  rePassword: string;
-}
-
 const Register: FC = () => {
+  const nav = useNavigate();
+
+  const { run } = useRequest(
+    async (values: UserRegister) =>
+      await register({ username: values.username, password: values.password }),
+    {
+      manual: true,
+      onSuccess() {
+        message.success('注册成功');
+        nav(LOGIN_PATH);
+      },
+    }
+  );
+
   const onFinish = (values: UserRegister) => {
-    console.log('Success:', values);
+    run(values);
   };
 
   return (
