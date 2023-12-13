@@ -6,13 +6,13 @@ const Random = Mock.Random
 
 module.exports = [
     {
-        url: '/api/user/:id',
+        url: '/api/user/info',
         method: 'get',
         response() {
             return {
                 code: 0,
                 data: {
-                    id: Random.id(),
+                    _id: Random.id(),
                     username: Random.cname(),
                     age: Random.integer(16,40),
                     email: Random.email(),
