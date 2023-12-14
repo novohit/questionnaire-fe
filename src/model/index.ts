@@ -42,3 +42,15 @@ export interface SearchOption {
   page: number;
   size: number;
 }
+
+// component ===============================
+export interface QuestionTitleProps {
+  text?: string;
+  level?: 1 | 2 | 3 | 4 | 5;
+  isCenter?: boolean;
+}
+
+export interface QuestionInputProps {
+  title?: string;
+  placeholder?: string;
+}
