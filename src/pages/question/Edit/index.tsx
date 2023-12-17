@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 import useLoadQuestion from '../../../hooks/useLoadQuestion';
 import styles from './index.module.scss';
 import EditCanvas from './EditCanvas';
+import { Spin } from 'antd';
 
 const Edit: FC = () => {
   // 用 hooks 抽取公共逻辑

@@ -6,6 +6,14 @@ export interface Question {
   answerCount: number;
   createdAt: string;
   deletedAt: string;
+  components: QuestionComponent[];
+}
+
+export interface QuestionComponent {
+  _id: string;
+  type: string;
+  title: string;
+  props: ComponentProps;
 }
 
 export interface User {
@@ -44,6 +52,8 @@ export interface SearchOption {
 }
 
 // component ===============================
+export type ComponentProps = QuestionInputProps | QuestionInputProps;
+
 export interface QuestionTitleProps {
   text?: string;
   level?: 1 | 2 | 3 | 4 | 5;

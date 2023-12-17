@@ -15,8 +15,33 @@ module.exports = [
             return {
                 code: 0,
                 data: {
-                    id: Random.id(),
+                    _id: Random.id(),
                     title: Random.ctitle(),
+                    isStar: Random.boolean(),
+                    isPublished: Random.boolean(),
+                    answerCount: Random.natural(50, 100),
+                    createdAt: Random.datetime(),
+                    deletedAt: Random.datetime(),
+                    components: [
+                        {
+                            _id: Random.id(),
+                            title: Random.ctitle(),
+                            type: 'title',
+                            props: { text: '个人信息调研', level: 1, isCenter: false }
+                        },
+                        {
+                            _id: Random.id(),
+                            title: Random.ctitle(),
+                            type: 'input',
+                            props: { title: '你的姓名', placeholder: '请输入姓名' }
+                        },
+                        {
+                            _id: Random.id(),
+                            title: Random.ctitle(),
+                            type: 'input',
+                            props: { title: '你的手机号', placeholder: '请输入手机号 ' }
+                        },
+                    ]
                 },
                 message: 'success'
             }
