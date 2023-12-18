@@ -3,10 +3,12 @@ import React, { FC } from 'react';
 import styles from './EditCanvas.module.scss';
 import QuestionTitle from '../../../components/question/QuestionTitle/Component';
 import QuestionInput from '../../../components/question/QuestionInput/Component';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { getComponentByType } from '../../../components/question/QuestionConfig';
 import { ComponentProps } from '../../../model';
+import { selectComponent } from '../../../store/components';
+import classNames from 'classnames';
 
 function genComponent(type: string, props: ComponentProps) {
   const Component = getComponentByType(type);
@@ -17,15 +19,33 @@ function genComponent(type: string, props: ComponentProps) {
 }
 
 const EditCanvas: FC = () => {
-  const components = useSelector((state: RootState) => state.components);
-  console.log(components);
+  const dispatch = useDispatch();
+  const componentsState = useSelector(
+    (state: RootState) => state.componentsState
+  );
+  const { selectedId, components } = componentsState;
+  // console.log(components);
+
+  function select(_id: string) {
+    dispatch(selectComponent(_id));
+  }
+
   // 静态展示两个组件
   return (
     <div className={styles.canvas}>
       {components.map(c => {
         const { _id, type, title, props } = c;
+
+        // 拼接 css classname
+        const defaultClassName = styles['component-wrapper'];
+        const selectedClassName = styles.selected;
+        const divClassName = classNames({
+          [defaultClassName]: true,
+          [selectedClassName]: _id === selectedId,
+        });
+
         return (
-          <div key={_id} className={styles['component-wrapper']}>
+          <div key={_id} className={divClassName} onClick={() => select(_id)}>
             <div className={styles.component}>{genComponent(type, props)}</div>
           </div>
         );

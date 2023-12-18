@@ -6,7 +6,6 @@ const { Title } = Typography;
 
 const QuestionTitle: FC<QuestionTitleProps> = (props: QuestionTitleProps) => {
   const { text = '一行标题', level = 1, isCenter = true } = { ...props };
-  console.log(text, level, isCenter);
 
   const genFontSize = (level: number) => {
     if (level === 1) return '24px';

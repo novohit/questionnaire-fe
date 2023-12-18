@@ -16,7 +16,7 @@ function useLoadQuestion() {
       const data = await getQuestion(_id);
       // 存储信息到 Redux
       const { components } = data;
-      dispatch(resetComponents(components));
+      dispatch(resetComponents({ selectedId: '', components }));
       setQuestion(data);
       setLoading(false);
     }
