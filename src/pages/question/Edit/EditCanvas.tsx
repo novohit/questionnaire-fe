@@ -26,7 +26,9 @@ const EditCanvas: FC = () => {
   const { selectedId, components } = componentsState;
   // console.log(components);
 
-  function select(_id: string) {
+  function select(event: React.MouseEvent<HTMLDivElement>, _id: string) {
+    // 阻止事件冒泡到上层的styles.main
+    event.stopPropagation();
     dispatch(selectComponent(_id));
   }
 
@@ -45,7 +47,7 @@ const EditCanvas: FC = () => {
         });
 
         return (
-          <div key={_id} className={divClassName} onClick={() => select(_id)}>
+          <div key={_id} className={divClassName} onClick={e => select(e, _id)}>
             <div className={styles.component}>{genComponent(type, props)}</div>
           </div>
         );
