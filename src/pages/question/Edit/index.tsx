@@ -6,6 +6,7 @@ import EditCanvas from './EditCanvas';
 import { Spin } from 'antd';
 import { useDispatch } from 'react-redux';
 import { selectComponent } from '../../../store/components';
+import LeftPanel from './LeftPanel';
 
 const Edit: FC = () => {
   // 用 hooks 抽取公共逻辑
@@ -23,7 +24,9 @@ const Edit: FC = () => {
         <div>Edit Header</div>
         <div className={styles['content-wrapper']}>
           <div className={styles.content}>
-            <div className={styles.left}>left</div>
+            <div className={styles.left}>
+              <LeftPanel />
+            </div>
             <div className={styles.main} onClick={cannelSelected}>
               <div className={styles['canvas-wrapper']}>
                 <div style={{ height: '900px' }}>

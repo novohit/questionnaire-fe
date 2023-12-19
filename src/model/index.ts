@@ -10,7 +10,7 @@ export interface Question {
 }
 
 export interface QuestionComponent {
-  _id: string;
+  componentId: string;
   type: string;
   title: string;
   props: ComponentProps;
@@ -39,6 +39,12 @@ export interface UserLogin {
 export interface PageResponse<T> {
   list: Array<T>;
   total: number;
+}
+
+export interface ComponentGroup {
+  groupId: number;
+  groupName: string;
+  components: Array<QuestionComponent>;
 }
 
 // request ========================

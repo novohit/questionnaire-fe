@@ -4,7 +4,7 @@ import { ComponentProps } from '../../model';
 
 // 为 slice state 定义一个类型
 interface ComponentState {
-  _id: string;
+  componentId: string;
   type: string;
   title: string;
   props: ComponentProps;

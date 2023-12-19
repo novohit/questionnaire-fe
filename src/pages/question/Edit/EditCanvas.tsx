@@ -26,28 +26,35 @@ const EditCanvas: FC = () => {
   const { selectedId, components } = componentsState;
   // console.log(components);
 
-  function select(event: React.MouseEvent<HTMLDivElement>, _id: string) {
+  function select(
+    event: React.MouseEvent<HTMLDivElement>,
+    componentId: string
+  ) {
     // 阻止事件冒泡到上层的styles.main
     event.stopPropagation();
-    dispatch(selectComponent(_id));
+    dispatch(selectComponent(componentId));
   }
 
   // 静态展示两个组件
   return (
     <div className={styles.canvas}>
       {components.map(c => {
-        const { _id, type, title, props } = c;
+        const { componentId, type, title, props } = c;
 
         // 拼接 css classname
         const defaultClassName = styles['component-wrapper'];
         const selectedClassName = styles.selected;
         const divClassName = classNames({
           [defaultClassName]: true,
-          [selectedClassName]: _id === selectedId,
+          [selectedClassName]: componentId === selectedId,
         });
 
         return (
-          <div key={_id} className={divClassName} onClick={e => select(e, _id)}>
+          <div
+            key={componentId}
+            className={divClassName}
+            onClick={e => select(e, componentId)}
+          >
             <div className={styles.component}>{genComponent(type, props)}</div>
           </div>
         );

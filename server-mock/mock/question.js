@@ -24,19 +24,19 @@ module.exports = [
                     deletedAt: Random.datetime(),
                     components: [
                         {
-                            _id: Random.id(),
+                            componentId: Random.id(),
                             title: Random.ctitle(),
                             type: 'title',
                             props: { text: '个人信息调研', level: 1, isCenter: false }
                         },
                         {
-                            _id: Random.id(),
+                            componentId: Random.id(),
                             title: Random.ctitle(),
                             type: 'input',
                             props: { title: '你的姓名', placeholder: '请输入姓名' }
                         },
                         {
-                            _id: Random.id(),
+                            componentId: Random.id(),
                             title: Random.ctitle(),
                             type: 'input',
                             props: { title: '你的手机号', placeholder: '请输入手机号 ' }
