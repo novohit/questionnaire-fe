@@ -4,6 +4,9 @@ import { ComponentGroup } from '../../../model';
 import { Empty, Spin, Typography } from 'antd';
 import { getComponentByType } from '../../../components/question/QuestionConfig';
 import styles from './ComponentLib.module.scss';
+import { useDispatch } from 'react-redux';
+import { addComponent } from '../../../store/components';
+import { nanoid } from '@reduxjs/toolkit';
 
 const { Title } = Typography;
 
@@ -11,6 +14,8 @@ const ComponentLib: FC = () => {
   const [componentLib = [], setComponentLib] =
     useState<Array<ComponentGroup>>();
   const [loading, setLoading] = useState<boolean>(true);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function get() {
@@ -47,8 +52,17 @@ const ComponentLib: FC = () => {
               </Title>
               {components.map(c => {
                 const Component = getComponentByType(c.type);
+                const handleClick = () => {
+                  // TODO 要处理一下id 否则id为空 暂时用nanoid
+                  dispatch(addComponent({ ...c, componentId: nanoid() }));
+                };
+
                 return (
-                  <div key={c.componentId} className={styles.wrapper}>
+                  <div
+                    key={c.componentId}
+                    className={styles.wrapper}
+                    onClick={handleClick}
+                  >
                     <div className={styles.component}>
                       <Component />
                     </div>

@@ -31,10 +31,25 @@ export const componentsSlice = createSlice({
     selectComponent: (state, action: PayloadAction<string>) => {
       state.selectedId = action.payload;
     },
+    addComponent: (state, action: PayloadAction<ComponentState>) => {
+      const newComponent = action.payload;
+      const { selectedId, components } = state;
+      if (!selectedId) {
+        // 未选中任何组件 直接新建到最后
+        //
+        components.push(newComponent);
+      } else {
+        // 插入到选中组件的下一个
+        const index = components.findIndex(c => c.componentId === selectedId);
+        components.splice(index + 1, 0, newComponent);
+      }
+      state.selectedId = newComponent.componentId;
+    },
   },
 });
 // 每个 case reducer 函数会生成对应的 Action creators
-export const { resetComponents, selectComponent } = componentsSlice.actions;
+export const { resetComponents, selectComponent, addComponent } =
+  componentsSlice.actions;
 // 选择器等其他代码可以使用导入的 `RootState` 类型
 export const selectCount = (state: RootState) => state.componentsState;
 
