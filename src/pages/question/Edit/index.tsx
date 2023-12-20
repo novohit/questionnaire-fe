@@ -7,6 +7,7 @@ import { Spin } from 'antd';
 import { useDispatch } from 'react-redux';
 import { selectComponent } from '../../../store/components';
 import LeftPanel from './LeftPanel';
+import RightPanel from './RightPanel';
 
 const Edit: FC = () => {
   // 用 hooks 抽取公共逻辑
@@ -35,7 +36,9 @@ const Edit: FC = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.right}>right</div>
+            <div className={styles.right}>
+              <RightPanel />
+            </div>
           </div>
         </div>
       </div>

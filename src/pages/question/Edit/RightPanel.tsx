@@ -1,30 +1,30 @@
-import { AppstoreAddOutlined, BarsOutlined } from '@ant-design/icons';
+import { FileTextOutlined, SettingOutlined } from '@ant-design/icons';
 import { Tabs, TabsProps } from 'antd';
 import React, { FC } from 'react';
-import ComponentLibTab from './ComponentLibTab';
+import ComponentPropsTab from './ComponentPropsTab';
 
-const LeftPanel: FC = () => {
+const RightPanel: FC = () => {
   const items: TabsProps['items'] = [
     {
       key: '1',
       label: (
         <span>
-          <AppstoreAddOutlined />
-          组件库
+          <FileTextOutlined />
+          属性
         </span>
       ),
-      children: <ComponentLibTab />,
+      children: <ComponentPropsTab />,
       // icon属性用不了？
     },
     {
       key: '2',
       label: (
         <span>
-          <BarsOutlined />
-          图层
+          <SettingOutlined />
+          页面设置
         </span>
       ),
-      children: 'Content of Tab Pane 2',
+      children: <div>页面设置</div>,
     },
   ];
 
@@ -39,4 +39,4 @@ const LeftPanel: FC = () => {
   );
 };
 
-export default LeftPanel;
+export default RightPanel;

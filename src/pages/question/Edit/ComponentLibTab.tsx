@@ -3,7 +3,7 @@ import { getComponentLib } from '../../../services/component';
 import { ComponentGroup } from '../../../model';
 import { Empty, Spin, Typography } from 'antd';
 import { getComponentByType } from '../../../components/question/QuestionConfig';
-import styles from './ComponentLib.module.scss';
+import styles from './ComponentLibTab.module.scss';
 import { useDispatch } from 'react-redux';
 import { addComponent } from '../../../store/components';
 import { nanoid } from '@reduxjs/toolkit';
