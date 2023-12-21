@@ -51,10 +51,20 @@ const ComponentLib: FC = () => {
                 {groupName}
               </Title>
               {components.map(c => {
-                const Component = getComponentByType(c.type);
+                const { componentId, type, defaultProps } = c;
+                const Component = getComponentByType(type);
                 const handleClick = () => {
                   // TODO 要处理一下id 否则id为空 暂时用nanoid
-                  dispatch(addComponent({ ...c, componentId: nanoid() }));
+                  // 注意 userQuestionComponentId 和 componentId 区别
+                  dispatch(
+                    addComponent({
+                      userQuestionComponentId: nanoid(),
+                      componentId,
+                      title: '',
+                      type,
+                      props: defaultProps,
+                    })
+                  );
                 };
 
                 return (

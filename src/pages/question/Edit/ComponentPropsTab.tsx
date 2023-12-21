@@ -12,16 +12,17 @@ const ComponentPropsTab: FC = () => {
     (state: RootState) => state.componentsState
   );
   const { selectedId, components } = componentsState;
-  const selectedComponent = components.find(c => c.componentId === selectedId);
+  const selectedComponent = components.find(
+    c => c.userQuestionComponentId === selectedId
+  );
   if (selectedComponent == null) {
     return <Unselected />;
   }
   const ComponentProps = getComponentPropsByType(selectedComponent?.type);
-
+  // console.log(selectedComponent);
   return (
     <div>
-      选中的组件{JSON.stringify(selectedComponent)}
-      <ComponentProps props={selectedComponent.props} />
+      <ComponentProps {...selectedComponent.props} />
     </div>
   );
 };

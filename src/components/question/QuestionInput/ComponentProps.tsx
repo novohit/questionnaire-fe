@@ -1,11 +1,17 @@
 import { Form, Input } from 'antd';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { QuestionInputProps } from '../../../model';
 
 const ComponentProps: FC<QuestionInputProps> = (props: QuestionInputProps) => {
-  const { title = '输入框标题', placeholder = '请输入...' } = { ...props };
+  const { title, placeholder } = { ...props };
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.setFieldsValue(props);
+  }, [form]);
+
   return (
-    <Form layout="vertical" initialValues={{ title, placeholder }}>
+    <Form form={form} layout="vertical" initialValues={{ title, placeholder }}>
       <Form.Item label="标题" name="title">
         <Input />
       </Form.Item>

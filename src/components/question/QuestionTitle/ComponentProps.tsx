@@ -1,9 +1,15 @@
 import { Checkbox, Form, Input, Select } from 'antd';
-import React, { FC } from 'react';
-import { QuestionInputProps } from '../../../model';
+import React, { FC, useEffect } from 'react';
+import { QuestionTitleProps } from '../../../model';
 
-const ComponentProps: FC<QuestionInputProps> = (props: QuestionInputProps) => {
-  const { text = '一行标题', level = 1, isCenter = true } = { ...props };
+const ComponentProps: FC<QuestionTitleProps> = (props: QuestionTitleProps) => {
+  const { text, level, isCenter } = { ...props };
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.setFieldsValue(props);
+  }, [form]);
+
   return (
     <Form layout="vertical" initialValues={{ text, level, isCenter }}>
       <Form.Item label="标题" name="text">

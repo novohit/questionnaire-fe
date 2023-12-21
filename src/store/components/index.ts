@@ -4,6 +4,7 @@ import { ComponentProps } from '../../model';
 
 // 为 slice state 定义一个类型
 interface ComponentState {
+  userQuestionComponentId: string;
   componentId: string;
   type: string;
   title: string;
@@ -40,10 +41,12 @@ export const componentsSlice = createSlice({
         components.push(newComponent);
       } else {
         // 插入到选中组件的下一个
-        const index = components.findIndex(c => c.componentId === selectedId);
+        const index = components.findIndex(
+          c => c.userQuestionComponentId === selectedId
+        );
         components.splice(index + 1, 0, newComponent);
       }
-      state.selectedId = newComponent.componentId;
+      state.selectedId = newComponent.userQuestionComponentId;
     },
   },
 });

@@ -19,6 +19,11 @@ module.exports = [
                             {
                                 componentId: Random.id(),
                                 type: 'title',
+                                defaultProps: {
+                                    text: "一行标题",
+                                    level: 1,
+                                    isCenter: false,
+                                }
                             },
                         ]
                     },
@@ -29,6 +34,10 @@ module.exports = [
                             {
                                 componentId: Random.id(),
                                 type: 'input',
+                                defaultProps: {
+                                    title: "输入框标题",
+                                    placeholder: "请输入...",
+                                }
                             },
                         ]
                     },

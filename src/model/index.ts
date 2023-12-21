@@ -10,6 +10,7 @@ export interface Question {
 }
 
 export interface QuestionComponent {
+  userQuestionComponentId: string;
   componentId: string;
   type: string;
   title: string;
@@ -41,10 +42,17 @@ export interface PageResponse<T> {
   total: number;
 }
 
+// component
+export interface Component {
+  componentId: string;
+  type: string;
+  defaultProps: ComponentProps;
+}
+
 export interface ComponentGroup {
   groupId: number;
   groupName: string;
-  components: Array<QuestionComponent>;
+  components: Array<Component>;
 }
 
 // request ========================
