@@ -3,15 +3,25 @@ import React, { FC, useEffect } from 'react';
 import { QuestionTitleProps } from '../../../model';
 
 const ComponentProps: FC<QuestionTitleProps> = (props: QuestionTitleProps) => {
-  const { text, level, isCenter } = { ...props };
+  const { text, level, isCenter, onChange } = { ...props };
   const [form] = Form.useForm();
 
   useEffect(() => {
     form.setFieldsValue(props);
-  }, [form]);
+    console.log(form);
+  }, [props]);
+
+  function onValuesChange() {
+    onChange(form.getFieldsValue());
+  }
 
   return (
-    <Form layout="vertical" initialValues={{ text, level, isCenter }}>
+    <Form
+      form={form}
+      layout="vertical"
+      initialValues={{ text, level, isCenter }}
+      onValuesChange={onValuesChange}
+    >
       <Form.Item label="标题" name="text">
         <Input />
       </Form.Item>

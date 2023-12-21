@@ -72,9 +72,13 @@ export interface QuestionTitleProps {
   text?: string;
   level?: 1 | 2 | 3 | 4 | 5;
   isCenter?: boolean;
+
+  onChange: (newProps: QuestionTitleProps) => void;
 }
 
 export interface QuestionInputProps {
   title?: string;
   placeholder?: string;
+
+  onChange: (newProps: QuestionInputProps) => void;
 }
