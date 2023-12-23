@@ -66,6 +66,24 @@ export const componentsSlice = createSlice({
         };
       }
     },
+    // 删除选中的组件
+    deleteComponent: state => {
+      const { selectedId, components } = state;
+      if (!selectedId) {
+        return state;
+      }
+      const index = components.findIndex(
+        c => c.userQuestionComponentId === selectedId
+      );
+      // 删除前selectId下移或者设置为空
+      if (index === components.length - 1) {
+        // 删除的是最后一个
+        state.selectedId = '';
+      } else {
+        state.selectedId = components[index + 1].userQuestionComponentId;
+      }
+      components.splice(index, 1);
+    },
   },
 });
 // 每个 case reducer 函数会生成对应的 Action creators
@@ -74,6 +92,7 @@ export const {
   selectComponent,
   addComponent,
   updateComponent,
+  deleteComponent,
 } = componentsSlice.actions;
 // 选择器等其他代码可以使用导入的 `RootState` 类型
 export const selectCount = (state: RootState) => state.componentsState;
