@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { selectComponent } from '../../../store/components';
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
+import EditHeader from './EditHeader';
 
 const Edit: FC = () => {
   // 用 hooks 抽取公共逻辑
@@ -22,7 +23,9 @@ const Edit: FC = () => {
   return (
     <>
       <div className={styles.container}>
-        <div>Edit Header</div>
+        <div>
+          <EditHeader />
+        </div>
         <div className={styles['content-wrapper']}>
           <div className={styles.content}>
             <div className={styles.left}>
