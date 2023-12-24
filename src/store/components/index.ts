@@ -1,6 +1,7 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit';
 import { RootState } from '..';
 import { ComponentProps } from '../../model';
+import cloneDeep from 'lodash.clonedeep';
 
 // 为 slice state 定义一个类型
 interface ComponentState {
@@ -16,6 +17,7 @@ interface ComponentState {
 interface ComponentsState {
   selectedId: string; // 选中蓝色高亮的状态
   components: ComponentState[];
+  copiedComponent?: ComponentState;
 }
 
 // 使用该类型定义初始 state
@@ -117,6 +119,37 @@ export const componentsSlice = createSlice({
       const old = components[index].locked;
       components[index].locked = !old;
     },
+    // 复制选中的组件
+    copyComponent: state => {
+      const { selectedId, components } = state;
+      if (!selectedId) {
+        return state;
+      }
+      const index = components.findIndex(
+        c => c.userQuestionComponentId === selectedId
+      );
+      // 深拷贝
+      state.copiedComponent = cloneDeep(components[index]);
+    },
+    // 粘贴组件
+    pasteComponent: state => {
+      const { selectedId, components } = state;
+      if (!state.copiedComponent) {
+        return state;
+      }
+      // 注意是粘贴的时候重新生成id
+      state.copiedComponent.userQuestionComponentId = nanoid();
+      if (!selectedId) {
+        // 未选中任何组件 直接粘贴到最后
+        components.push(state.copiedComponent);
+      } else {
+        // 粘贴到选中组件的下一个
+        const index = components.findIndex(
+          c => c.userQuestionComponentId === selectedId
+        );
+        components.splice(index + 1, 0, state.copiedComponent);
+      }
+    },
   },
 });
 // 每个 case reducer 函数会生成对应的 Action creators
@@ -128,6 +161,8 @@ export const {
   deleteComponent,
   hideComponent,
   lockComponent,
+  copyComponent,
+  pasteComponent,
 } = componentsSlice.actions;
 // 选择器等其他代码可以使用导入的 `RootState` 类型
 export const selectCount = (state: RootState) => state.componentsState;

@@ -1,4 +1,6 @@
 import {
+  BlockOutlined,
+  CopyOutlined,
   DeleteOutlined,
   EyeInvisibleOutlined,
   LockOutlined,
@@ -7,9 +9,11 @@ import { Button, Space, Tooltip } from 'antd';
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  copyComponent,
   deleteComponent,
   hideComponent,
   lockComponent,
+  pasteComponent,
 } from '../../../store/components';
 import { RootState } from '../../../store';
 
@@ -18,7 +22,7 @@ const EditMainToolbar: FC = () => {
     (state: RootState) => state.componentsState
   );
   const dispatch = useDispatch();
-  const { selectedId, components } = componentsState;
+  const { selectedId, components, copiedComponent } = componentsState;
   const selectedComponent = components.find(
     c => c.userQuestionComponentId === selectedId
   );
@@ -33,6 +37,14 @@ const EditMainToolbar: FC = () => {
 
   const handleLocked = () => {
     dispatch(lockComponent());
+  };
+
+  const handleCopy = () => {
+    dispatch(copyComponent());
+  };
+
+  const handlePaste = () => {
+    dispatch(pasteComponent());
   };
 
   return (
@@ -57,6 +69,18 @@ const EditMainToolbar: FC = () => {
           shape="circle"
           icon={<LockOutlined />}
           onClick={handleLocked}
+        />
+      </Tooltip>
+      <Tooltip title="复制">
+        <Button shape="circle" icon={<CopyOutlined />} onClick={handleCopy} />
+      </Tooltip>
+      <Tooltip title="粘贴">
+        <Button
+          type={selectedComponent?.locked ? 'primary' : 'default'}
+          disabled={copiedComponent == null}
+          shape="circle"
+          icon={<BlockOutlined />}
+          onClick={handlePaste}
         />
       </Tooltip>
     </Space>
