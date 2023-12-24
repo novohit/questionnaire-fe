@@ -14,6 +14,8 @@ export interface QuestionComponent {
   componentId: string;
   type: string;
   title: string;
+  hidden: boolean;
+  locked: boolean;
   props: ComponentProps;
 }
 

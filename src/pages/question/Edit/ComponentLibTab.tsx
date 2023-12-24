@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { getComponentLib } from '../../../services/component';
-import { ComponentGroup } from '../../../model';
+import { ComponentGroup, QuestionComponent } from '../../../model';
 import { Empty, Spin, Typography } from 'antd';
 import { getComponentByType } from '../../../components/question/QuestionConfig';
 import styles from './ComponentLibTab.module.scss';
@@ -60,10 +60,10 @@ const ComponentLib: FC = () => {
                     addComponent({
                       userQuestionComponentId: nanoid(),
                       componentId,
-                      title: '',
                       type,
+                      title: '',
                       props: defaultProps,
-                    })
+                    } as QuestionComponent)
                   );
                 };
 

@@ -38,27 +38,40 @@ const EditCanvas: FC = () => {
   // 静态展示两个组件
   return (
     <div className={styles.canvas}>
-      {components.map(c => {
-        const { userQuestionComponentId, componentId, type, title, props } = c;
+      {components
+        .filter(c => !c.hidden) // 过滤隐藏的组件
+        .map(c => {
+          const {
+            userQuestionComponentId,
+            componentId,
+            type,
+            title,
+            locked,
+            props,
+          } = c;
 
-        // 拼接 css classname
-        const defaultClassName = styles['component-wrapper'];
-        const selectedClassName = styles.selected;
-        const divClassName = classNames({
-          [defaultClassName]: true,
-          [selectedClassName]: userQuestionComponentId === selectedId,
-        });
+          // 拼接 css classname
+          const defaultClassName = styles['component-wrapper'];
+          const selectedClassName = styles.selected;
+          const lockedClassName = styles.locked;
+          const divClassName = classNames({
+            [defaultClassName]: true,
+            [selectedClassName]: userQuestionComponentId === selectedId,
+            [lockedClassName]: locked,
+          });
 
-        return (
-          <div
-            key={userQuestionComponentId}
-            className={divClassName}
-            onClick={e => select(e, userQuestionComponentId)}
-          >
-            <div className={styles.component}>{genComponent(type, props)}</div>
-          </div>
-        );
-      })}
+          return (
+            <div
+              key={userQuestionComponentId}
+              className={divClassName}
+              onClick={e => select(e, userQuestionComponentId)}
+            >
+              <div className={styles.component}>
+                {genComponent(type, props)}
+              </div>
+            </div>
+          );
+        })}
       {/* <div className={styles['component-wrapper']}>
         <div className={styles.component}>
           <QuestionTitle isCenter={false} />

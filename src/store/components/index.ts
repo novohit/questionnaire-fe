@@ -8,6 +8,8 @@ interface ComponentState {
   componentId: string;
   type: string;
   title: string;
+  hidden: boolean;
+  locked: boolean;
   props: ComponentProps;
 }
 
@@ -84,6 +86,37 @@ export const componentsSlice = createSlice({
       }
       components.splice(index, 1);
     },
+    // 隐藏/显示选中的组件
+    hideComponent: state => {
+      const { selectedId, components } = state;
+      if (!selectedId) {
+        return state;
+      }
+      const index = components.findIndex(
+        c => c.userQuestionComponentId === selectedId
+      );
+      // 隐藏前selectId下移或者设置为空
+      if (index === components.length - 1) {
+        // 隐藏的是最后一个
+        state.selectedId = '';
+      } else {
+        state.selectedId = components[index + 1].userQuestionComponentId;
+      }
+      const old = components[index].hidden;
+      components[index].hidden = !old;
+    },
+    // 锁定/解锁选中的组件
+    lockComponent: state => {
+      const { selectedId, components } = state;
+      if (!selectedId) {
+        return state;
+      }
+      const index = components.findIndex(
+        c => c.userQuestionComponentId === selectedId
+      );
+      const old = components[index].locked;
+      components[index].locked = !old;
+    },
   },
 });
 // 每个 case reducer 函数会生成对应的 Action creators
@@ -93,6 +126,8 @@ export const {
   addComponent,
   updateComponent,
   deleteComponent,
+  hideComponent,
+  lockComponent,
 } = componentsSlice.actions;
 // 选择器等其他代码可以使用导入的 `RootState` 类型
 export const selectCount = (state: RootState) => state.componentsState;
