@@ -51,6 +51,7 @@ const EditMainToolbar: FC = () => {
     <Space>
       <Tooltip title="删除">
         <Button
+          disabled={selectedComponent?.locked}
           shape="circle"
           icon={<DeleteOutlined />}
           onClick={handleDelete}
