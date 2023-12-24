@@ -34,7 +34,11 @@ const ComponentPropsTab: FC = () => {
   const ComponentProps = getComponentPropsByType(type);
   return (
     <div>
-      <ComponentProps {...props} onChange={updateComponentsState} />
+      <ComponentProps
+        {...props}
+        onChange={updateComponentsState}
+        disabled={selectedComponent.locked}
+      />
     </div>
   );
 };

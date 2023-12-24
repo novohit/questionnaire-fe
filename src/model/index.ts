@@ -76,6 +76,7 @@ export interface QuestionTitleProps {
   isCenter?: boolean;
 
   onChange: (newProps: QuestionTitleProps) => void;
+  disabled: boolean;
 }
 
 export interface QuestionInputProps {
@@ -83,4 +84,5 @@ export interface QuestionInputProps {
   placeholder?: string;
 
   onChange: (newProps: QuestionInputProps) => void;
+  disabled: boolean;
 }

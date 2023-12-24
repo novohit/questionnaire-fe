@@ -3,7 +3,7 @@ import React, { FC, useEffect } from 'react';
 import { QuestionInputProps } from '../../../model';
 
 const ComponentProps: FC<QuestionInputProps> = (props: QuestionInputProps) => {
-  const { title, placeholder, onChange } = { ...props };
+  const { title, placeholder, onChange, disabled } = { ...props };
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -16,6 +16,7 @@ const ComponentProps: FC<QuestionInputProps> = (props: QuestionInputProps) => {
 
   return (
     <Form
+      disabled={disabled}
       form={form}
       layout="vertical"
       initialValues={{ title, placeholder }}
