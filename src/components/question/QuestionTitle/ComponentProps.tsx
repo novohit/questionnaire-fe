@@ -8,7 +8,6 @@ const ComponentProps: FC<QuestionTitleProps> = (props: QuestionTitleProps) => {
 
   useEffect(() => {
     form.setFieldsValue(props);
-    console.log(form);
   }, [props]);
 
   function onValuesChange() {
@@ -35,7 +34,7 @@ const ComponentProps: FC<QuestionTitleProps> = (props: QuestionTitleProps) => {
           ]}
         />
       </Form.Item>
-      <Form.Item label="居中显示" valuePropName="checked">
+      <Form.Item label="居中显示" name="isCenter" valuePropName="checked">
         <Checkbox />
       </Form.Item>
     </Form>
