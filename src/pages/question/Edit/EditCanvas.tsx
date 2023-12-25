@@ -9,6 +9,7 @@ import { getComponentByType } from '../../../components/question/QuestionConfig'
 import { ComponentProps } from '../../../model';
 import { selectComponent } from '../../../store/components';
 import classNames from 'classnames';
+import useBindingCanvasKeypress from '../../../hooks/useBindingCanvasKeyPress';
 
 function genComponent(type: string, props: ComponentProps) {
   const Component = getComponentByType(type);
@@ -25,6 +26,9 @@ const EditCanvas: FC = () => {
   );
   const { selectedId, components } = componentsState;
   // console.log(components);
+
+  // 监听快捷键
+  useBindingCanvasKeypress();
 
   function select(
     event: React.MouseEvent<HTMLDivElement>,
