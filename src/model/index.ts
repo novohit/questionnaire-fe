@@ -68,7 +68,7 @@ export interface SearchOption {
 }
 
 // component ===============================
-export type ComponentProps = QuestionInputProps | QuestionInputProps;
+export type ComponentProps = QuestionTitleProps | QuestionInputProps;
 
 export interface QuestionTitleProps {
   text?: string;

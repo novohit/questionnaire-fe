@@ -5,7 +5,7 @@ import { Typography } from 'antd';
 const { Title } = Typography;
 
 const QuestionTitle: FC<QuestionTitleProps> = (props: QuestionTitleProps) => {
-  const { text = '一行标题', level = 1, isCenter = true } = { ...props };
+  const { text, level = 1, isCenter } = { ...props };
 
   const genFontSize = (level: number) => {
     if (level === 1) return '24px';

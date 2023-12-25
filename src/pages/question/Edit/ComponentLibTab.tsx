@@ -74,7 +74,7 @@ const ComponentLib: FC = () => {
                     onClick={handleClick}
                   >
                     <div className={styles.component}>
-                      <Component />
+                      <Component {...defaultProps} />
                     </div>
                   </div>
                 );
