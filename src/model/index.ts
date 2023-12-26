@@ -68,7 +68,10 @@ export interface SearchOption {
 }
 
 // component ===============================
-export type ComponentProps = QuestionTitleProps | QuestionInputProps;
+export type ComponentProps =
+  | QuestionTitleProps
+  | QuestionParagraphProps
+  | QuestionInputProps;
 
 export interface QuestionTitleProps {
   text?: string;
@@ -76,6 +79,14 @@ export interface QuestionTitleProps {
   isCenter?: boolean;
 
   onChange: (newProps: QuestionTitleProps) => void;
+  disabled: boolean;
+}
+
+export interface QuestionParagraphProps {
+  text?: string;
+  isCenter?: boolean;
+
+  onChange: (newProps: QuestionParagraphProps) => void;
   disabled: boolean;
 }
 

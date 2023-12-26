@@ -25,6 +25,14 @@ module.exports = [
                                     isCenter: false,
                                 }
                             },
+                            {
+                                componentId: Random.id(),
+                                type: 'paragraph',
+                                defaultProps: {
+                                    text: "这是段落",
+                                    isCenter: false,
+                                }
+                            },
                         ]
                     },
                     {
