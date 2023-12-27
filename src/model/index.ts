@@ -71,7 +71,8 @@ export interface SearchOption {
 export type ComponentProps =
   | QuestionTitleProps
   | QuestionParagraphProps
-  | QuestionInputProps;
+  | QuestionInputProps
+  | QuestionInputAreaProps;
 
 export interface QuestionTitleProps {
   text?: string;
@@ -95,5 +96,13 @@ export interface QuestionInputProps {
   placeholder?: string;
 
   onChange: (newProps: QuestionInputProps) => void;
+  disabled: boolean;
+}
+
+export interface QuestionInputAreaProps {
+  title?: string;
+  placeholder?: string;
+
+  onChange: (newProps: QuestionInputAreaProps) => void;
   disabled: boolean;
 }

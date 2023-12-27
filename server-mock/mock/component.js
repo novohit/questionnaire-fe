@@ -47,6 +47,14 @@ module.exports = [
                                     placeholder: "请输入...",
                                 }
                             },
+                            {
+                                componentId: Random.id(),
+                                type: 'inputArea',
+                                defaultProps: {
+                                    title: "输入框标题",
+                                    placeholder: "请输入多行文本...",
+                                }
+                            },
                         ]
                     },
                 ],
