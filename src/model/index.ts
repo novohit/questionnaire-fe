@@ -72,7 +72,8 @@ export type ComponentProps =
   | QuestionTitleProps
   | QuestionParagraphProps
   | QuestionInputProps
-  | QuestionInputAreaProps;
+  | QuestionInputAreaProps
+  | QuestionRadioProps;
 
 export interface QuestionTitleProps {
   text?: string;
@@ -105,4 +106,19 @@ export interface QuestionInputAreaProps {
 
   onChange: (newProps: QuestionInputAreaProps) => void;
   disabled: boolean;
+}
+
+export interface QuestionRadioProps {
+  title?: string;
+  options?: RadioOption[];
+  defaultOption?: RadioOption;
+  direction: 'vertical' | 'horizontal';
+
+  onChange: (newProps: QuestionRadioProps) => void;
+  disabled: boolean;
+}
+
+// 可以为复杂类型
+export interface RadioOption {
+  text: string;
 }

@@ -7,6 +7,8 @@ import QuestionParagraph from './QuestionParagraph/Component';
 import QuestionParagraphProps from './QuestionParagraph/ComponentProps';
 import QuestionInputArea from './QuestionInputArea/Component';
 import QuestionInputAreaProps from './QuestionInputArea/ComponentProps';
+import QuestionRadio from './QuestionRadio/Component';
+import QuestionRadioProps from './QuestionRadio/ComponentProps';
 
 type ComponentConfigs = {
   [key: string]: React.FC<any>;
@@ -17,6 +19,7 @@ const componentConfigs: ComponentConfigs = {
   title: QuestionTitle,
   paragraph: QuestionParagraph,
   inputArea: QuestionInputArea,
+  radio: QuestionRadio,
   // 在这里添加其他组件类型和对应的组件
 };
 
@@ -25,6 +28,7 @@ const componentPropsConfigs: ComponentConfigs = {
   title: QuestionTitleProps,
   paragraph: QuestionParagraphProps,
   inputArea: QuestionInputAreaProps,
+  radio: QuestionRadioProps,
   // 在这里添加其他组件类型和对应的组件
 };
 

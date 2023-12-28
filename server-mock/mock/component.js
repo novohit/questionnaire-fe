@@ -57,6 +57,27 @@ module.exports = [
                             },
                         ]
                     },
+                    {
+                        groupId: Random.id(),
+                        groupName: '用户选择',
+                        components: [
+                            {
+                                componentId: Random.id(),
+                                type: 'radio',
+                                defaultProps: {
+                                    title: "单项选择",
+                                    options: [
+                                        { text: 'A' },
+                                        { text: 'B' },
+                                        { text: 'C' },
+                                        { text: 'D' },
+                                    ],
+                                    defaultOption: { text: 'B' },
+                                    direction: 'horizontal'
+                                }
+                            },
+                        ]
+                    },
                 ],
                 message: 'success'
             }
