@@ -37,40 +37,67 @@ const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
         <Input />
       </Form.Item>
       <Form.Item label="选项">
-        <Form.List name="options">
+        <Form.List
+          name="options"
+          rules={[
+            {
+              validator: (_, value) => {
+                console.log(' value', value);
+                // TODO BUG ErrorList 接收不到这里的error
+                return Promise.reject(new Error('At least 2 passengers'));
+              },
+            },
+          ]}
+        >
           {(fields, { add, remove }, { errors }) => (
             <>
-              {console.log(errors)}
-              {/* 遍历所有选项 */}
-              {fields.map(field => {
-                console.log(field);
-                return (
-                  /* baseline 对齐选项框和icon */
-                  <Space key={field.key} align="baseline">
-                    <Form.Item
-                      name={[field.name, 'text']}
-                      validateTrigger={['onBlur']}
-                      rules={[
-                        {
-                          required: true,
-                          message: '选项不能为空',
+              {fields.map(field => (
+                // console.log(field);
+                <Space key={field.key} align="baseline">
+                  <Form.Item
+                    name={[field.name, 'text']}
+                    validateTrigger={['onChange', 'onBlur']}
+                    rules={[
+                      {
+                        required: true,
+                        message: '选项不能为空',
+                      },
+                      {
+                        validator: (_, value) => {
+                          let count = 0;
+                          options.forEach(opt => {
+                            if (opt.text === value) count++;
+                          });
+                          if (count > 1) {
+                            return Promise.reject(new Error('选项重复'));
+                          } else {
+                            return Promise.resolve();
+                          }
                         },
-                      ]}
-                      validateFirst={true}
-                    >
-                      <Input />
-                    </Form.Item>
-                    {fields.length > 2 ? (
-                      <MinusCircleOutlined onClick={() => remove(field.name)} />
-                    ) : null}
-                  </Space>
-                );
-              })}
+                      },
+                    ]}
+                    validateFirst={true}
+                  >
+                    <Input />
+                  </Form.Item>
+                  {fields.length > 2 ? (
+                    <MinusCircleOutlined
+                      onClick={() => {
+                        remove(field.name);
+                        form.validateFields(); // 添加和删除都手动触发一下校验
+                      }}
+                    />
+                  ) : null}
+                </Space>
+              ))}
               <Form.Item>
                 <Button
                   type="link"
                   block
-                  onClick={() => add({ text: '' })}
+                  onClick={() => {
+                    add({ text: '' });
+                    form.validateFields();
+                  }}
                   icon={<PlusOutlined />}
                 >
                   添加选项
