@@ -70,6 +70,21 @@ export const componentsSlice = createSlice({
         };
       }
     },
+    updateComponentTitle: (
+      state,
+      action: PayloadAction<{
+        userQuestionComponentId: string;
+        newTitle: string;
+      }>
+    ) => {
+      const { userQuestionComponentId, newTitle } = action.payload;
+      const old = state.components.find(
+        c => c.userQuestionComponentId == userQuestionComponentId
+      );
+      if (old) {
+        old.title = newTitle;
+      }
+    },
     // 删除选中的组件
     deleteComponent: state => {
       const { selectedId, components } = state;
@@ -158,6 +173,7 @@ export const {
   selectComponent,
   addComponent,
   updateComponent,
+  updateComponentTitle,
   deleteComponent,
   hideComponent,
   lockComponent,
