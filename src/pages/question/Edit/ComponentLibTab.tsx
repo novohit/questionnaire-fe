@@ -53,6 +53,9 @@ const ComponentLib: FC = () => {
               {components.map(c => {
                 const { componentId, type, defaultProps } = c;
                 const Component = getComponentByType(type);
+                if (Component == null) {
+                  return <></>;
+                }
                 const handleClick = () => {
                   // TODO 要处理一下id 否则id为空 暂时用nanoid
                   // 注意 userQuestionComponentId 和 componentId 区别

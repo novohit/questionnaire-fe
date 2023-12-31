@@ -76,6 +76,20 @@ module.exports = [
                                     direction: 'horizontal'
                                 }
                             },
+                            {
+                                componentId: Random.id(),
+                                type: 'checkbox',
+                                defaultProps: {
+                                    title: "多项选择",
+                                    options: [
+                                        { value: 'A', text: 'A', checked: true },
+                                        { value: 'B', text: 'B', checked: false },
+                                        { value: 'C', text: 'C', checked: true },
+                                        { value: 'C', text: 'C', checked: false },
+                                    ],
+                                    direction: 'horizontal'
+                                }
+                            },
                         ]
                     },
                 ],

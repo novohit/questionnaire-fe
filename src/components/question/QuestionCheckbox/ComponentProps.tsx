@@ -1,21 +1,22 @@
 import React, { FC, useEffect } from 'react';
-import { QuestionRadioProps } from '../../../model';
-import { Button, Form, Input, Select, Space } from 'antd';
+import { QuestionCheckboxProps } from '../../../model';
+import { Button, Checkbox, Form, Input, Select, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { nanoid } from '@reduxjs/toolkit';
 
-const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
+const ComponentProps: FC<QuestionCheckboxProps> = (
+  props: QuestionCheckboxProps
+) => {
   const {
     title,
     options = [],
-    defaultOptionValue,
     direction,
     onChange,
     disabled,
   } = {
     ...props,
   };
-  // console.log(options, defaultOptionValue, direction);
+
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
   }, [props]);
 
   function onValuesChange() {
+    console.log(form.getFieldsValue());
     onChange(form.getFieldsValue());
   }
 
@@ -31,7 +33,7 @@ const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
       disabled={disabled}
       form={form}
       layout="vertical"
-      initialValues={{ title, options, defaultOptionValue, direction }}
+      initialValues={{ title, options, direction }}
       onValuesChange={onValuesChange}
     >
       <Form.Item
@@ -61,6 +63,12 @@ const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
                 // console.log(field);
                 <Space key={field.key} align="baseline">
                   <Form.Item
+                    name={[field.name, 'checked']}
+                    valuePropName="checked"
+                  >
+                    <Checkbox />
+                  </Form.Item>
+                  <Form.Item
                     name={[field.name, 'text']}
                     validateTrigger={['onChange', 'onBlur']}
                     rules={[
@@ -86,7 +94,7 @@ const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
                   >
                     <Input />
                   </Form.Item>
-                  {fields.length > 2 ? (
+                  {fields.length > 1 ? (
                     <MinusCircleOutlined
                       onClick={() => {
                         remove(field.name);
@@ -101,7 +109,7 @@ const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
                   type="link"
                   block
                   onClick={() => {
-                    add({ value: nanoid(), text: '' });
+                    add({ value: nanoid(), text: '', checked: false });
                     form.validateFields();
                   }}
                   icon={<PlusOutlined />}
@@ -113,14 +121,6 @@ const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
             </>
           )}
         </Form.List>
-      </Form.Item>
-      <Form.Item label="默认选项" name="defaultOptionValue">
-        <Select
-          options={options.map(({ text, value }) => ({
-            value,
-            label: text || '空选项', // 当 text 为空时 label会显示value
-          }))}
-        ></Select>
       </Form.Item>
       <Form.Item label="选项排列" name="direction">
         <Select

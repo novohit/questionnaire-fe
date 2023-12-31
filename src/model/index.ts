@@ -110,7 +110,7 @@ export interface QuestionInputAreaProps {
 
 export interface QuestionRadioProps {
   title?: string;
-  options?: RadioOption[];
+  options?: Option[];
   defaultOptionValue?: string;
   direction: 'vertical' | 'horizontal';
 
@@ -119,7 +119,17 @@ export interface QuestionRadioProps {
 }
 
 // 可以为复杂类型
-export interface RadioOption {
+export interface Option {
   value: string;
   text: string;
+  checked?: boolean;
+}
+
+export interface QuestionCheckboxProps {
+  title?: string;
+  options?: Option[];
+  direction: 'vertical' | 'horizontal';
+
+  onChange: (newProps: QuestionCheckboxProps) => void;
+  disabled: boolean;
 }

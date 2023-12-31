@@ -9,6 +9,8 @@ import QuestionInputArea from './QuestionInputArea/Component';
 import QuestionInputAreaProps from './QuestionInputArea/ComponentProps';
 import QuestionRadio from './QuestionRadio/Component';
 import QuestionRadioProps from './QuestionRadio/ComponentProps';
+import QuestionCheckbox from './QuestionCheckbox/Component';
+import QuestionCheckboxProps from './QuestionCheckbox/ComponentProps';
 
 type ComponentConfigs = {
   [key: string]: React.FC<any>;
@@ -20,6 +22,7 @@ const componentConfigs: ComponentConfigs = {
   paragraph: QuestionParagraph,
   inputArea: QuestionInputArea,
   radio: QuestionRadio,
+  checkbox: QuestionCheckbox,
   // 在这里添加其他组件类型和对应的组件
 };
 
@@ -29,6 +32,7 @@ const componentPropsConfigs: ComponentConfigs = {
   paragraph: QuestionParagraphProps,
   inputArea: QuestionInputAreaProps,
   radio: QuestionRadioProps,
+  checkbox: QuestionCheckboxProps,
   // 在这里添加其他组件类型和对应的组件
 };
 
