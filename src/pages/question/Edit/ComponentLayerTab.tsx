@@ -59,9 +59,9 @@ const ComponentLayerTab: FC = () => {
               }}
             >
               {editingId !== userQuestionComponentId && title}
-              {/* TODO 失焦事件 */}
               {editingId === userQuestionComponentId && (
                 <Input
+                  autoFocus // 自动聚焦 避免 selectId 和 editingId 会出现不同步的情况
                   value={title}
                   onChange={changeTitle}
                   onPressEnter={() => {
