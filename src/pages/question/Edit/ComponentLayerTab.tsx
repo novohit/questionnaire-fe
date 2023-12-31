@@ -3,11 +3,14 @@ import { RootState } from '../../../store';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 import styles from './ComponentLayerTab.module.scss';
-import { Input } from 'antd';
+import { Button, Input, Space } from 'antd';
 import {
+  hideComponent,
+  lockComponent,
   selectComponent,
   updateComponentTitle,
 } from '../../../store/components';
+import { EyeOutlined, LockOutlined } from '@ant-design/icons';
 
 const ComponentLayerTab: FC = () => {
   const dispatch = useDispatch();
@@ -22,7 +25,6 @@ const ComponentLayerTab: FC = () => {
     if (editingId !== userQuestionComponentId) {
       setEditingId('');
     }
-    console.log('click', userQuestionComponentId);
   };
 
   const changeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +37,7 @@ const ComponentLayerTab: FC = () => {
   return (
     <>
       {components.map(c => {
-        const { userQuestionComponentId, title } = c;
+        const { userQuestionComponentId, title, hidden, locked } = c;
 
         // 拼接 title className
         const titleDefaultClassName = styles.title;
@@ -73,7 +75,30 @@ const ComponentLayerTab: FC = () => {
                 />
               )}
             </div>
-            <div className={styles.handler}>按钮</div>
+            <div className={styles.handler}>
+              <Space>
+                <Button
+                  className={!hidden ? styles.button : ''}
+                  shape="circle"
+                  size="small"
+                  icon={<EyeOutlined />}
+                  type={hidden ? 'primary' : 'text'}
+                  onClick={() => {
+                    dispatch(hideComponent(userQuestionComponentId));
+                  }}
+                />
+                <Button
+                  className={!locked ? styles.button : ''}
+                  shape="circle"
+                  size="small"
+                  icon={<LockOutlined />}
+                  type={locked ? 'primary' : 'text'}
+                  onClick={() => {
+                    dispatch(lockComponent(userQuestionComponentId));
+                  }}
+                />
+              </Space>
+            </div>
           </div>
         );
       })}

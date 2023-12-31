@@ -32,11 +32,11 @@ const EditMainToolbar: FC = () => {
   };
 
   const handleHidden = () => {
-    dispatch(hideComponent());
+    dispatch(hideComponent(selectedId));
   };
 
   const handleLocked = () => {
-    dispatch(lockComponent());
+    dispatch(lockComponent(selectedId));
   };
 
   const handleCopy = () => {
@@ -59,6 +59,7 @@ const EditMainToolbar: FC = () => {
       </Tooltip>
       <Tooltip title="隐藏">
         <Button
+          type={selectedComponent?.hidden ? 'primary' : 'default'}
           shape="circle"
           icon={<EyeInvisibleOutlined />}
           onClick={handleHidden}

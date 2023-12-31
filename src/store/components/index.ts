@@ -103,34 +103,38 @@ export const componentsSlice = createSlice({
       }
       components.splice(index, 1);
     },
-    // 隐藏/显示选中的组件
-    hideComponent: state => {
+    // 隐藏/显示组件
+    hideComponent: (state, action: PayloadAction<string>) => {
       const { selectedId, components } = state;
-      if (!selectedId) {
+      const id = action.payload;
+
+      if (!id) {
         return state;
       }
-      const index = components.findIndex(
-        c => c.userQuestionComponentId === selectedId
-      );
-      // 隐藏前selectId下移或者设置为空
-      if (index === components.length - 1) {
-        // 隐藏的是最后一个
-        state.selectedId = '';
-      } else {
-        state.selectedId = components[index + 1].userQuestionComponentId;
+      const index = components.findIndex(c => c.userQuestionComponentId === id);
+      // 有两个地方会调用 组件层次Tab触发时不需要更改selectedId
+      if (id === selectedId) {
+        // 隐藏前selectId下移或者设置为空
+        if (index === components.length - 1) {
+          // 隐藏的是最后一个
+          state.selectedId = '';
+        } else {
+          state.selectedId = components[index + 1].userQuestionComponentId;
+        }
       }
+
       const old = components[index].hidden;
       components[index].hidden = !old;
     },
-    // 锁定/解锁选中的组件
-    lockComponent: state => {
-      const { selectedId, components } = state;
-      if (!selectedId) {
+    // 锁定/解锁组件
+    lockComponent: (state, action: PayloadAction<string>) => {
+      const { components } = state;
+      const id = action.payload;
+
+      if (!id) {
         return state;
       }
-      const index = components.findIndex(
-        c => c.userQuestionComponentId === selectedId
-      );
+      const index = components.findIndex(c => c.userQuestionComponentId === id);
       const old = components[index].locked;
       components[index].locked = !old;
     },
