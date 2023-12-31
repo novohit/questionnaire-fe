@@ -111,7 +111,7 @@ export interface QuestionInputAreaProps {
 export interface QuestionRadioProps {
   title?: string;
   options?: RadioOption[];
-  defaultOption?: RadioOption;
+  defaultOptionValue?: string;
   direction: 'vertical' | 'horizontal';
 
   onChange: (newProps: QuestionRadioProps) => void;
@@ -120,5 +120,6 @@ export interface QuestionRadioProps {
 
 // 可以为复杂类型
 export interface RadioOption {
+  value: string;
   text: string;
 }

@@ -9,7 +9,7 @@ const QuestionRadio: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
   const {
     title,
     options,
-    defaultOption,
+    defaultOptionValue,
     direction = 'horizontal',
   } = {
     ...props,
@@ -18,12 +18,12 @@ const QuestionRadio: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
   return (
     <>
       <Paragraph strong>{title}</Paragraph>
-      <Radio.Group value={defaultOption?.text}>
+      <Radio.Group value={defaultOptionValue}>
         <Space direction={direction}>
           {options?.map(opt => {
             return (
               /* key用nanoid 添加重复选项 防止控制台报错 */
-              <Radio key={nanoid()} value={opt.text}>
+              <Radio key={nanoid()} value={opt.value}>
                 {opt.text}
               </Radio>
             );

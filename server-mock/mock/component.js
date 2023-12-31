@@ -67,12 +67,12 @@ module.exports = [
                                 defaultProps: {
                                     title: "单项选择",
                                     options: [
-                                        { text: 'A' },
-                                        { text: 'B' },
-                                        { text: 'C' },
-                                        { text: 'D' },
+                                        { value: 'A', text: 'A' },
+                                        { value: 'B', text: 'B' },
+                                        { value: 'C', text: 'C' },
+                                        { value: 'D', text: 'D' },
                                     ],
-                                    defaultOption: { text: 'B' },
+                                    defaultOptionValue: 'B',
                                     direction: 'horizontal'
                                 }
                             },

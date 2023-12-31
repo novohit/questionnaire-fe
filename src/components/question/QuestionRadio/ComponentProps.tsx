@@ -2,19 +2,20 @@ import React, { FC, useEffect } from 'react';
 import { QuestionRadioProps } from '../../../model';
 import { Button, Form, Input, Select, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { nanoid } from '@reduxjs/toolkit';
 
 const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
   const {
     title,
     options = [],
-    defaultOption,
+    defaultOptionValue,
     direction,
     onChange,
     disabled,
   } = {
     ...props,
   };
-  console.log(options, defaultOption, direction);
+  // console.log(options, defaultOptionValue, direction);
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -22,7 +23,17 @@ const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
   }, [props]);
 
   function onValuesChange() {
-    onChange(form.getFieldsValue());
+    const newValues = form.getFieldsValue() as QuestionRadioProps;
+    const temp = newValues.options || [];
+
+    // 补全字段
+    const newOptions = temp.map(({ text, value }) => {
+      if (!value) return { text, value: nanoid() };
+      return { text, value };
+    });
+    newValues.options = newOptions;
+
+    onChange(newValues);
   }
 
   return (
@@ -30,10 +41,15 @@ const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
       disabled={disabled}
       form={form}
       layout="vertical"
-      initialValues={{ title }}
+      initialValues={{ title, options, defaultOptionValue, direction }}
       onValuesChange={onValuesChange}
     >
-      <Form.Item label="标题" name="title">
+      <Form.Item
+        label="标题"
+        name="title"
+        rules={[{ required: true, message: '不能为空' }]}
+        validateFirst={true}
+      >
         <Input />
       </Form.Item>
       <Form.Item label="选项">
@@ -41,10 +57,10 @@ const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
           name="options"
           rules={[
             {
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               validator: (_, value) => {
-                console.log(' value', value);
+                // console.log(' value', value);
                 // TODO BUG ErrorList 接收不到这里的error
-                return Promise.reject(new Error('At least 2 passengers'));
               },
             },
           ]}
@@ -108,9 +124,16 @@ const ComponentProps: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
           )}
         </Form.List>
       </Form.Item>
+      <Form.Item label="默认选项" name="defaultOptionValue">
+        <Select
+          options={options.map(({ text, value }) => ({
+            value,
+            label: text || '空选项', // 当 text 为空时 label会显示value
+          }))}
+        ></Select>
+      </Form.Item>
       <Form.Item label="选项排列" name="direction">
         <Select
-          value={direction}
           options={[
             { value: 'vertical', label: '垂直' },
             { value: 'horizontal', label: '水平' },
