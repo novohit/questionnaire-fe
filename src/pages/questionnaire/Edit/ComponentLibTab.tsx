@@ -3,7 +3,7 @@ import { getComponentLib } from '../../../services/component';
 import { ComponentGroup } from '../../../model/component';
 import { QuestionnaireComponent } from '../../../model/questionnaire';
 import { Empty, Spin, Typography } from 'antd';
-import { getComponentByType } from '../../../components/question/QuestionConfig';
+import { getComponentByType } from '../../../components/questionnaire/QuestionConfig';
 import styles from './ComponentLibTab.module.scss';
 import { useDispatch } from 'react-redux';
 import { addComponent } from '../../../store/components';

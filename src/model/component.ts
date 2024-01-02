@@ -1,4 +1,4 @@
-import { ComponentProps } from '../components/question/type';
+import { ComponentProps } from '../components/questionnaire/type';
 
 export interface Component {
   componentId: string;

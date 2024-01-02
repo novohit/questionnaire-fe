@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { getComponentPropsByType } from '../../../components/question/QuestionConfig';
-import { ComponentProps } from '../../../components/question/type';
+import { getComponentPropsByType } from '../../../components/questionnaire/QuestionConfig';
+import { ComponentProps } from '../../../components/questionnaire/type';
 import { updateComponent } from '../../../store/components';
 
 const Unselected: FC = () => {

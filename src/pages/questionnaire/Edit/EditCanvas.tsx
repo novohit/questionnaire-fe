@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { FC } from 'react';
 import styles from './EditCanvas.module.scss';
-import QuestionTitle from '../../../components/question/QuestionTitle/Component';
-import QuestionInput from '../../../components/question/QuestionInput/Component';
+import QuestionTitle from '../../../components/questionnaire/QuestionTitle/Component';
+import QuestionInput from '../../../components/questionnaire/QuestionInput/Component';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { getComponentByType } from '../../../components/question/QuestionConfig';
-import { ComponentProps } from '../../../components/question/type';
+import { getComponentByType } from '../../../components/questionnaire/QuestionConfig';
+import { ComponentProps } from '../../../components/questionnaire/type';
 import { selectComponent } from '../../../store/components';
 import classNames from 'classnames';
 import useBindingCanvasKeypress from '../../../hooks/useBindingCanvasKeyPress';
