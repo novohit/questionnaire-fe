@@ -1,9 +1,9 @@
-import { ComponentProps } from '../components/questionnaire/type';
+import { ComponentPropsType } from '../components/questionnaire/type';
 
 export interface Component {
   componentId: string;
   type: string;
-  defaultProps: ComponentProps;
+  defaultProps: ComponentPropsType;
 }
 
 export interface ComponentGroup {

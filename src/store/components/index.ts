@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit';
-import { ComponentProps } from '../../components/questionnaire/type';
+import { ComponentPropsType } from '../../components/questionnaire/type';
 import cloneDeep from 'lodash.clonedeep';
 
 // 为 slice state 定义一个类型
@@ -10,7 +10,7 @@ interface ComponentState {
   title: string;
   hidden: boolean;
   locked: boolean;
-  props: ComponentProps;
+  props: ComponentPropsType;
 }
 
 interface ComponentsState {
@@ -55,7 +55,7 @@ export const componentsSlice = createSlice({
       state,
       action: PayloadAction<{
         userQuestionComponentId: string;
-        newProps: ComponentProps;
+        newProps: ComponentPropsType;
       }>
     ) => {
       const { userQuestionComponentId, newProps } = action.payload;

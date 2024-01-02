@@ -1,4 +1,4 @@
-import { ComponentProps } from '../components/questionnaire/type';
+import { ComponentPropsType } from '../components/questionnaire/type';
 
 export interface Questionnaire {
   _id: string;
@@ -26,5 +26,5 @@ export interface QuestionnaireComponent {
   title: string;
   hidden: boolean;
   locked: boolean;
-  props: ComponentProps;
+  props: ComponentPropsType;
 }

@@ -1,12 +1,10 @@
 import { Checkbox, Form, Input } from 'antd';
 import React, { FC, useEffect } from 'react';
-import { QuestionParagraphProps } from '../type';
+import { ParagraphPropsType } from '../type';
 
 const { TextArea } = Input;
 
-const ComponentProps: FC<QuestionParagraphProps> = (
-  props: QuestionParagraphProps
-) => {
+const ComponentProps: FC<ParagraphPropsType> = (props: ParagraphPropsType) => {
   const { text, isCenter, onChange, disabled } = { ...props };
   const [form] = Form.useForm();
 

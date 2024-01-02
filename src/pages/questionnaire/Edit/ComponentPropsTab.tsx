@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { getComponentPropsByType } from '../../../components/questionnaire/QuestionConfig';
-import { ComponentProps } from '../../../components/questionnaire/type';
+import { getComponentPropsByType } from '../../../components/questionnaire/config';
+import { ComponentPropsType } from '../../../components/questionnaire/type';
 import { updateComponent } from '../../../store/components';
 
 const Unselected: FC = () => {
@@ -26,7 +26,7 @@ const ComponentPropsTab: FC = () => {
   const { userQuestionComponentId, type, props } = selectedComponent;
 
   // 属性props同步到redux
-  function updateComponentsState(newProps: ComponentProps) {
+  function updateComponentsState(newProps: ComponentPropsType) {
     dispatch(updateComponent({ userQuestionComponentId, newProps }));
     // console.log('newProps', newProps);
   }

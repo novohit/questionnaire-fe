@@ -1,51 +1,52 @@
 // component ===============================
-export type ComponentProps =
-  | QuestionTitleProps
-  | QuestionParagraphProps
-  | QuestionInputProps
-  | QuestionInputAreaProps
-  | QuestionRadioProps;
+export type ComponentPropsType =
+  | TitlePropsType
+  | ParagraphPropsType
+  | InputPropsType
+  | InputAreaPropsType
+  | RadioPropsType
+  | CheckboxPropsType;
 
-export interface QuestionTitleProps {
+export interface TitlePropsType {
   text?: string;
   level?: 1 | 2 | 3 | 4 | 5;
   isCenter?: boolean;
 
-  onChange: (newProps: QuestionTitleProps) => void;
+  onChange: (newProps: TitlePropsType) => void;
   disabled: boolean;
 }
 
-export interface QuestionParagraphProps {
+export interface ParagraphPropsType {
   text?: string;
   isCenter?: boolean;
 
-  onChange: (newProps: QuestionParagraphProps) => void;
+  onChange: (newProps: ParagraphPropsType) => void;
   disabled: boolean;
 }
 
-export interface QuestionInputProps {
+export interface InputPropsType {
   title?: string;
   placeholder?: string;
 
-  onChange: (newProps: QuestionInputProps) => void;
+  onChange: (newProps: InputPropsType) => void;
   disabled: boolean;
 }
 
-export interface QuestionInputAreaProps {
+export interface InputAreaPropsType {
   title?: string;
   placeholder?: string;
 
-  onChange: (newProps: QuestionInputAreaProps) => void;
+  onChange: (newProps: InputAreaPropsType) => void;
   disabled: boolean;
 }
 
-export interface QuestionRadioProps {
+export interface RadioPropsType {
   title?: string;
   options?: Option[];
   defaultOptionValue?: string;
   direction: 'vertical' | 'horizontal';
 
-  onChange: (newProps: QuestionRadioProps) => void;
+  onChange: (newProps: RadioPropsType) => void;
   disabled: boolean;
 }
 
@@ -56,11 +57,11 @@ export interface Option {
   checked?: boolean;
 }
 
-export interface QuestionCheckboxProps {
+export interface CheckboxPropsType {
   title?: string;
   options?: Option[];
   direction: 'vertical' | 'horizontal';
 
-  onChange: (newProps: QuestionCheckboxProps) => void;
+  onChange: (newProps: CheckboxPropsType) => void;
   disabled: boolean;
 }

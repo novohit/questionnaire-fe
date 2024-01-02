@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
-import { QuestionRadioProps } from '../type';
+import { RadioPropsType } from '../type';
 import { Radio, Space, Typography } from 'antd';
 import { nanoid } from '@reduxjs/toolkit';
 
 const { Paragraph } = Typography;
 
-const QuestionRadio: FC<QuestionRadioProps> = (props: QuestionRadioProps) => {
+const QuestionRadio: FC<RadioPropsType> = (props: RadioPropsType) => {
   const {
     title,
     options,

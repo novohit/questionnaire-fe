@@ -1,8 +1,8 @@
 import { Checkbox, Form, Input, Select } from 'antd';
 import React, { FC, useEffect } from 'react';
-import { QuestionTitleProps } from '../type';
+import { TitlePropsType } from '../type';
 
-const ComponentProps: FC<QuestionTitleProps> = (props: QuestionTitleProps) => {
+const ComponentProps: FC<TitlePropsType> = (props: TitlePropsType) => {
   const { text, level, isCenter, onChange, disabled } = { ...props };
   const [form] = Form.useForm();
 

@@ -1,13 +1,11 @@
 import React, { FC } from 'react';
-import { QuestionCheckboxProps } from '../type';
+import { CheckboxPropsType } from '../type';
 import { Checkbox, Space, Typography } from 'antd';
 import { nanoid } from '@reduxjs/toolkit';
 
 const { Paragraph } = Typography;
 
-const QuestionCheckbox: FC<QuestionCheckboxProps> = (
-  props: QuestionCheckboxProps
-) => {
+const QuestionCheckbox: FC<CheckboxPropsType> = (props: CheckboxPropsType) => {
   const {
     title,
     options,

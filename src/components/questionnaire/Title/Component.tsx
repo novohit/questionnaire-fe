@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
-import { QuestionTitleProps } from '../type';
+import { TitlePropsType } from '../type';
 import { Typography } from 'antd';
 
 const { Title } = Typography;
 
-const QuestionTitle: FC<QuestionTitleProps> = (props: QuestionTitleProps) => {
+const QuestionTitle: FC<TitlePropsType> = (props: TitlePropsType) => {
   const { text, level = 1, isCenter } = { ...props };
 
   const genFontSize = (level: number) => {

@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { QuestionParagraphProps } from '../type';
+import { ParagraphPropsType } from '../type';
 import { Typography } from 'antd';
 import DOMPurify from 'dompurify';
 
 const { Paragraph } = Typography;
 
-const QuestionParagraph: FC<QuestionParagraphProps> = (
-  props: QuestionParagraphProps
+const QuestionParagraph: FC<ParagraphPropsType> = (
+  props: ParagraphPropsType
 ) => {
   const { text = '', isCenter } = { ...props };
   // 防止 xss 攻击 https://github.com/cure53/DOMPurify
