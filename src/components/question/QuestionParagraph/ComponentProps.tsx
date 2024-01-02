@@ -1,6 +1,6 @@
 import { Checkbox, Form, Input } from 'antd';
 import React, { FC, useEffect } from 'react';
-import { QuestionParagraphProps } from '../../../model';
+import { QuestionParagraphProps } from '../type';
 
 const { TextArea } = Input;
 

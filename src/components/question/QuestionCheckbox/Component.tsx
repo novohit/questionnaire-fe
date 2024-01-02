@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { QuestionCheckboxProps } from '../../../model';
+import { QuestionCheckboxProps } from '../type';
 import { Checkbox, Space, Typography } from 'antd';
 import { nanoid } from '@reduxjs/toolkit';
 

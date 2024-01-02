@@ -7,7 +7,7 @@ import { useDebounceFn, useRequest, useTitle } from 'ahooks';
 import { Empty, Spin, Typography } from 'antd';
 import ListSearch from '../../components/ListSearch';
 import { getQuestionList } from '../../services/question';
-import { Question } from '../../model';
+import { Question } from '../../model/questionnaire';
 import useLoadQuestionList from '../../hooks/useLoadQuestionList';
 import { useSearchParams } from 'react-router-dom';
 import { DEFAULT_PAGE_SIZE, SEARCH_KEY } from '../../constants';

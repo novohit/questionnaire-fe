@@ -6,7 +6,7 @@ import QuestionInput from '../../../components/question/QuestionInput/Component'
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { getComponentByType } from '../../../components/question/QuestionConfig';
-import { ComponentProps } from '../../../model';
+import { ComponentProps } from '../../../components/question/type';
 import { selectComponent } from '../../../store/components';
 import classNames from 'classnames';
 import useBindingCanvasKeypress from '../../../hooks/useBindingCanvasKeyPress';

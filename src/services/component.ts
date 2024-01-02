@@ -1,4 +1,4 @@
-import { ComponentGroup } from '../model';
+import { ComponentGroup } from '../model/component';
 import http from './http';
 
 export async function getComponentLib() {

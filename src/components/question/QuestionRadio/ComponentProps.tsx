@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { QuestionRadioProps } from '../../../model';
+import { QuestionRadioProps } from '../type';
 import { Button, Form, Input, Select, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { nanoid } from '@reduxjs/toolkit';

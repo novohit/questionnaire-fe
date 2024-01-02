@@ -1,6 +1,6 @@
 import { Form, Input } from 'antd';
 import React, { FC, useEffect } from 'react';
-import { QuestionInputProps } from '../../../model';
+import { QuestionInputProps } from '../type';
 
 const ComponentProps: FC<QuestionInputProps> = (props: QuestionInputProps) => {
   const { title, placeholder, onChange, disabled } = { ...props };

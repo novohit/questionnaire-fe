@@ -1,6 +1,6 @@
 import { Form, Input } from 'antd';
 import React, { FC, useEffect } from 'react';
-import { QuestionInputAreaProps } from '../../../model';
+import { QuestionInputAreaProps } from '../type';
 
 const { TextArea } = Input;
 

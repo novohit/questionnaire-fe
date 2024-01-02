@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { QuestionTitleProps } from '../../../model';
+import { QuestionTitleProps } from '../type';
 import { Typography } from 'antd';
 
 const { Title } = Typography;

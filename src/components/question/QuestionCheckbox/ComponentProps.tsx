@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { QuestionCheckboxProps } from '../../../model';
+import { QuestionCheckboxProps } from '../type';
 import { Button, Checkbox, Form, Input, Select, Space } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { nanoid } from '@reduxjs/toolkit';

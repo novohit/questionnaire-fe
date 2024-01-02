@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { getComponentPropsByType } from '../../../components/question/QuestionConfig';
-import { ComponentProps } from '../../../model';
+import { ComponentProps } from '../../../components/question/type';
 import { updateComponent } from '../../../store/components';
 
 const Unselected: FC = () => {

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { QuestionRadioProps } from '../../../model';
+import { QuestionRadioProps } from '../type';
 import { Radio, Space, Typography } from 'antd';
 import { nanoid } from '@reduxjs/toolkit';
 

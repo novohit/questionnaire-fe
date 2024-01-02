@@ -4,7 +4,7 @@ import React, { FC } from 'react';
 import styles from './Register.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { LOGIN_PATH } from '../router';
-import { UserRegister } from '../model';
+import { UserRegister } from '../model/user';
 import { useRequest } from 'ahooks';
 import { register } from '../services/user';
 

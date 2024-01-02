@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { getComponentLib } from '../../../services/component';
-import { ComponentGroup, QuestionComponent } from '../../../model';
+import { ComponentGroup } from '../../../model/component';
+import { QuestionComponent } from '../../../model/questionnaire';
 import { Empty, Spin, Typography } from 'antd';
 import { getComponentByType } from '../../../components/question/QuestionConfig';
 import styles from './ComponentLibTab.module.scss';

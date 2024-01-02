@@ -1,4 +1,5 @@
-import { PageResponse, Question, SearchOption } from '../model';
+import { PageResponse, SearchOption } from '../model';
+import { Question } from '../model/questionnaire';
 import http from './http';
 
 // https://juejin.cn/post/7154991998989959181 手动帮助编辑器“修正”类型提示 这里直接用 as

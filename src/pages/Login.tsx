@@ -12,7 +12,7 @@ import React, { FC } from 'react';
 import styles from './Login.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { MANAGE_INDEX_PATH, REGISTER_PATH } from '../router';
-import { UserLogin } from '../model';
+import { UserLogin } from '../model/user';
 import { useRequest } from 'ahooks';
 import { login } from '../services/user';
 import { setToken } from '../utils/token';

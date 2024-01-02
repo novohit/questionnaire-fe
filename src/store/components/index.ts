@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit';
-import { ComponentProps } from '../../model';
+import { ComponentProps } from '../../components/question/type';
 import cloneDeep from 'lodash.clonedeep';
 
 // 为 slice state 定义一个类型

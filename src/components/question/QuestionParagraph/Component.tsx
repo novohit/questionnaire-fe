@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { QuestionParagraphProps } from '../../../model';
+import { QuestionParagraphProps } from '../type';
 import { Typography } from 'antd';
 import DOMPurify from 'dompurify';
 

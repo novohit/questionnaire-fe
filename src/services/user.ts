@@ -1,4 +1,4 @@
-import { User, UserLogin } from '../model';
+import { User, UserLogin } from '../model/user';
 import http from './http';
 
 export async function getUserInfo() {
