@@ -22,6 +22,12 @@ module.exports = [
                     answerCount: Random.natural(50, 100),
                     createdAt: Random.datetime(),
                     deletedAt: Random.datetime(),
+                    pageSetting: {
+                        title: Random.ctitle(),
+                        desc: '问卷描述',
+                        js: '',
+                        css: '',
+                    },
                     components: [
                         {
                             userQuestionComponentId: Random.id(),

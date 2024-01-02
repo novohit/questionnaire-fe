@@ -3,6 +3,7 @@ import { getQuestion } from '../services/question';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { resetComponents } from '../store/components';
+import { resetPageSetting } from '../store/pageInfoReducer';
 
 function useLoadQuestion() {
   const dispatch = useDispatch();
@@ -15,8 +16,9 @@ function useLoadQuestion() {
     async function get() {
       const data = await getQuestion(_id);
       // 存储信息到 Redux
-      const { components } = data;
+      const { pageSetting, components } = data;
       dispatch(resetComponents({ selectedId: '', components }));
+      dispatch(resetPageSetting(pageSetting));
       setQuestion(data);
       setLoading(false);
     }

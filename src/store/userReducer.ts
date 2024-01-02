@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '.';
 
 // 为 slice state 定义一个类型
 interface UserState {
@@ -31,7 +30,5 @@ export const userSlice = createSlice({
 });
 // 每个 case reducer 函数会生成对应的 Action creators
 export const { loginReducer, logoutReducer } = userSlice.actions;
-// 选择器等其他代码可以使用导入的 `RootState` 类型
-export const selectCount = (state: RootState) => state.user;
 
 export default userSlice.reducer;

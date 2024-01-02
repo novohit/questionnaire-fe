@@ -6,6 +6,7 @@ export interface Question {
   answerCount: number;
   createdAt: string;
   deletedAt: string;
+  pageSetting: PageSetting;
   components: QuestionComponent[];
 }
 
@@ -17,6 +18,13 @@ export interface QuestionComponent {
   hidden: boolean;
   locked: boolean;
   props: ComponentProps;
+}
+
+export interface PageSetting {
+  title: string;
+  desc: string;
+  js: string;
+  css: string;
 }
 
 export interface User {
