@@ -23,10 +23,7 @@ const Edit: FC = () => {
   return (
     <>
       <div className={styles.container}>
-        {/* 这个颜色的style得在EditHeader上层 */}
-        <div style={{ backgroundColor: '#fff', height: '50px' }}>
-          <EditHeader />
-        </div>
+        <EditHeader />
         <div className={styles['content-wrapper']}>
           <div className={styles.content}>
             <div className={styles.left}>
