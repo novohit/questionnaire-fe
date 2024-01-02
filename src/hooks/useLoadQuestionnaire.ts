@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { getQuestion } from '../services/question';
+import { getQuestionnaire } from '../services/question';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { resetComponents } from '../store/components';
 import { resetPageSetting } from '../store/pageInfoReducer';
 
-function useLoadQuestion() {
+function useLoadQuestionnaire() {
   const dispatch = useDispatch();
   // 获取动态路由的参数
   const { _id = '' } = useParams();
@@ -14,7 +14,7 @@ function useLoadQuestion() {
 
   useEffect(() => {
     async function get() {
-      const data = await getQuestion(_id);
+      const data = await getQuestionnaire(_id);
       // 存储信息到 Redux
       const { pageSetting, components } = data;
       dispatch(resetComponents({ selectedId: '', components }));
@@ -28,4 +28,4 @@ function useLoadQuestion() {
   return { loading, question };
 }
 
-export default useLoadQuestion;
+export default useLoadQuestionnaire;

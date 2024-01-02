@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRequest } from 'ahooks';
-import { copyQuestion, updateQuestion } from '../services/question';
+import { copyQuestionnaire, updateQuestionnaire } from '../services/question';
 import dayjs from 'dayjs';
 
 // ts 自定义类型
@@ -37,19 +37,19 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
   const nav = useNavigate();
 
   const { loading: copyLoading, run: copy } = useRequest(
-    async () => await copyQuestion(_id),
+    async () => await copyQuestionnaire(_id),
     {
       manual: true,
       onSuccess(_id) {
         message.success('复制成功');
-        nav(`/question/edit/${_id}`);
+        nav(`/questionnaire/edit/${_id}`);
       },
     }
   );
 
   const { loading: deleteLoading, run: deleteRequest } = useRequest(
     async () =>
-      await updateQuestion(_id, {
+      await updateQuestionnaire(_id, {
         deletedAt: dayjs().format('YYYY-MM-DD HH:mm:ss'),
       }),
     {
@@ -63,7 +63,7 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
 
   const { loading: starLoading, run: updateStar } = useRequest(
     async () => {
-      await updateQuestion(_id, {
+      await updateQuestionnaire(_id, {
         isStar: !isStar,
       });
     },
@@ -104,7 +104,7 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
                   onClick={updateStar}
                 />
               )}
-              <Link to={`/question/edit/${_id}`}>{title}</Link>
+              <Link to={`/questionnaire/edit/${_id}`}>{title}</Link>
             </Space>
           </div>
           <div className={styles.right}>
@@ -128,7 +128,7 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
                 type="text"
                 icon={<EditOutlined />}
                 onClick={() => {
-                  nav(`/question/edit/${_id}`);
+                  nav(`/questionnaire/edit/${_id}`);
                 }}
               >
                 编辑问卷
@@ -138,7 +138,7 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
                 icon={<LineChartOutlined />}
                 disabled={!isPublished} // 未发布问卷的禁用统计按钮
                 onClick={() => {
-                  nav(`/question/stats/${_id}`);
+                  nav(`/questionnaire/stats/${_id}`);
                 }}
               >
                 数据统计

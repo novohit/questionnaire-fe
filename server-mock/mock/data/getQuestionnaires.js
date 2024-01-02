@@ -5,7 +5,7 @@
 const Mock = require('mockjs')
 const Random = Mock.Random
 
-function getQuestionList(opt = {}) {
+function getQuestionnaires(opt = {}) {
     const { len = 10, isDeleted = false, isStar = false } = opt
     const list = []
     for (let i = 0; i < len; i++) {
@@ -37,4 +37,4 @@ function getQuestionList(opt = {}) {
     return list
 }
 
-module.exports = getQuestionList
+module.exports = getQuestionnaires

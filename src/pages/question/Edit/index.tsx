@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { FC } from 'react';
-import useLoadQuestion from '../../../hooks/useLoadQuestion';
+import useLoadQuestionnaire from '../../../hooks/useLoadQuestionnaire';
 import styles from './index.module.scss';
 import EditCanvas from './EditCanvas';
 import { Spin } from 'antd';
@@ -12,7 +12,7 @@ import EditHeader from './EditHeader';
 
 const Edit: FC = () => {
   // 用 hooks 抽取公共逻辑
-  const { loading, question } = useLoadQuestion();
+  const { loading, question } = useLoadQuestionnaire();
   const dispatch = useDispatch();
 
   // 点击空白出 取消选中

@@ -6,9 +6,9 @@ import QuestionCard from '../../components/QuestionCard';
 import { useDebounceFn, useRequest, useTitle } from 'ahooks';
 import { Empty, Spin, Typography } from 'antd';
 import ListSearch from '../../components/ListSearch';
-import { getQuestionList } from '../../services/question';
-import { Question } from '../../model/questionnaire';
-import useLoadQuestionList from '../../hooks/useLoadQuestionList';
+import { getQuestionnaires } from '../../services/question';
+import { Questionnaire } from '../../model/questionnaire';
+import useLoadQuestionnaires from '../../hooks/useLoadQuestionnaires';
 import { useSearchParams } from 'react-router-dom';
 import { DEFAULT_PAGE_SIZE, SEARCH_KEY } from '../../constants';
 
@@ -51,13 +51,13 @@ const { Title } = Typography;
 
 const List: FC = () => {
   useTitle('问卷星 - 我的问卷');
-  const [questionList, setQuestionList] = useState<Question[]>([]);
+  const [questionnaires, setQuestionnaires] = useState<Questionnaire[]>([]);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
 
   const [searchParams] = useSearchParams();
 
-  const haveMore = total > questionList.length;
+  const haveMore = total > questionnaires.length;
   const containerRef = useRef<HTMLDivElement>(null);
   const prevY = useRef<number>(0);
 
@@ -71,7 +71,7 @@ const List: FC = () => {
       if (type === 'route') {
         p = 1;
       }
-      const data = await getQuestionList({
+      const data = await getQuestionnaires({
         keyword: searchParams.get(SEARCH_KEY) || '',
         page: p,
         size: DEFAULT_PAGE_SIZE,
@@ -86,10 +86,10 @@ const List: FC = () => {
         setTotal(total);
         if (type === 'scroll') {
           setPage(page + 1);
-          setQuestionList(questionList.concat(list));
+          setQuestionnaires(questionnaires.concat(list));
         } else {
           setPage(2);
-          setQuestionList(list);
+          setQuestionnaires(list);
         }
       },
     }
@@ -151,12 +151,12 @@ const List: FC = () => {
             <Spin />
           </div>
         )}
-        {!loading && questionList.length === 0 && (
+        {!loading && questionnaires.length === 0 && (
           <Empty description="暂无数据" />
         )}
         {!loading &&
-          questionList.length > 0 &&
-          questionList.map(q => {
+          questionnaires.length > 0 &&
+          questionnaires.map(q => {
             const { _id } = q;
             return <QuestionCard key={_id} {...q} />;
           })}

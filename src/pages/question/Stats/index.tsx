@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import useLoadQuestion from '../../../hooks/useLoadQuestion';
+import useLoadQuestionnaire from '../../../hooks/useLoadQuestionnaire';
 
 const Stats: FC = () => {
-  const { loading, question } = useLoadQuestion();
+  const { loading, question } = useLoadQuestionnaire();
 
   return (
     <>

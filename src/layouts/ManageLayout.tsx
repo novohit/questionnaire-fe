@@ -8,7 +8,7 @@ import {
   PlusOutlined,
   StarOutlined,
 } from '@ant-design/icons';
-import { createQuestion } from '../services/question';
+import { createQuestionnaire } from '../services/question';
 
 const ManageLayout: FC = () => {
   const nav = useNavigate();
@@ -18,9 +18,9 @@ const ManageLayout: FC = () => {
 
   const handleCreateQuestion = async () => {
     setLoading(true);
-    const _id = (await createQuestion()) || {};
+    const _id = (await createQuestionnaire()) || {};
     if (_id) {
-      nav(`/question/edit/${_id}`);
+      nav(`/questionnaire/edit/${_id}`);
       message.success('创建成功');
     }
     setLoading(false);

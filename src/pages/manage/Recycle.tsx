@@ -15,9 +15,12 @@ import styles from './Common.module.scss';
 import { useRequest, useTitle } from 'ahooks';
 import { ColumnsType } from 'antd/es/table';
 import ListSearch from '../../components/ListSearch';
-import useLoadQuestionList from '../../hooks/useLoadQuestionList';
+import useLoadQuestionnaires from '../../hooks/useLoadQuestionnaires';
 import ListPage from '../../components/ListPage';
-import { deleteQuestion, recoverQuestion } from '../../services/question';
+import {
+  deleteQuestionnaire,
+  recoverQuestionnaire,
+} from '../../services/question';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
 interface Question {
@@ -115,14 +118,14 @@ const Recycle: FC = () => {
   // console.log(recycleList, setRecycleList);
 
   const [selectedIds, setSelectedIds] = useState<React.Key[]>([]);
-  const { data, loading, error, refresh } = useLoadQuestionList({
+  const { data, loading, error, refresh } = useLoadQuestionnaires({
     isDeleted: true,
   });
   const recycleList = data?.list || [];
 
   const { loading: recoverLoading, run: recover } = useRequest(
     async () => {
-      await recoverQuestion(selectedIds);
+      await recoverQuestionnaire(selectedIds);
     },
     {
       manual: true,
@@ -137,7 +140,7 @@ const Recycle: FC = () => {
 
   const { loading: deleteLoading, run: deleteRequest } = useRequest(
     async () => {
-      await deleteQuestion(selectedIds);
+      await deleteQuestionnaire(selectedIds);
     },
     {
       manual: true,

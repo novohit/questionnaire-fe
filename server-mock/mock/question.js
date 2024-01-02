@@ -3,13 +3,13 @@
 /* eslint-disable prettier/prettier */
 const Mock = require('mockjs')
 
-const getQuestionList = require('./data/getQuestionList')
+const getQuestionnaires = require('./data/getQuestionnaires')
 const Random = Mock.Random
 
 module.exports = [
     {
         // 获取单个问卷信息
-        url: '/api/question/:id',
+        url: '/api/questionnaire/:id',
         method: 'get',
         response() {
             return {
@@ -64,7 +64,7 @@ module.exports = [
     },
     {
         // 创建问卷
-        url: '/api/question',
+        url: '/api/questionnaire',
         method: 'post',
         response() {
             return {
@@ -76,7 +76,7 @@ module.exports = [
     },
     {
         // 问卷列表
-        url: '/api/question',
+        url: '/api/questionnaire',
         method: 'get',
         response(ctx) {
             const { url = '', query = {} } = ctx
@@ -86,7 +86,7 @@ module.exports = [
             return {
                 code: 0,
                 data: {
-                    list: getQuestionList({ len: size, isDeleted, isStar }),
+                    list: getQuestionnaires({ len: size, isDeleted, isStar }),
                     total: 100
                 },
                 message: 'success'
@@ -95,7 +95,7 @@ module.exports = [
     },
     {
         // 更新问卷
-        url: '/api/question/:id',
+        url: '/api/questionnaire/:id',
         method: 'put',
         response() {
             return {
@@ -106,7 +106,7 @@ module.exports = [
     },
     {
         // 复制问卷
-        url: '/api/question/copy/:id',
+        url: '/api/questionnaire/copy/:id',
         method: 'post',
         response() {
             return {
@@ -118,7 +118,7 @@ module.exports = [
     },
     {
         // 批量删除问卷
-        url: '/api/question',
+        url: '/api/questionnaire',
         method: 'delete',
         response() {
             return {
@@ -129,7 +129,7 @@ module.exports = [
     },
     {
         // 批量恢复问卷
-        url: '/api/question/recover',
+        url: '/api/questionnaire/recover',
         method: 'put',
         response() {
             return {

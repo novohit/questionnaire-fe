@@ -1,6 +1,6 @@
 import { ComponentProps } from '../components/question/type';
 
-export interface Question {
+export interface Questionnaire {
   _id: string;
   title: string;
   isPublished: boolean;
@@ -9,7 +9,7 @@ export interface Question {
   createdAt: string;
   deletedAt: string;
   pageSetting: PageSetting;
-  components: QuestionComponent[];
+  components: QuestionnaireComponent[];
 }
 
 export interface PageSetting {
@@ -19,7 +19,7 @@ export interface PageSetting {
   css: string;
 }
 
-export interface QuestionComponent {
+export interface QuestionnaireComponent {
   userQuestionComponentId: string;
   componentId: string;
   type: string;

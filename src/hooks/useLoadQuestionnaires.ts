@@ -5,10 +5,10 @@ import {
   PAGE_SIZE_KEY,
   SEARCH_KEY,
 } from '../constants';
-import { getQuestionList } from '../services/question';
+import { getQuestionnaires } from '../services/question';
 import { useRequest } from 'ahooks';
 
-function useLoadQuestionList(opt: { isStar?: boolean; isDeleted?: boolean }) {
+function useLoadQuestionnaires(opt: { isStar?: boolean; isDeleted?: boolean }) {
   const [searchParams] = useSearchParams();
   const { isStar, isDeleted } = opt;
   const { data, loading, error, refresh } = useRequest(
@@ -18,7 +18,7 @@ function useLoadQuestionList(opt: { isStar?: boolean; isDeleted?: boolean }) {
       const size =
         parseInt(searchParams.get(PAGE_SIZE_KEY) || '') || DEFAULT_PAGE_SIZE;
       if (keyword) {
-        return await getQuestionList({
+        return await getQuestionnaires({
           keyword,
           isStar,
           isDeleted,
@@ -26,7 +26,7 @@ function useLoadQuestionList(opt: { isStar?: boolean; isDeleted?: boolean }) {
           size,
         });
       } else {
-        return await getQuestionList({ isStar, isDeleted, page, size });
+        return await getQuestionnaires({ isStar, isDeleted, page, size });
       }
     },
     {
@@ -37,4 +37,4 @@ function useLoadQuestionList(opt: { isStar?: boolean; isDeleted?: boolean }) {
   return { data, loading, error, refresh };
 }
 
-export default useLoadQuestionList;
+export default useLoadQuestionnaires;

@@ -5,7 +5,7 @@ import styles from './Common.module.scss';
 import QuestionCard from '../../components/QuestionCard';
 import { useTitle } from 'ahooks';
 import ListSearch from '../../components/ListSearch';
-import useLoadQuestionList from '../../hooks/useLoadQuestionList';
+import useLoadQuestionnaires from '../../hooks/useLoadQuestionnaires';
 import ListPage from '../../components/ListPage';
 
 const mockStarList = [
@@ -33,7 +33,7 @@ const Star: FC = () => {
   useTitle('问卷星 - 收藏问卷');
 
   // const [starList, setStarList] = useState(mockStarList);
-  const { data, loading, error } = useLoadQuestionList({ isStar: true });
+  const { data, loading, error } = useLoadQuestionnaires({ isStar: true });
   const starList = data?.list || [];
 
   return (

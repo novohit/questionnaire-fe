@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { getComponentLib } from '../../../services/component';
 import { ComponentGroup } from '../../../model/component';
-import { QuestionComponent } from '../../../model/questionnaire';
+import { QuestionnaireComponent } from '../../../model/questionnaire';
 import { Empty, Spin, Typography } from 'antd';
 import { getComponentByType } from '../../../components/question/QuestionConfig';
 import styles from './ComponentLibTab.module.scss';
@@ -67,7 +67,7 @@ const ComponentLib: FC = () => {
                       type,
                       title: '',
                       props: defaultProps,
-                    } as QuestionComponent)
+                    } as QuestionnaireComponent)
                   );
                 };
 
