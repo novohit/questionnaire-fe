@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getQuestionnaire } from '../services/question';
+import { getQuestionnaire } from '../services/questionnaire';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { resetComponents } from '../store/components';

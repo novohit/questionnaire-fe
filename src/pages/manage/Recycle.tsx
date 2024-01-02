@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Button,
   Empty,
@@ -20,7 +19,7 @@ import ListPage from '../../components/ListPage';
 import {
   deleteQuestionnaire,
   recoverQuestionnaire,
-} from '../../services/question';
+} from '../../services/questionnaire';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
 interface Question {
@@ -31,25 +30,6 @@ interface Question {
   answerCount: number;
   createdAt: string;
 }
-
-const mockRecycleList = [
-  {
-    _id: 'q8',
-    title: '问卷8',
-    isPublished: false,
-    isStar: true,
-    answerCount: 23,
-    createdAt: '2023-11-18 15:42:22',
-  },
-  {
-    _id: 'q9',
-    title: '问卷9',
-    isPublished: true,
-    isStar: true,
-    answerCount: 3,
-    createdAt: '2023-11-18 15:42:22',
-  },
-];
 
 const columns: ColumnsType<Question> = [
   {
@@ -118,7 +98,7 @@ const Recycle: FC = () => {
   // console.log(recycleList, setRecycleList);
 
   const [selectedIds, setSelectedIds] = useState<React.Key[]>([]);
-  const { data, loading, error, refresh } = useLoadQuestionnaires({
+  const { data, loading, refresh } = useLoadQuestionnaires({
     isDeleted: true,
   });
   const recycleList = data?.list || [];

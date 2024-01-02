@@ -8,7 +8,7 @@ import {
   PlusOutlined,
   StarOutlined,
 } from '@ant-design/icons';
-import { createQuestionnaire } from '../services/question';
+import { createQuestionnaire } from '../services/questionnaire';
 
 const ManageLayout: FC = () => {
   const nav = useNavigate();

@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react';
-import styles from './QuestionCard.module.scss';
+import styles from './QuestionnaireCard.module.scss';
 import { Button, Divider, Modal, Popconfirm, Space, Tag, message } from 'antd';
 import {
   CopyOutlined,
@@ -12,7 +12,10 @@ import {
 } from '@ant-design/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRequest } from 'ahooks';
-import { copyQuestionnaire, updateQuestionnaire } from '../services/question';
+import {
+  copyQuestionnaire,
+  updateQuestionnaire,
+} from '../services/questionnaire';
 import dayjs from 'dayjs';
 
 // ts 自定义类型
@@ -27,7 +30,7 @@ type PropsType = {
 
 const { confirm } = Modal;
 
-const QuestionCard: FC<PropsType> = (props: PropsType) => {
+const QuestionnaireCard: FC<PropsType> = (props: PropsType) => {
   const { _id, title, answerCount, isPublished, isStar, createdAt } = props;
   // 修改数据后是否重新加载列表？还是本地维护状态 两种做法
   // 更新收藏后，不加载list接口，直接修改页面 维护star的状态
@@ -185,4 +188,4 @@ const QuestionCard: FC<PropsType> = (props: PropsType) => {
   );
 };
 
-export default QuestionCard;
+export default QuestionnaireCard;

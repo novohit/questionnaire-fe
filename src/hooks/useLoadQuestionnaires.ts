@@ -5,7 +5,7 @@ import {
   PAGE_SIZE_KEY,
   SEARCH_KEY,
 } from '../constants';
-import { getQuestionnaires } from '../services/question';
+import { getQuestionnaires } from '../services/questionnaire';
 import { useRequest } from 'ahooks';
 
 function useLoadQuestionnaires(opt: { isStar?: boolean; isDeleted?: boolean }) {

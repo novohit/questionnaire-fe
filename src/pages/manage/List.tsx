@@ -1,51 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import React, { FC, useEffect, useRef, useState } from 'react';
 import styles from './Common.module.scss';
-import QuestionCard from '../../components/QuestionCard';
+import QuestionnaireCard from '../../components/QuestionnaireCard';
 import { useDebounceFn, useRequest, useTitle } from 'ahooks';
 import { Empty, Spin, Typography } from 'antd';
 import ListSearch from '../../components/ListSearch';
-import { getQuestionnaires } from '../../services/question';
+import { getQuestionnaires } from '../../services/questionnaire';
 import { Questionnaire } from '../../model/questionnaire';
-import useLoadQuestionnaires from '../../hooks/useLoadQuestionnaires';
 import { useSearchParams } from 'react-router-dom';
 import { DEFAULT_PAGE_SIZE, SEARCH_KEY } from '../../constants';
-
-const mockQuestionList = [
-  {
-    _id: 'q1',
-    title: '问卷1',
-    isPublished: false,
-    isStar: true,
-    answerCount: 23,
-    createdAt: '2023-11-18 15:42:22',
-  },
-  {
-    _id: 'q2',
-    title: '问卷2',
-    isPublished: true,
-    isStar: false,
-    answerCount: 3,
-    createdAt: '2023-11-18 15:42:22',
-  },
-  {
-    _id: 'q3',
-    title: '问卷3',
-    isPublished: false,
-    isStar: true,
-    answerCount: 3,
-    createdAt: '2023-11-18 15:42:22',
-  },
-  {
-    _id: 'q4',
-    title: '问卷4',
-    isPublished: true,
-    isStar: false,
-    answerCount: 13,
-    createdAt: '2023-11-18 15:42:22',
-  },
-];
 
 const { Title } = Typography;
 
@@ -61,11 +23,7 @@ const List: FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const prevY = useRef<number>(0);
 
-  const {
-    run: loadMore,
-    loading,
-    error,
-  } = useRequest(
+  const { run: loadMore, loading } = useRequest(
     async (type: string) => {
       let p = page;
       if (type === 'route') {
@@ -158,7 +116,7 @@ const List: FC = () => {
           questionnaires.length > 0 &&
           questionnaires.map(q => {
             const { _id } = q;
-            return <QuestionCard key={_id} {...q} />;
+            return <QuestionnaireCard key={_id} {...q} />;
           })}
       </div>
       <div className={styles.footer}>
