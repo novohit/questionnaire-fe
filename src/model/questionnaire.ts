@@ -15,8 +15,8 @@ export interface Questionnaire {
 export interface PageSetting {
   title: string;
   desc: string;
-  js: string;
-  css: string;
+  js?: string;
+  css?: string;
 }
 
 export interface QuestionnaireComponent {

@@ -1,12 +1,14 @@
 import React, { FC, useState } from 'react';
 import styles from './EditHeader.module.scss';
-import { Button, Input, Space, Typography } from 'antd';
+import { Button, Input, Space, Typography, message } from 'antd';
 import { EditOutlined, LeftOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import EditMainToolbar from './EditMainToolbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { resetPageSetting } from '../../../store/pageInfoReducer';
+import { useKeyPress, useRequest } from 'ahooks';
+import { updateQuestionnaire } from '../../../services/questionnaire';
 
 const { Title } = Typography;
 
@@ -27,7 +29,7 @@ const EditHeader: FC = () => {
             >
               返回
             </Button>
-            <QuestionTitle />
+            <QuestionnaireTitle />
           </Space>
         </div>
         <div className={styles.main}>
@@ -35,7 +37,7 @@ const EditHeader: FC = () => {
         </div>
         <div className={styles.right}>
           <Space direction="horizontal">
-            <Button>保存</Button>
+            <SaveButton />
             <Button type="primary">发布</Button>
           </Space>
         </div>
@@ -44,7 +46,47 @@ const EditHeader: FC = () => {
   );
 };
 
-const QuestionTitle: FC = () => {
+// 保存按钮组件
+const SaveButton: FC = () => {
+  const pageSetting = useSelector((state: RootState) => state.pageSetting);
+  const { components } = useSelector(
+    (state: RootState) => state.componentsState
+  );
+  const { _id } = useParams();
+
+  const { loading, run } = useRequest(
+    async () => {
+      if (!_id) return;
+      await updateQuestionnaire(_id, {
+        title: pageSetting.title,
+        pageSetting,
+        components,
+      });
+    },
+    {
+      manual: true,
+      onSuccess() {
+        message.success('保存成功');
+      },
+    }
+  );
+
+  // 快捷键保存
+  useKeyPress(['ctrl.s', 'meta.s'], (event: KeyboardEvent) => {
+    // 阻止键盘事件的默认行为 避免跟浏览器快捷键冲突
+    event.preventDefault();
+    if (!loading) run();
+  });
+
+  return (
+    <Button onClick={run} loading={loading}>
+      保存
+    </Button>
+  );
+};
+
+// 问卷标题组件
+const QuestionnaireTitle: FC = () => {
   const pageSetting = useSelector((state: RootState) => state.pageSetting);
   const dispatch = useDispatch();
   const { title } = pageSetting;

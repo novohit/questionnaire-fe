@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 // 为 slice state 定义一个类型
 interface PageSettingState {
   title: string;
-  desc?: string;
+  desc: string;
   js?: string;
   css?: string;
 }

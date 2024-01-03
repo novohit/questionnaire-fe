@@ -12,7 +12,7 @@ import EditHeader from './EditHeader';
 
 const Edit: FC = () => {
   // 用 hooks 抽取公共逻辑
-  const { loading, question } = useLoadQuestionnaire();
+  const { loading, questionnaire } = useLoadQuestionnaire();
   const dispatch = useDispatch();
 
   // 点击空白出 取消选中

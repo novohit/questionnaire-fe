@@ -22,7 +22,7 @@ import {
 } from '../../services/questionnaire';
 import { ExclamationCircleFilled } from '@ant-design/icons';
 
-interface Question {
+interface Questionnaire {
   _id: string;
   title: string;
   isPublished: boolean;
@@ -31,7 +31,7 @@ interface Question {
   createdAt: string;
 }
 
-const columns: ColumnsType<Question> = [
+const columns: ColumnsType<Questionnaire> = [
   {
     title: '标题',
     dataIndex: 'title',

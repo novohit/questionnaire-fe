@@ -10,7 +10,7 @@ function useLoadQuestionnaire() {
   // 获取动态路由的参数
   const { _id = '' } = useParams();
   const [loading, setLoading] = useState(true);
-  const [question, setQuestion] = useState({});
+  const [questionnaire, setQuestionnaire] = useState({});
 
   useEffect(() => {
     async function get() {
@@ -19,13 +19,13 @@ function useLoadQuestionnaire() {
       const { pageSetting, components } = data;
       dispatch(resetComponents({ selectedId: '', components }));
       dispatch(resetPageSetting(pageSetting));
-      setQuestion(data);
+      setQuestionnaire(data);
       setLoading(false);
     }
     get();
   }, []);
 
-  return { loading, question };
+  return { loading, questionnaire };
 }
 
 export default useLoadQuestionnaire;
