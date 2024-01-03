@@ -1,7 +1,11 @@
 import React, { FC, useState } from 'react';
 import styles from './EditHeader.module.scss';
-import { Button, Input, Space, Typography, message } from 'antd';
-import { EditOutlined, LeftOutlined } from '@ant-design/icons';
+import { Button, Input, Modal, Space, Typography, message } from 'antd';
+import {
+  CheckCircleOutlined,
+  EditOutlined,
+  LeftOutlined,
+} from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import EditMainToolbar from './EditMainToolbar';
 import { useDispatch, useSelector } from 'react-redux';
@@ -38,7 +42,7 @@ const EditHeader: FC = () => {
         <div className={styles.right}>
           <Space direction="horizontal">
             <SaveButton />
-            <Button type="primary">发布</Button>
+            <PublishButton />
           </Space>
         </div>
       </div>
@@ -89,9 +93,75 @@ const SaveButton: FC = () => {
   );
 
   return (
-    <Button onClick={run} loading={loading}>
+    <Button onClick={run} loading={loading} disabled={loading}>
       保存
     </Button>
+  );
+};
+
+// 发布按钮组件
+const PublishButton: FC = () => {
+  const pageSetting = useSelector((state: RootState) => state.pageSetting);
+  const { components } = useSelector(
+    (state: RootState) => state.componentsState
+  );
+  const { _id } = useParams();
+
+  const nav = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+    nav(`/questionnaire/stats/${_id}`);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const { loading, run } = useRequest(
+    async () => {
+      if (!_id) return;
+      await updateQuestionnaire(_id, {
+        isPublished: true,
+        title: pageSetting.title,
+        pageSetting,
+        components,
+      });
+    },
+    {
+      manual: true,
+      onSuccess() {
+        showModal();
+      },
+    }
+  );
+
+  return (
+    <>
+      <Button type="primary" onClick={run} loading={loading} disabled={loading}>
+        发布
+      </Button>
+      <Modal
+        title={
+          <Space>
+            <CheckCircleOutlined style={{ color: 'green' }} />
+            <span>发布成功</span>
+          </Space>
+        }
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        okText="跳转"
+        cancelText="留在本页"
+      >
+        <p>是否跳转到统计页</p>
+      </Modal>
+    </>
   );
 };
 
