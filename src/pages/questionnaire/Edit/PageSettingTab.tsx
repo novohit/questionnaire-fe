@@ -2,7 +2,7 @@ import { Form, Input } from 'antd';
 import React, { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { resetPageSetting } from '../../../store/pageInfoReducer';
+import { resetPageSetting } from '../../../store/pageSettingReducer';
 
 const { TextArea } = Input;
 

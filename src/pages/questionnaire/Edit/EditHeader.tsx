@@ -10,7 +10,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import EditMainToolbar from './EditMainToolbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
-import { resetPageSetting } from '../../../store/pageInfoReducer';
+import { resetPageSetting } from '../../../store/pageSettingReducer';
 import { useDebounceEffect, useKeyPress, useRequest } from 'ahooks';
 import { updateQuestionnaire } from '../../../services/questionnaire';
 

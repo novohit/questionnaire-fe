@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './userReducer';
 import componentsReducer from './components';
-import pageSettingReducer from './pageInfoReducer';
+import pageSettingReducer from './pageSettingReducer';
 
 const store = configureStore({
   reducer: {

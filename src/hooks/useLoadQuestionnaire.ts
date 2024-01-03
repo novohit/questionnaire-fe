@@ -3,7 +3,7 @@ import { getQuestionnaire } from '../services/questionnaire';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { resetComponents } from '../store/components';
-import { resetPageSetting } from '../store/pageInfoReducer';
+import { resetPageSetting } from '../store/pageSettingReducer';
 
 function useLoadQuestionnaire() {
   const dispatch = useDispatch();
