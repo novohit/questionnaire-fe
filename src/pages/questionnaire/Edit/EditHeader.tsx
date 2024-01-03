@@ -7,7 +7,7 @@ import EditMainToolbar from './EditMainToolbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { resetPageSetting } from '../../../store/pageInfoReducer';
-import { useKeyPress, useRequest } from 'ahooks';
+import { useDebounceEffect, useKeyPress, useRequest } from 'ahooks';
 import { updateQuestionnaire } from '../../../services/questionnaire';
 
 const { Title } = Typography;
@@ -77,6 +77,16 @@ const SaveButton: FC = () => {
     event.preventDefault();
     if (!loading) run();
   });
+
+  // 编辑后自动延时5s保存
+  // TODO BUG 第一次渲染页面会触发
+  useDebounceEffect(
+    () => {
+      run();
+    },
+    [pageSetting, components],
+    { wait: 5000 }
+  );
 
   return (
     <Button onClick={run} loading={loading}>
