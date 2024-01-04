@@ -12,6 +12,8 @@ function isComponentElement() {
   // 防止光标 focus 到属性输入框时删掉组件
   const activeElem = document.activeElement;
   if (activeElem === document.body) return true;
+  // TODO 使用 dnd-kit 后元素变成了div
+  if (activeElem?.matches('div[role="button"]')) return true;
   return false;
 }
 
