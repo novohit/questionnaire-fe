@@ -4,6 +4,8 @@ import {
   DeleteOutlined,
   EyeInvisibleOutlined,
   LockOutlined,
+  RedoOutlined,
+  UndoOutlined,
 } from '@ant-design/icons';
 import { Button, Space, Tooltip } from 'antd';
 import React, { FC } from 'react';
@@ -16,11 +18,19 @@ import {
   pasteComponent,
 } from '../../../store/components';
 import { RootState } from '../../../store';
+import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
 const EditMainToolbar: FC = () => {
   const componentsState = useSelector(
-    (state: RootState) => state.componentsState
+    (state: RootState) => state.componentsState.present
   );
+
+  // 判断大于1的逻辑 因为 redux @@INIT 是空
+  const canUndo =
+    useSelector((state: RootState) => state.componentsState.past.length) > 1;
+  const canRedo =
+    useSelector((state: RootState) => state.componentsState.future.length) > 0;
+
   const dispatch = useDispatch();
   const { selectedId, components, copiedComponent } = componentsState;
   const selectedComponent = components.find(
@@ -45,6 +55,14 @@ const EditMainToolbar: FC = () => {
 
   const handlePaste = () => {
     dispatch(pasteComponent());
+  };
+
+  const handleUndo = () => {
+    dispatch(UndoActionCreators.undo());
+  };
+
+  const handleRedo = () => {
+    dispatch(UndoActionCreators.redo());
   };
 
   return (
@@ -84,6 +102,22 @@ const EditMainToolbar: FC = () => {
           icon={<BlockOutlined />}
           onClick={handlePaste}
         />
+      </Tooltip>
+      <Tooltip title="撤销">
+        <Button
+          shape="circle"
+          icon={<UndoOutlined />}
+          onClick={handleUndo}
+          disabled={!canUndo}
+        ></Button>
+      </Tooltip>
+      <Tooltip title="重做">
+        <Button
+          shape="circle"
+          icon={<RedoOutlined />}
+          onClick={handleRedo}
+          disabled={!canRedo}
+        ></Button>
       </Tooltip>
     </Space>
   );

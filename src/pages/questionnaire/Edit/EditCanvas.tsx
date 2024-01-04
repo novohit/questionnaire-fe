@@ -24,7 +24,7 @@ function genComponent(type: string, props: ComponentPropsType) {
 const EditCanvas: FC = () => {
   const dispatch = useDispatch();
   const componentsState = useSelector(
-    (state: RootState) => state.componentsState
+    (state: RootState) => state.componentsState.present
   );
   const { selectedId, components } = componentsState;
   // console.log(components);

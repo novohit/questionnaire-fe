@@ -54,7 +54,7 @@ const EditHeader: FC = () => {
 const SaveButton: FC = () => {
   const pageSetting = useSelector((state: RootState) => state.pageSetting);
   const { components } = useSelector(
-    (state: RootState) => state.componentsState
+    (state: RootState) => state.componentsState.present
   );
   const { _id } = useParams();
 
@@ -103,7 +103,7 @@ const SaveButton: FC = () => {
 const PublishButton: FC = () => {
   const pageSetting = useSelector((state: RootState) => state.pageSetting);
   const { components } = useSelector(
-    (state: RootState) => state.componentsState
+    (state: RootState) => state.componentsState.present
   );
   const { _id } = useParams();
 

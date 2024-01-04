@@ -2,11 +2,18 @@ import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './userReducer';
 import componentsReducer from './components';
 import pageSettingReducer from './pageSettingReducer';
+import undoable, { excludeAction } from 'redux-undo';
 
 const store = configureStore({
   reducer: {
     user: userReducer,
-    componentsState: componentsReducer,
+    componentsState: undoable(componentsReducer, {
+      limit: 20,
+      filter: excludeAction([
+        'componentsState/resetComponents',
+        'componentsState/selectComponent',
+      ]),
+    }),
     pageSetting: pageSettingReducer,
   },
 });

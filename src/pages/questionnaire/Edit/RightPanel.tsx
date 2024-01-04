@@ -37,7 +37,7 @@ const items: TabsProps['items'] = [
 
 const RightPanel: FC = () => {
   const componentsState = useSelector(
-    (state: RootState) => state.componentsState
+    (state: RootState) => state.componentsState.present
   );
   const { selectedId } = componentsState;
   const [activeKey, setActiveKey] = useState(TabKey.PAGE_SETTING);

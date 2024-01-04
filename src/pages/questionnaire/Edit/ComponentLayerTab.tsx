@@ -18,7 +18,7 @@ import { SortableItem } from '../../../components/DragSortable/SortableItem';
 const ComponentLayerTab: FC = () => {
   const dispatch = useDispatch();
   const componentsState = useSelector(
-    (state: RootState) => state.componentsState
+    (state: RootState) => state.componentsState.present
   );
   const { selectedId, components } = componentsState;
 

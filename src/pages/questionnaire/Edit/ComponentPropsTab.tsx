@@ -11,7 +11,7 @@ const Unselected: FC = () => {
 
 const ComponentPropsTab: FC = () => {
   const componentsState = useSelector(
-    (state: RootState) => state.componentsState
+    (state: RootState) => state.componentsState.present
   );
   const dispatch = useDispatch();
   const { selectedId, components } = componentsState;
