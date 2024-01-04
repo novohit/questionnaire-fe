@@ -1,6 +1,7 @@
 import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit';
 import { ComponentPropsType } from '../../components/questionnaire/type';
 import cloneDeep from 'lodash.clonedeep';
+import { arrayMove } from '@dnd-kit/sortable';
 
 // 为 slice state 定义一个类型
 interface ComponentState {
@@ -168,6 +169,16 @@ export const componentsSlice = createSlice({
         components.splice(index + 1, 0, state.copiedComponent);
       }
     },
+    // 拖拽排序组件
+    moveComponent: (
+      state,
+      action: PayloadAction<{ oldIndex: number; newIndex: number }>
+    ) => {
+      const { components } = state;
+      const { oldIndex, newIndex } = action.payload;
+      // arrayMove 算法也可以自己实现
+      state.components = arrayMove(components, oldIndex, newIndex);
+    },
   },
 });
 // 每个 case reducer 函数会生成对应的 Action creators
@@ -182,6 +193,7 @@ export const {
   lockComponent,
   copyComponent,
   pasteComponent,
+  moveComponent,
 } = componentsSlice.actions;
 
 export default componentsSlice.reducer;

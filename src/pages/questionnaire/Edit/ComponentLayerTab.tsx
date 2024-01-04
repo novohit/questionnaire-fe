@@ -7,10 +7,13 @@ import { Button, Input, Space } from 'antd';
 import {
   hideComponent,
   lockComponent,
+  moveComponent,
   selectComponent,
   updateComponentTitle,
 } from '../../../store/components';
 import { EyeOutlined, LockOutlined } from '@ant-design/icons';
+import SortableContainer from '../../../components/DragSortable/SortableContainer';
+import { SortableItem } from '../../../components/DragSortable/SortableItem';
 
 const ComponentLayerTab: FC = () => {
   const dispatch = useDispatch();
@@ -34,8 +37,17 @@ const ComponentLayerTab: FC = () => {
     );
   };
 
+  const handleDragEndMove = (oldIndex: number, newIndex: number) => {
+    dispatch(moveComponent({ oldIndex, newIndex }));
+  };
+
   return (
-    <>
+    <SortableContainer
+      items={components.map(c => {
+        return { ...c, id: c.userQuestionComponentId };
+      })}
+      handleDragEndMove={handleDragEndMove}
+    >
       {components.map(c => {
         const { userQuestionComponentId, title, hidden, locked } = c;
 
@@ -48,61 +60,66 @@ const ComponentLayerTab: FC = () => {
         });
 
         return (
-          <div key={userQuestionComponentId} className={styles.wrapper}>
-            <div
-              className={titleClassName}
-              onClick={() => {
-                dispatch(selectComponent(userQuestionComponentId));
-                handleTitleClick(userQuestionComponentId);
-              }}
-              onDoubleClick={() => {
-                dispatch(selectComponent(userQuestionComponentId));
-                setEditingId(userQuestionComponentId);
-              }}
-            >
-              {editingId !== userQuestionComponentId && title}
-              {editingId === userQuestionComponentId && (
-                <Input
-                  autoFocus // 自动聚焦 避免 selectId 和 editingId 会出现不同步的情况
-                  value={title}
-                  onChange={changeTitle}
-                  onPressEnter={() => {
-                    setEditingId('');
-                  }}
-                  onBlur={() => {
-                    setEditingId('');
-                  }}
-                />
-              )}
+          <SortableItem
+            key={userQuestionComponentId}
+            id={userQuestionComponentId}
+          >
+            <div className={styles.wrapper}>
+              <div
+                className={titleClassName}
+                onClick={() => {
+                  dispatch(selectComponent(userQuestionComponentId));
+                  handleTitleClick(userQuestionComponentId);
+                }}
+                onDoubleClick={() => {
+                  dispatch(selectComponent(userQuestionComponentId));
+                  setEditingId(userQuestionComponentId);
+                }}
+              >
+                {editingId !== userQuestionComponentId && title}
+                {editingId === userQuestionComponentId && (
+                  <Input
+                    autoFocus // 自动聚焦 避免 selectId 和 editingId 会出现不同步的情况
+                    value={title}
+                    onChange={changeTitle}
+                    onPressEnter={() => {
+                      setEditingId('');
+                    }}
+                    onBlur={() => {
+                      setEditingId('');
+                    }}
+                  />
+                )}
+              </div>
+              <div className={styles.handler}>
+                <Space>
+                  <Button
+                    className={!hidden ? styles.button : ''}
+                    shape="circle"
+                    size="small"
+                    icon={<EyeOutlined />}
+                    type={hidden ? 'primary' : 'text'}
+                    onClick={() => {
+                      dispatch(hideComponent(userQuestionComponentId));
+                    }}
+                  />
+                  <Button
+                    className={!locked ? styles.button : ''}
+                    shape="circle"
+                    size="small"
+                    icon={<LockOutlined />}
+                    type={locked ? 'primary' : 'text'}
+                    onClick={() => {
+                      dispatch(lockComponent(userQuestionComponentId));
+                    }}
+                  />
+                </Space>
+              </div>
             </div>
-            <div className={styles.handler}>
-              <Space>
-                <Button
-                  className={!hidden ? styles.button : ''}
-                  shape="circle"
-                  size="small"
-                  icon={<EyeOutlined />}
-                  type={hidden ? 'primary' : 'text'}
-                  onClick={() => {
-                    dispatch(hideComponent(userQuestionComponentId));
-                  }}
-                />
-                <Button
-                  className={!locked ? styles.button : ''}
-                  shape="circle"
-                  size="small"
-                  icon={<LockOutlined />}
-                  type={locked ? 'primary' : 'text'}
-                  onClick={() => {
-                    dispatch(lockComponent(userQuestionComponentId));
-                  }}
-                />
-              </Space>
-            </div>
-          </div>
+          </SortableItem>
         );
       })}
-    </>
+    </SortableContainer>
   );
 };
 
