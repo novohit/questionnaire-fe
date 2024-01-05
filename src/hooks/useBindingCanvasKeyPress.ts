@@ -6,6 +6,7 @@ import {
   selectComponent,
 } from '../store/componentsReducer';
 import { useAppDispatch, useAppSelector } from './useRedux';
+import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
 function isComponentElement() {
   // 防止光标 focus 到属性输入框时删掉组件
@@ -22,6 +23,12 @@ function useBindingCanvasKeypress() {
     state => state.componentsState.present
   );
   const { selectedId, components } = componentsState;
+
+  // 判断大于1的逻辑 因为 redux @@INIT 是空
+  const canUndo =
+    useAppSelector(state => state.componentsState.past.length) > 1;
+  const canRedo =
+    useAppSelector(state => state.componentsState.future.length) > 0;
 
   // 删除
   useKeyPress(['backspace', 'delete'], () => {
@@ -72,6 +79,20 @@ function useBindingCanvasKeypress() {
     );
     const nextIndex = Math.min(index + 1, components.length - 1);
     dispatch(selectComponent(components[nextIndex].userQuestionComponentId));
+  });
+
+  // 撤销
+  useKeyPress(['ctrl.z', 'meta.z'], () => {
+    if (canUndo) {
+      dispatch(UndoActionCreators.undo());
+    }
+  });
+
+  // 重做
+  useKeyPress(['ctrl.y', 'meta.y'], () => {
+    if (canRedo) {
+      dispatch(UndoActionCreators.redo());
+    }
   });
 }
 
