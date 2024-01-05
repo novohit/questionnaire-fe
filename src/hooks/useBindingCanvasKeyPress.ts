@@ -1,12 +1,11 @@
 import { useKeyPress } from 'ahooks';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   copyComponent,
   deleteComponent,
   pasteComponent,
   selectComponent,
 } from '../store/componentsReducer';
-import { RootState } from '../store';
+import { useAppDispatch, useAppSelector } from './useRedux';
 
 function isComponentElement() {
   // 防止光标 focus 到属性输入框时删掉组件
@@ -18,9 +17,9 @@ function isComponentElement() {
 }
 
 function useBindingCanvasKeypress() {
-  const dispatch = useDispatch();
-  const componentsState = useSelector(
-    (state: RootState) => state.componentsState.present
+  const dispatch = useAppDispatch();
+  const componentsState = useAppSelector(
+    state => state.componentsState.present
   );
   const { selectedId, components } = componentsState;
 

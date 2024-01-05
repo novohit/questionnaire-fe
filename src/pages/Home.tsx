@@ -5,13 +5,12 @@ import { LOGIN_PATH, MANAGE_INDEX_PATH } from '../router';
 import styles from './Home.module.scss';
 import axios from 'axios';
 import '../mock/index'; // 需要引用 mockjs 才会劫持
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { useAppSelector } from '../hooks/useRedux';
 
 const { Title, Paragraph } = Typography;
 const Home: FC = () => {
   const nav = useNavigate();
-  const userState = useSelector((state: RootState) => state.user);
+  const userState = useAppSelector(state => state.user);
 
   useEffect(() => {
     axios.get('/api/test').then(res => console.log('res ', res));

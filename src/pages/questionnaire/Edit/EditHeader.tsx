@@ -8,11 +8,10 @@ import {
 } from '@ant-design/icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import EditMainToolbar from './EditMainToolbar';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
 import { resetPageSetting } from '../../../store/pageSettingReducer';
 import { useDebounceEffect, useKeyPress, useRequest } from 'ahooks';
 import { updateQuestionnaire } from '../../../services/questionnaire';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 
 const { Title } = Typography;
 
@@ -52,10 +51,8 @@ const EditHeader: FC = () => {
 
 // 保存按钮组件
 const SaveButton: FC = () => {
-  const pageSetting = useSelector((state: RootState) => state.pageSetting);
-  const { components } = useSelector(
-    (state: RootState) => state.componentsState.present
-  );
+  const pageSetting = useAppSelector(state => state.pageSetting);
+  const { components } = useAppSelector(state => state.componentsState.present);
   const { _id } = useParams();
 
   const { loading, run } = useRequest(
@@ -101,10 +98,8 @@ const SaveButton: FC = () => {
 
 // 发布按钮组件
 const PublishButton: FC = () => {
-  const pageSetting = useSelector((state: RootState) => state.pageSetting);
-  const { components } = useSelector(
-    (state: RootState) => state.componentsState.present
-  );
+  const pageSetting = useAppSelector(state => state.pageSetting);
+  const { components } = useAppSelector(state => state.componentsState.present);
   const { _id } = useParams();
 
   const nav = useNavigate();
@@ -167,8 +162,8 @@ const PublishButton: FC = () => {
 
 // 问卷标题组件
 const QuestionnaireTitle: FC = () => {
-  const pageSetting = useSelector((state: RootState) => state.pageSetting);
-  const dispatch = useDispatch();
+  const pageSetting = useAppSelector(state => state.pageSetting);
+  const dispatch = useAppDispatch();
   const { title } = pageSetting;
 
   const [isEditing, setIsEditing] = useState(false);

@@ -4,15 +4,14 @@ import { LOGIN_PATH } from '../router';
 import { clearToken } from '../utils/token';
 import { UserOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
 import { logoutReducer } from '../store/userReducer';
 import useLoadUserInfo from '../hooks/useLoadUserInfo';
+import { useAppDispatch, useAppSelector } from '../hooks/useRedux';
 
 const UserInfo: FC = () => {
   const nav = useNavigate();
-  const userState = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
+  const userState = useAppSelector(state => state.user);
+  const dispatch = useAppDispatch();
 
   useLoadUserInfo();
 

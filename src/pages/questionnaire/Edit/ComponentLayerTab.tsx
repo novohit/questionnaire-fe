@@ -1,6 +1,4 @@
 import React, { FC, useState } from 'react';
-import { RootState } from '../../../store';
-import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 import styles from './ComponentLayerTab.module.scss';
 import { Button, Input, Space } from 'antd';
@@ -14,11 +12,12 @@ import {
 import { EyeOutlined, LockOutlined } from '@ant-design/icons';
 import SortableContainer from '../../../components/DragSortable/SortableContainer';
 import { SortableItem } from '../../../components/DragSortable/SortableItem';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 
 const ComponentLayerTab: FC = () => {
-  const dispatch = useDispatch();
-  const componentsState = useSelector(
-    (state: RootState) => state.componentsState.present
+  const dispatch = useAppDispatch();
+  const componentsState = useAppSelector(
+    state => state.componentsState.present
   );
   const { selectedId, components } = componentsState;
 

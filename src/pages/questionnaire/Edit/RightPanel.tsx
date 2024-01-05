@@ -3,8 +3,7 @@ import { Tabs, TabsProps } from 'antd';
 import React, { FC, useEffect, useState } from 'react';
 import ComponentPropsTab from './ComponentPropsTab';
 import PageSettingTab from './PageSettingTab';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../store';
+import { useAppSelector } from '../../../hooks/useRedux';
 
 enum TabKey {
   COMPONENT_PROPS = '1',
@@ -36,8 +35,8 @@ const items: TabsProps['items'] = [
 ];
 
 const RightPanel: FC = () => {
-  const componentsState = useSelector(
-    (state: RootState) => state.componentsState.present
+  const componentsState = useAppSelector(
+    state => state.componentsState.present
   );
   const { selectedId } = componentsState;
   const [activeKey, setActiveKey] = useState(TabKey.PAGE_SETTING);

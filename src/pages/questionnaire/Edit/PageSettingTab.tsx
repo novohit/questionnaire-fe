@@ -1,14 +1,13 @@
 import { Form, Input } from 'antd';
 import React, { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
 import { resetPageSetting } from '../../../store/pageSettingReducer';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 
 const { TextArea } = Input;
 
 const PageSettingTab: FC = () => {
-  const pageSetting = useSelector((state: RootState) => state.pageSetting);
-  const dispatch = useDispatch();
+  const pageSetting = useAppSelector(state => state.pageSetting);
+  const dispatch = useAppDispatch();
   const [form] = Form.useForm();
 
   useEffect(() => {

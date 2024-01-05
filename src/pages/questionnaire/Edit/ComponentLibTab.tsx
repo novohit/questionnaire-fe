@@ -5,9 +5,9 @@ import { QuestionnaireComponent } from '../../../model/questionnaire';
 import { Empty, Spin, Typography } from 'antd';
 import { getComponentByType } from '../../../components/questionnaire/config';
 import styles from './ComponentLibTab.module.scss';
-import { useDispatch } from 'react-redux';
 import { addComponent } from '../../../store/componentsReducer';
 import { nanoid } from '@reduxjs/toolkit';
+import { useAppDispatch } from '../../../hooks/useRedux';
 
 const { Title } = Typography;
 
@@ -16,7 +16,7 @@ const ComponentLib: FC = () => {
     useState<Array<ComponentGroup>>();
   const [loading, setLoading] = useState<boolean>(true);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     async function get() {

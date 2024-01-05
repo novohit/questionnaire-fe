@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getUserInfo } from '../services/user';
-import { useDispatch } from 'react-redux';
 import { loginReducer } from '../store/userReducer';
 import { getToken } from '../utils/token';
+import { useAppDispatch } from './useRedux';
 
 function useLoadUserInfo() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
   const token = getToken();
 

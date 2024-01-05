@@ -9,7 +9,6 @@ import {
 } from '@ant-design/icons';
 import { Button, Space, Tooltip } from 'antd';
 import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   copyComponent,
   deleteComponent,
@@ -17,21 +16,21 @@ import {
   lockComponent,
   pasteComponent,
 } from '../../../store/componentsReducer';
-import { RootState } from '../../../store';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 
 const EditMainToolbar: FC = () => {
-  const componentsState = useSelector(
-    (state: RootState) => state.componentsState.present
+  const componentsState = useAppSelector(
+    state => state.componentsState.present
   );
 
   // 判断大于1的逻辑 因为 redux @@INIT 是空
   const canUndo =
-    useSelector((state: RootState) => state.componentsState.past.length) > 1;
+    useAppSelector(state => state.componentsState.past.length) > 1;
   const canRedo =
-    useSelector((state: RootState) => state.componentsState.future.length) > 0;
+    useAppSelector(state => state.componentsState.future.length) > 0;
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { selectedId, components, copiedComponent } = componentsState;
   const selectedComponent = components.find(
     c => c.userQuestionComponentId === selectedId

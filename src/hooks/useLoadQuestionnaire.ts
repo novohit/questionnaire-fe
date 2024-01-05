@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { getQuestionnaire } from '../services/questionnaire';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { resetComponents } from '../store/componentsReducer';
 import { resetPageSetting } from '../store/pageSettingReducer';
+import { useAppDispatch } from './useRedux';
 
 function useLoadQuestionnaire() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   // 获取动态路由的参数
   const { _id = '' } = useParams();
   const [loading, setLoading] = useState(true);

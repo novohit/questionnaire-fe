@@ -3,8 +3,6 @@ import React, { FC } from 'react';
 import styles from './EditCanvas.module.scss';
 import QuestionTitle from '../../../components/questionnaire/Title/Component';
 import QuestionInput from '../../../components/questionnaire/Input/Component';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store';
 import { getComponentByType } from '../../../components/questionnaire/config';
 import { ComponentPropsType } from '../../../components/questionnaire/type';
 import {
@@ -15,6 +13,7 @@ import classNames from 'classnames';
 import useBindingCanvasKeypress from '../../../hooks/useBindingCanvasKeyPress';
 import SortableContainer from '../../../components/DragSortable/SortableContainer';
 import { SortableItem } from '../../../components/DragSortable/SortableItem';
+import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 
 function genComponent(type: string, props: ComponentPropsType) {
   const Component = getComponentByType(type);
@@ -25,9 +24,9 @@ function genComponent(type: string, props: ComponentPropsType) {
 }
 
 const EditCanvas: FC = () => {
-  const dispatch = useDispatch();
-  const componentsState = useSelector(
-    (state: RootState) => state.componentsState.present
+  const dispatch = useAppDispatch();
+  const componentsState = useAppSelector(
+    state => state.componentsState.present
   );
   const { selectedId, components } = componentsState;
   // console.log(components);
