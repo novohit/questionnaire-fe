@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice, nanoid } from '@reduxjs/toolkit';
-import { ComponentPropsType } from '../../components/questionnaire/type';
+import { ComponentPropsType } from '../components/questionnaire/type';
 import cloneDeep from 'lodash.clonedeep';
 import { arrayMove } from '@dnd-kit/sortable';
 

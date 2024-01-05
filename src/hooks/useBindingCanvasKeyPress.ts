@@ -5,7 +5,7 @@ import {
   deleteComponent,
   pasteComponent,
   selectComponent,
-} from '../store/components';
+} from '../store/componentsReducer';
 import { RootState } from '../store';
 
 function isComponentElement() {

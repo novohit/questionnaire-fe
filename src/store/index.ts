@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './userReducer';
-import componentsReducer from './components';
+import componentsReducer from './componentsReducer';
 import pageSettingReducer from './pageSettingReducer';
 import undoable, { excludeAction } from 'redux-undo';
 
@@ -12,6 +12,7 @@ const store = configureStore({
       filter: excludeAction([
         'componentsState/resetComponents',
         'componentsState/selectComponent',
+        'componentsState/copyComponent',
       ]),
     }),
     pageSetting: pageSettingReducer,

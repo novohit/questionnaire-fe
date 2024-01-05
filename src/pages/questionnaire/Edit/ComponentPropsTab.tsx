@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { getComponentPropsByType } from '../../../components/questionnaire/config';
 import { ComponentPropsType } from '../../../components/questionnaire/type';
-import { updateComponent } from '../../../store/components';
+import { updateComponent } from '../../../store/componentsReducer';
 
 const Unselected: FC = () => {
   return <div style={{ textAlign: 'center' }}>未选中组件</div>;

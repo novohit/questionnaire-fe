@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { getQuestionnaire } from '../services/questionnaire';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { resetComponents } from '../store/components';
+import { resetComponents } from '../store/componentsReducer';
 import { resetPageSetting } from '../store/pageSettingReducer';
 
 function useLoadQuestionnaire() {

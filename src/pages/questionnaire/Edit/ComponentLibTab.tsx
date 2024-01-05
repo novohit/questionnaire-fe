@@ -6,7 +6,7 @@ import { Empty, Spin, Typography } from 'antd';
 import { getComponentByType } from '../../../components/questionnaire/config';
 import styles from './ComponentLibTab.module.scss';
 import { useDispatch } from 'react-redux';
-import { addComponent } from '../../../store/components';
+import { addComponent } from '../../../store/componentsReducer';
 import { nanoid } from '@reduxjs/toolkit';
 
 const { Title } = Typography;

@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store';
 import { getComponentByType } from '../../../components/questionnaire/config';
 import { ComponentPropsType } from '../../../components/questionnaire/type';
-import { moveComponent, selectComponent } from '../../../store/components';
+import {
+  moveComponent,
+  selectComponent,
+} from '../../../store/componentsReducer';
 import classNames from 'classnames';
 import useBindingCanvasKeypress from '../../../hooks/useBindingCanvasKeyPress';
 import SortableContainer from '../../../components/DragSortable/SortableContainer';

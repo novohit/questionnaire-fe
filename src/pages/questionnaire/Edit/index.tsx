@@ -5,7 +5,7 @@ import styles from './index.module.scss';
 import EditCanvas from './EditCanvas';
 import { Spin } from 'antd';
 import { useDispatch } from 'react-redux';
-import { selectComponent } from '../../../store/components';
+import { selectComponent } from '../../../store/componentsReducer';
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import EditHeader from './EditHeader';

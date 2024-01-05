@@ -16,7 +16,7 @@ import {
   hideComponent,
   lockComponent,
   pasteComponent,
-} from '../../../store/components';
+} from '../../../store/componentsReducer';
 import { RootState } from '../../../store';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 

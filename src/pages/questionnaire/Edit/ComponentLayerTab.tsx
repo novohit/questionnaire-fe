@@ -10,7 +10,7 @@ import {
   moveComponent,
   selectComponent,
   updateComponentTitle,
-} from '../../../store/components';
+} from '../../../store/componentsReducer';
 import { EyeOutlined, LockOutlined } from '@ant-design/icons';
 import SortableContainer from '../../../components/DragSortable/SortableContainer';
 import { SortableItem } from '../../../components/DragSortable/SortableItem';
