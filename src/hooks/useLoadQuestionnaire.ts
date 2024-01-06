@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { resetComponents } from '../store/componentsReducer';
 import { resetPageSetting } from '../store/pageSettingReducer';
 import { useAppDispatch } from './useRedux';
+import { resetQuestionnaire } from '../store/questionnaireReducer';
 
 function useLoadQuestionnaire() {
   const dispatch = useAppDispatch();
@@ -16,9 +17,29 @@ function useLoadQuestionnaire() {
     async function get() {
       const data = await getQuestionnaire(_id);
       // 存储信息到 Redux
-      const { pageSetting, components } = data;
+      const {
+        pageSetting,
+        components,
+        title,
+        isPublished,
+        isStar,
+        answerCount,
+        createdAt,
+        deletedAt,
+      } = data;
       dispatch(resetComponents({ selectedId: '', components }));
       dispatch(resetPageSetting(pageSetting));
+      dispatch(
+        resetQuestionnaire({
+          _id,
+          title,
+          isPublished,
+          isStar,
+          answerCount,
+          createdAt,
+          deletedAt,
+        })
+      );
       setQuestionnaire(data);
       setLoading(false);
     }

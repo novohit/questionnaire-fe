@@ -9,8 +9,10 @@ import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import EditHeader from './EditHeader';
 import { useAppDispatch } from '../../../hooks/useRedux';
+import { useTitle } from 'ahooks';
 
 const Edit: FC = () => {
+  useTitle('问卷星 - 编辑');
   // 用 hooks 抽取公共逻辑
   const { loading, questionnaire } = useLoadQuestionnaire();
   const dispatch = useAppDispatch();

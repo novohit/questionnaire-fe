@@ -3,6 +3,7 @@ import userReducer from './userReducer';
 import componentsReducer from './componentsReducer';
 import pageSettingReducer from './pageSettingReducer';
 import undoable, { excludeAction } from 'redux-undo';
+import questionnaireReducer from './questionnaireReducer';
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
       ]),
     }),
     pageSetting: pageSettingReducer,
+    questionnaire: questionnaireReducer,
   },
 });
 

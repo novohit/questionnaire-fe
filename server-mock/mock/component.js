@@ -85,7 +85,7 @@ module.exports = [
                                         { value: 'A', text: 'A', checked: true },
                                         { value: 'B', text: 'B', checked: false },
                                         { value: 'C', text: 'C', checked: true },
-                                        { value: 'C', text: 'C', checked: false },
+                                        { value: 'D', text: 'D', checked: false },
                                     ],
                                     direction: 'horizontal'
                                 }

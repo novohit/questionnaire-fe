@@ -1,14 +1,22 @@
 import React, { FC } from 'react';
 import useLoadQuestionnaire from '../../../hooks/useLoadQuestionnaire';
+import styles from './index.module.scss';
+import StatsHeader from './StatsHeader';
 
 const Stats: FC = () => {
-  const { loading, questionnaire } = useLoadQuestionnaire();
+  useLoadQuestionnaire();
 
   return (
-    <>
-      <p>Stats</p>
-      {loading ? <p>loading...</p> : <p>{JSON.stringify(questionnaire)}</p>}
-    </>
+    <div className={styles.container}>
+      <StatsHeader />
+      <div className={styles['content-wrapper']}>
+        <div className={styles.content}>
+          <div className={styles.left}>left</div>
+          <div className={styles.main}>main</div>
+          <div className={styles.right}>right</div>
+        </div>
+      </div>
+    </div>
   );
 };
 
