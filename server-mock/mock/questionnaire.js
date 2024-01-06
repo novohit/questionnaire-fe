@@ -20,6 +20,7 @@ module.exports = [
                     isStar: Random.boolean(),
                     isPublished: Random.boolean(),
                     answerCount: Random.natural(50, 100),
+                    url: 'https://www.baidu.com?params=' + Random.id(),
                     createdAt: Random.datetime(),
                     deletedAt: Random.datetime(),
                     pageSetting: {

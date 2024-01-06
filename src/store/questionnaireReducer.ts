@@ -7,6 +7,7 @@ interface QuestionnaireState {
   isPublished: boolean;
   isStar: boolean;
   answerCount: number;
+  url: string;
   createdAt: string;
   deletedAt: string;
 }
@@ -18,6 +19,7 @@ const initialState: QuestionnaireState = {
   isPublished: false,
   isStar: false,
   answerCount: 0,
+  url: '',
   createdAt: '',
   deletedAt: '',
 };

@@ -24,6 +24,7 @@ function useLoadQuestionnaire() {
         isPublished,
         isStar,
         answerCount,
+        url,
         createdAt,
         deletedAt,
       } = data;
@@ -36,6 +37,7 @@ function useLoadQuestionnaire() {
           isPublished,
           isStar,
           answerCount,
+          url,
           createdAt,
           deletedAt,
         })

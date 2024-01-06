@@ -1,8 +1,22 @@
-import React, { FC } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import styles from './StatsHeader.module.scss';
 import { useAppSelector } from '../../../hooks/useRedux';
-import { Button, Space, Typography } from 'antd';
-import { LeftOutlined } from '@ant-design/icons';
+import {
+  Button,
+  Input,
+  InputRef,
+  Popover,
+  QRCode,
+  Space,
+  Tooltip,
+  Typography,
+} from 'antd';
+import {
+  CheckOutlined,
+  CopyOutlined,
+  LeftOutlined,
+  QrcodeOutlined,
+} from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 
 const { Title } = Typography;
@@ -22,7 +36,9 @@ const StatsHeader: FC = () => {
             <Title>{title}</Title>
           </Space>
         </div>
-        <div className={styles.main}>main</div>
+        <div className={styles.main}>
+          <LinkAndQRCode />
+        </div>
         <div className={styles.right}>
           <Button
             type="primary"
@@ -33,6 +49,65 @@ const StatsHeader: FC = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const LinkAndQRCode: FC = () => {
+  const { url } = useAppSelector(state => state.questionnaire);
+  const urlInputRef = useRef<InputRef>(null);
+  const [copied, setCopied] = useState(false);
+
+  const copy = () => {
+    const urlInput = urlInputRef.current;
+    if (!urlInput) return;
+    urlInput.select();
+    document.execCommand('copy');
+    setCopied(true);
+  };
+
+  const downloadQRCode = () => {
+    const canvas = document
+      .getElementById('qrcode')
+      ?.querySelector<HTMLCanvasElement>('canvas');
+    if (canvas) {
+      const url = canvas.toDataURL();
+      const a = document.createElement('a');
+      a.download = 'QRCode.png';
+      a.href = url;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  };
+
+  const QRCodeElem = (
+    <div id="qrcode">
+      <Space direction="vertical" align="center">
+        <QRCode value={url} bgColor="#fff" size={130} />
+        <Button type="primary" size="small" onClick={downloadQRCode}>
+          Download
+        </Button>
+      </Space>
+    </div>
+  );
+
+  return (
+    <Space>
+      <Input
+        value={url}
+        style={{ width: '300px', caretColor: 'transparent' }} // 隐藏光标
+        ref={urlInputRef}
+      />
+      <Tooltip title="拷贝">
+        <Button
+          icon={copied ? <CheckOutlined /> : <CopyOutlined />}
+          onClick={copy}
+        ></Button>
+      </Tooltip>
+      <Popover content={QRCodeElem}>
+        <Button icon={<QrcodeOutlined />}></Button>
+      </Popover>
+    </Space>
   );
 };
 

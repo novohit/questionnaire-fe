@@ -6,6 +6,7 @@ export interface Questionnaire {
   isPublished: boolean;
   isStar: boolean;
   answerCount: number;
+  url: string;
   createdAt: string;
   deletedAt: string;
   pageSetting: PageSetting;
