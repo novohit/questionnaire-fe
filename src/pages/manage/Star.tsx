@@ -1,4 +1,4 @@
-import { Empty, Spin, Typography } from 'antd';
+import { Empty, Typography } from 'antd';
 import React, { FC } from 'react';
 import styles from './Common.module.scss';
 import QuestionnaireCard from '../../components/QuestionnaireCard';
@@ -6,6 +6,7 @@ import { useTitle } from 'ahooks';
 import ListSearch from '../../components/ListSearch';
 import useLoadQuestionnaires from '../../hooks/useLoadQuestionnaires';
 import ListPage from '../../components/ListPage';
+import { LoadingSpin } from '../../components/common';
 
 const { Title } = Typography;
 
@@ -27,11 +28,7 @@ const Star: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {loading && (
-          <div style={{ textAlign: 'center' }}>
-            <Spin />
-          </div>
-        )}
+        {loading && <LoadingSpin />}
         {!loading && starList.length === 0 && <Empty description="暂无数据" />}
         {!loading &&
           starList.length > 0 &&

@@ -2,12 +2,13 @@ import React, { FC, useEffect, useState } from 'react';
 import { getComponentLib } from '../../../services/component';
 import { ComponentGroup } from '../../../model/component';
 import { QuestionnaireComponent } from '../../../model/questionnaire';
-import { Empty, Spin, Typography } from 'antd';
+import { Empty, Typography } from 'antd';
 import { getComponentByType } from '../../../components/questionnaire/config';
 import styles from './ComponentLibTab.module.scss';
 import { addComponent } from '../../../store/componentsReducer';
 import { nanoid } from '@reduxjs/toolkit';
 import { useAppDispatch } from '../../../hooks/useRedux';
+import { LoadingSpin } from '../../../components/common';
 
 const { Title } = Typography;
 
@@ -29,11 +30,7 @@ const ComponentLib: FC = () => {
 
   return (
     <>
-      {loading && (
-        <div style={{ textAlign: 'center' }}>
-          <Spin />
-        </div>
-      )}
+      {loading && <LoadingSpin />}
       {!loading && componentLib.length === 0 && (
         <Empty description="组件库为空" />
       )}

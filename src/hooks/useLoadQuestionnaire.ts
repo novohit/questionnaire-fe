@@ -5,13 +5,14 @@ import { resetComponents } from '../store/componentsReducer';
 import { resetPageSetting } from '../store/pageSettingReducer';
 import { useAppDispatch } from './useRedux';
 import { resetQuestionnaire } from '../store/questionnaireReducer';
+import { Questionnaire } from '../model/questionnaire';
 
 function useLoadQuestionnaire() {
   const dispatch = useAppDispatch();
   // 获取动态路由的参数
   const { _id = '' } = useParams();
   const [loading, setLoading] = useState(true);
-  const [questionnaire, setQuestionnaire] = useState({});
+  const [questionnaire, setQuestionnaire] = useState<Questionnaire>();
 
   useEffect(() => {
     async function get() {

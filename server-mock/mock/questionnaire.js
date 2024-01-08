@@ -2,8 +2,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
 const Mock = require('mockjs')
-
 const getQuestionnaires = require('./data/getQuestionnaires')
+
 const Random = Mock.Random
 
 module.exports = [
@@ -18,7 +18,7 @@ module.exports = [
                     _id: Random.id(),
                     title: Random.ctitle(),
                     isStar: Random.boolean(),
-                    isPublished: Random.boolean(),
+                    isPublished: true,
                     answerCount: Random.natural(50, 100),
                     url: 'https://www.baidu.com?params=' + Random.id(),
                     createdAt: Random.datetime(),
@@ -40,7 +40,7 @@ module.exports = [
                             props: { text: '个人信息调研', level: 1, isCenter: false }
                         },
                         {
-                            userQuestionComponentId: Random.id(),
+                            userQuestionComponentId: 'c1',
                             componentId: Random.id(),
                             type: 'input',
                             title: Random.ctitle(),
@@ -49,13 +49,58 @@ module.exports = [
                             props: { title: '你的姓名', placeholder: '请输入姓名' }
                         },
                         {
-                            userQuestionComponentId: Random.id(),
+                            userQuestionComponentId: 'c2',
                             componentId: Random.id(),
                             type: 'input',
                             title: Random.ctitle(),
                             hidden: false,
                             locked: false,
-                            props: { title: '你的手机号', placeholder: '请输入手机号 ' }
+                            props: { title: '你的邮箱', placeholder: '请输入邮箱' }
+                        },
+                        {
+                            userQuestionComponentId: 'c3',
+                            componentId: Random.id(),
+                            type: 'input',
+                            title: Random.ctitle(),
+                            hidden: false,
+                            locked: false,
+                            props: { title: '你的手机号', placeholder: '请输入手机号' }
+                        },
+                        {
+                            userQuestionComponentId: 'c4',
+                            componentId: Random.id(),
+                            type: 'radio',
+                            title: Random.ctitle(),
+                            hidden: false,
+                            locked: false,
+                            props: {
+                                title: "性别",
+                                options: [
+                                    { value: '男', text: '男' },
+                                    { value: '女', text: '女' },
+                                    { value: '保密', text: '保密' },
+                                ],
+                                defaultOptionValue: '',
+                                direction: 'horizontal'
+                            }
+                        },
+                        {
+                            userQuestionComponentId: 'c5',
+                            componentId: Random.id(),
+                            type: 'checkbox',
+                            title: Random.ctitle(),
+                            hidden: false,
+                            locked: false,
+                            props: {
+                                title: "学习过哪些语言",
+                                options: [
+                                    { value: 'Java', text: 'Java', checked: false },
+                                    { value: 'C++', text: 'C++', checked: false },
+                                    { value: 'Python', text: 'Python', checked: false },
+                                    { value: 'Go', text: 'Go', checked: false },
+                                ],
+                                direction: 'horizontal'
+                            }
                         },
                     ]
                 },

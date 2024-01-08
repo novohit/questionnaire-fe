@@ -5,10 +5,17 @@ export interface PageResponse<T> {
 
 // request ========================
 
-export interface SearchOption {
+export interface PageOption {
+  page: number;
+  size: number;
+}
+
+export interface SearchOption extends PageOption {
   keyword: string;
   isStar: boolean;
   isDeleted: boolean;
-  page: number;
-  size: number;
+}
+
+export interface AnswerSearchOption extends PageOption {
+  questionnaireId: string;
 }

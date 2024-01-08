@@ -3,7 +3,6 @@ import {
   Empty,
   Modal,
   Space,
-  Spin,
   Table,
   Tag,
   Typography,
@@ -21,15 +20,8 @@ import {
   recoverQuestionnaire,
 } from '../../services/questionnaire';
 import { ExclamationCircleFilled } from '@ant-design/icons';
-
-interface Questionnaire {
-  _id: string;
-  title: string;
-  isPublished: boolean;
-  isStar: boolean;
-  answerCount: number;
-  createdAt: string;
-}
+import { LoadingSpin } from '../../components/common';
+import { Questionnaire } from '../../model/questionnaire';
 
 const columns: ColumnsType<Questionnaire> = [
   {
@@ -178,11 +170,7 @@ const Recycle: FC = () => {
         </div>
       </div>
       <div className={styles.content}>
-        {loading && (
-          <div style={{ textAlign: 'center' }}>
-            <Spin />
-          </div>
-        )}
+        {loading && <LoadingSpin />}
         {!loading && recycleList.length === 0 && (
           <Empty description="暂无数据" />
         )}
