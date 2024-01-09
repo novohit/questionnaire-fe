@@ -9,7 +9,7 @@ import {
   message,
 } from 'antd';
 import React, { FC, useState } from 'react';
-import styles from './Common.module.scss';
+import styles from '../Common.module.scss';
 import { useRequest, useTitle } from 'ahooks';
 import { ColumnsType } from 'antd/es/table';
 import ListSearch from '../../components/ListSearch';

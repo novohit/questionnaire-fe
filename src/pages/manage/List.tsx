@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
-import styles from './Common.module.scss';
+import styles from '../Common.module.scss';
 import QuestionnaireCard from '../../components/QuestionnaireCard';
 import { useDebounceFn, useRequest, useTitle } from 'ahooks';
 import { Empty, Spin, Typography } from 'antd';

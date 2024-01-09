@@ -1,6 +1,6 @@
 import { Empty, Typography } from 'antd';
 import React, { FC } from 'react';
-import styles from './Common.module.scss';
+import styles from '../Common.module.scss';
 import QuestionnaireCard from '../../components/QuestionnaireCard';
 import { useTitle } from 'ahooks';
 import ListSearch from '../../components/ListSearch';

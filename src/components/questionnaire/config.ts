@@ -43,3 +43,8 @@ export function getComponentByType(type: string) {
 export function getComponentPropsByType(type: string) {
   return componentPropsConfigs[type];
 }
+
+export function hasAnswerComponent(type: string) {
+  if (type === 'title') return false;
+  return true;
+}

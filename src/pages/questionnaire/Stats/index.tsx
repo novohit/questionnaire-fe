@@ -5,7 +5,7 @@ import StatsHeader from './StatsHeader';
 import LeftPanel from './LeftPanel';
 import NotFound from '../../NotFound';
 import { LoadingSpin } from '../../../components/common';
-import List from './List';
+import AnswerList from './AnswerList';
 
 const Stats: FC = () => {
   const { loading, questionnaire } = useLoadQuestionnaire();
@@ -28,7 +28,7 @@ const Stats: FC = () => {
                 <LeftPanel />
               </div>
               <div className={styles.main}>
-                <List questionnaireId={questionnaireId} />
+                <AnswerList questionnaireId={questionnaireId} />
               </div>
               <div className={styles.right}>right</div>
             </div>
