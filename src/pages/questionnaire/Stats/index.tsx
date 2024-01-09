@@ -6,6 +6,9 @@ import LeftPanel from './LeftPanel';
 import NotFound from '../../NotFound';
 import { LoadingSpin } from '../../../components/common';
 import AnswerList from './AnswerList';
+import PieChartDemo from './PieChartDemo';
+import BarChartDemo from './BarChartDemo';
+import { ResponsiveContainer } from 'recharts';
 
 const Stats: FC = () => {
   const { loading, questionnaire } = useLoadQuestionnaire();
@@ -30,7 +33,14 @@ const Stats: FC = () => {
               <div className={styles.main}>
                 <AnswerList questionnaireId={questionnaireId} />
               </div>
-              <div className={styles.right}>right</div>
+              <div className={styles.right}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <div>
+                    <PieChartDemo />
+                    <BarChartDemo />
+                  </div>
+                </ResponsiveContainer>
+              </div>
             </div>
           </div>
         </>
