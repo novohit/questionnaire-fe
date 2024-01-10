@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import styles from '../Edit/EditCanvas.module.scss';
 import classNames from 'classnames';
 import { getComponentByType } from '../../../components/questionnaire/config';
 import { ComponentPropsType } from '../../../components/questionnaire/type';
-import { selectComponent } from '../../../store/componentsReducer';
+import { QuestionnaireComponent } from '../../../model/questionnaire';
 
 function genComponent(type: string, props: ComponentPropsType) {
   const Component = getComponentByType(type);
@@ -14,20 +13,25 @@ function genComponent(type: string, props: ComponentPropsType) {
   return <Component {...props} />;
 }
 
-const LeftPanel: FC = () => {
-  const componentsState = useAppSelector(
-    state => state.componentsState.present
-  );
-  const dispatch = useAppDispatch();
-  const { selectedId, components } = componentsState;
+type Props = {
+  components: QuestionnaireComponent[];
+  selectedId: string;
+  setSelectedId: (type: string) => void;
+  setSelectedType: (type: string) => void;
+};
+
+const LeftPanel: FC<Props> = (props: Props) => {
+  const { components, selectedId, setSelectedId, setSelectedType } = props;
 
   function select(
     event: React.MouseEvent<HTMLDivElement>,
-    userQuestionComponentId: string
+    userQuestionComponentId: string,
+    type: string
   ) {
     // 阻止事件冒泡到上层的styles.main
     event.stopPropagation();
-    dispatch(selectComponent(userQuestionComponentId));
+    setSelectedId(userQuestionComponentId);
+    setSelectedType(type);
   }
 
   return (
@@ -49,7 +53,7 @@ const LeftPanel: FC = () => {
             <div
               key={userQuestionComponentId}
               className={divClassName}
-              onClick={e => select(e, userQuestionComponentId)}
+              onClick={e => select(e, userQuestionComponentId, type)}
             >
               <div className={styles.component}>
                 {genComponent(type, props)}

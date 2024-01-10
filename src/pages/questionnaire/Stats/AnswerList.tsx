@@ -6,31 +6,37 @@ import { Answer } from '../../../model/answer';
 import { useRequest } from 'ahooks';
 import { Empty, Pagination, Table, Typography } from 'antd';
 import { LoadingSpin } from '../../../components/common';
-import { useAppDispatch, useAppSelector } from '../../../hooks/useRedux';
 import { hasAnswerComponent } from '../../../components/questionnaire/config';
-import { selectComponent } from '../../../store/componentsReducer';
 import styles from '../../Common.module.scss';
+import { QuestionnaireComponent } from '../../../model/questionnaire';
 
 const { Title } = Typography;
 
-const AnswerList: FC<{ questionnaireId: string }> = (props: {
+type Props = {
   questionnaireId: string;
-}) => {
-  const componentsState = useAppSelector(
-    state => state.componentsState.present
-  );
-  const dispatch = useAppDispatch();
+  components: QuestionnaireComponent[];
+  selectedId: string;
+  setSelectedId: (type: string) => void;
+  setSelectedType: (type: string) => void;
+};
+
+const AnswerList: FC<Props> = (props: Props) => {
+  const {
+    questionnaireId,
+    components,
+    selectedId,
+    setSelectedId,
+    setSelectedType,
+  } = props;
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [total, setTotal] = useState(0);
   const [current, setCurrent] = useState(3);
   const [size, setSize] = useState(DEFAULT_PAGE_SIZE);
 
-  const { selectedId, components } = componentsState;
-
   const { loading } = useRequest(
     async () => {
       const data = await getAnswers({
-        questionnaireId: props.questionnaireId,
+        questionnaireId,
         page: 1,
         size: DEFAULT_PAGE_SIZE,
       });
@@ -71,7 +77,8 @@ const AnswerList: FC<{ questionnaireId: string }> = (props: {
                   : 'inherit',
             }}
             onClick={() => {
-              dispatch(selectComponent(c.userQuestionComponentId));
+              setSelectedId(c.userQuestionComponentId);
+              setSelectedType(c.type);
             }}
           >
             {temp}

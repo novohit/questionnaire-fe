@@ -1,4 +1,4 @@
-// component ===============================
+// component props type ===============================
 export type ComponentPropsType =
   | TitlePropsType
   | ParagraphPropsType
@@ -64,4 +64,12 @@ export interface CheckboxPropsType {
 
   onChange: (newProps: CheckboxPropsType) => void;
   disabled: boolean;
+}
+
+// component stats type ===============================
+
+export type StatsComponentProps = RadioStatsProps;
+
+export interface RadioStatsProps {
+  data: Array<{ option: string; count: number }>;
 }

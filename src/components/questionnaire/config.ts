@@ -11,6 +11,7 @@ import Radio from './Radio/Component';
 import RadioProps from './Radio/ComponentProps';
 import Checkbox from './Checkbox/Component';
 import CheckboxProps from './Checkbox/ComponentProps';
+import RadioStats from './Radio/StatsComponent';
 
 type ComponentConfigs = {
   [key: string]: React.FC<any>;
@@ -36,6 +37,11 @@ const componentPropsConfigs: ComponentConfigs = {
   // 在这里添加其他组件类型和对应的组件
 };
 
+const statsComponentMap: ComponentConfigs = {
+  radio: RadioStats,
+  // 在这里添加其他组件类型和对应的组件
+};
+
 export function getComponentByType(type: string) {
   return componentConfigs[type];
 }
@@ -47,4 +53,8 @@ export function getComponentPropsByType(type: string) {
 export function hasAnswerComponent(type: string) {
   if (type === 'title') return false;
   return true;
+}
+
+export function getStatsComponentByType(type: string) {
+  return statsComponentMap[type];
 }

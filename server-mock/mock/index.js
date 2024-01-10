@@ -6,6 +6,7 @@ const test = require('./test')
 const user = require('./user')
 const component = require('./component')
 const answer = require('./answer')
+const stats = require('./stats')
 
 const mockList = [
     ...test,
@@ -13,6 +14,7 @@ const mockList = [
     ...user,
     ...component,
     ...answer,
+    ...stats,
 ]
 
 module.exports = mockList
