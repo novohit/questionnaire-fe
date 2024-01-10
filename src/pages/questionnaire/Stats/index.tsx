@@ -60,6 +60,7 @@ const Stats: FC = () => {
                   </div>
                 </ResponsiveContainer> */}
                 <RightPanel
+                  questionnaireId={questionnaireId}
                   selectedId={selectedId}
                   selectedType={selectedType}
                 />

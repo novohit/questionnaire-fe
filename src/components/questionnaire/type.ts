@@ -68,8 +68,18 @@ export interface CheckboxPropsType {
 
 // component stats type ===============================
 
-export type StatsComponentProps = RadioStatsProps;
+export type StatsProps = {
+  data: StatsData;
+};
 
-export interface RadioStatsProps {
-  data: Array<{ option: string; count: number }>;
+export type StatsData = Array<RadioStatsPair | CheckboxStatsPair>;
+
+export interface RadioStatsPair {
+  option: string;
+  count: number;
+}
+
+export interface CheckboxStatsPair {
+  name: string;
+  value: number;
 }

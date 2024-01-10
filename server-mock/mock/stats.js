@@ -9,18 +9,26 @@ module.exports = [
     {
         url: '/api/stats',
         method: 'post',
-        response() {
-            return {
-                code: 0,
-                data: {
+        response(ctx) {
+            const { type } = ctx.request.body;
+            if (type === 'radio') {
+                return {
+                    code: 0,
                     data: [
                         { option: '男', count: Random.integer(1, 50) },
                         { option: '女', count: Random.integer(1, 50) },
                         { option: '保密', count: Random.integer(1, 50) },
-                    ]
-                },
-                message: 'success',
+                    ],
+                    message: 'success',
+                }
+            } else {
+                return {
+                    code: 0,
+                    data: [{}],
+                    message: 'success',
+                }
             }
+                
         }
     }
 ]

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { RadioStatsProps } from '../type';
+import { StatsProps } from '../type';
 import { Cell, Pie, PieChart, Tooltip } from 'recharts';
 
 const colors = [
@@ -18,9 +18,7 @@ const colors = [
   '#96BFFF',
 ];
 
-const StatsComponent: FC<RadioStatsProps> = ({ data = [] }) => {
-  console.log(data);
-
+const StatsComponent: FC<StatsProps> = ({ data = [] }) => {
   return (
     <PieChart width={400} height={400}>
       <Pie
@@ -29,7 +27,7 @@ const StatsComponent: FC<RadioStatsProps> = ({ data = [] }) => {
         nameKey="option"
         cx="50%"
         cy="50%"
-        outerRadius={80}
+        outerRadius={60}
         fill="#8884d8"
         label
       >

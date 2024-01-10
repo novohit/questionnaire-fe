@@ -1,4 +1,4 @@
-import { RadioStatsProps } from '../components/questionnaire/type';
+import { StatsData } from '../components/questionnaire/type';
 import http from './http';
 
 export async function getStats(body: {
@@ -7,8 +7,6 @@ export async function getStats(body: {
   type: string;
 }) {
   const url = '/api/stats';
-  //   if (body.type === 'radio') {
-  const data = (await http.post(url, body)) as RadioStatsProps;
+  const data = (await http.post(url, body)) as StatsData;
   return data;
-  //   }
 }

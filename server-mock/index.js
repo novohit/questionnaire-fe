@@ -3,6 +3,7 @@
 /* eslint-disable prettier/prettier */
 const Koa = require('koa')
 const Router = require('koa-router')
+const { bodyParser } = require("@koa/bodyparser");
 const mockList = require('./mock/index')
 
 const app = new Koa()
@@ -27,5 +28,6 @@ mockList.forEach(item => {
     })
 })
 
+app.use(bodyParser()); // request body 解析
 app.use(router.routes())
 app.listen(8080) // port 端口
