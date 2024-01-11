@@ -1,6 +1,18 @@
-import React, { FC } from 'react';
-import { StatsProps } from '../type';
-import { Cell, Pie, PieChart, Tooltip } from 'recharts';
+import React, { FC, useMemo } from 'react';
+import { RadioStatsPair, StatsProps } from '../type';
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 
 const colors = [
   '#37A2DA',
@@ -19,27 +31,50 @@ const colors = [
 ];
 
 const StatsComponent: FC<StatsProps> = ({ data = [] }) => {
+  const sum = useMemo(() => {
+    let s = 0;
+    data.forEach(item => {
+      const { count } = item as RadioStatsPair;
+      s += count;
+    });
+    return s;
+  }, [data]);
+
   return (
-    <PieChart width={400} height={400}>
-      <Pie
-        data={data}
-        dataKey="count"
-        nameKey="option"
-        cx="50%"
-        cy="50%"
-        outerRadius={60}
-        fill="#8884d8"
-        label
-      >
-        {data.map((entry, index) => (
-          <Cell
-            key={`cell-${index}`}
-            fill={colors[(index + 2) % colors.length]}
-          />
-        ))}
-      </Pie>
-      <Tooltip />
-    </PieChart>
+    <ResponsiveContainer width="100%" height="100%">
+      <div>
+        <PieChart width={400} height={300}>
+          <Pie
+            data={data}
+            dataKey="count"
+            nameKey="option"
+            cx="50%"
+            cy="50%"
+            outerRadius={80}
+            fill="#8884d8"
+            label={item =>
+              `${item.option}:${((item.count / sum) * 100).toFixed(2)}%`
+            }
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={colors[(index + 2) % colors.length]}
+              />
+            ))}
+          </Pie>
+          <Tooltip />
+        </PieChart>
+        <BarChart width={380} height={300} data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="option" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="count" fill="#8884d8" />
+        </BarChart>
+      </div>
+    </ResponsiveContainer>
   );
 };
 
