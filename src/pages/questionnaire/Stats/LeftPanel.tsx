@@ -16,7 +16,7 @@ function genComponent(type: string, props: ComponentPropsType) {
 type Props = {
   components: QuestionnaireComponent[];
   selectedId: string;
-  setSelectedId: (type: string) => void;
+  setSelectedId: (id: string) => void;
   setSelectedType: (type: string) => void;
 };
 

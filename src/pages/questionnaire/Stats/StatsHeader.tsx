@@ -21,7 +21,10 @@ import { useNavigate } from 'react-router-dom';
 
 const { Title } = Typography;
 
-const StatsHeader: FC = () => {
+const StatsHeader: FC<{
+  setSelectedId: (id: string) => void;
+  setSelectedType: (type: string) => void;
+}> = ({ setSelectedId, setSelectedType }) => {
   const { _id, title } = useAppSelector(state => state.questionnaire);
   const nav = useNavigate();
 
@@ -40,12 +43,23 @@ const StatsHeader: FC = () => {
           <LinkAndQRCode />
         </div>
         <div className={styles.right}>
-          <Button
-            type="primary"
-            onClick={() => nav(`/questionnaire/edit/${_id}`)}
-          >
-            编辑问卷
-          </Button>
+          <Space>
+            <Button
+              type="primary"
+              onClick={() => {
+                setSelectedId('');
+                setSelectedType('');
+              }}
+            >
+              访问统计
+            </Button>
+            <Button
+              type="primary"
+              onClick={() => nav(`/questionnaire/edit/${_id}`)}
+            >
+              编辑问卷
+            </Button>
+          </Space>
         </div>
       </div>
     </div>

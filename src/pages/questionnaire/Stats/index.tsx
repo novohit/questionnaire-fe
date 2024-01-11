@@ -32,7 +32,10 @@ const Stats: FC = () => {
       {loading && <LoadingSpin />}
       {!loading && (
         <>
-          <StatsHeader />
+          <StatsHeader
+            setSelectedId={setSelectedId}
+            setSelectedType={setSelectedType}
+          />
           <div className={styles['content-wrapper']}>
             <div className={styles.content}>
               <div className={styles.left}>

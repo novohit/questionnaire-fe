@@ -16,7 +16,7 @@ type Props = {
   questionnaireId: string;
   components: QuestionnaireComponent[];
   selectedId: string;
-  setSelectedId: (type: string) => void;
+  setSelectedId: (id: string) => void;
   setSelectedType: (type: string) => void;
 };
 

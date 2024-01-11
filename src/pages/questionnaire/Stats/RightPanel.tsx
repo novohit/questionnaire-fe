@@ -3,6 +3,7 @@ import { getStats } from '../../../services/stats';
 import { StatsData } from '../../../components/questionnaire/type';
 import { getStatsComponentByType } from '../../../components/questionnaire/config';
 import { Typography } from 'antd';
+import PVStats from './PVStats';
 
 const { Text } = Typography;
 
@@ -24,14 +25,18 @@ const RightPanel: FC<Props> = (props: Props) => {
         type: selectedType,
       });
       setStatsData(data);
-      console.log('axios', data);
     }
-    get();
+    if (selectedId) {
+      get();
+    }
   }, [selectedId]);
 
   const StatsComponent = getStatsComponentByType(selectedType);
 
   if (StatsComponent == null) {
+    if (!selectedId) {
+      return <PVStats />;
+    }
     return (
       <>
         <Text>该类型数据暂不支持统计</Text>
