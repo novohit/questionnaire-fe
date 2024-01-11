@@ -21,14 +21,25 @@ module.exports = [
                     ],
                     message: 'success',
                 }
+            } else if (type === 'checkbox') {
+                return {
+                    code: 0,
+                    data: [
+                        { option: 'Java', count: Random.integer(1, 50) },
+                        { option: 'C++', count: Random.integer(1, 50) },
+                        { option: 'Python', count: Random.integer(1, 50) },
+                        { option: 'Go', count: Random.integer(1, 50) },
+                        { option: 'Java、Python', count: Random.integer(1, 50) },
+                    ],
+                    message: 'success',
+                }
             } else {
                 return {
                     code: 0,
-                    data: [{}],
+                    data: [],
                     message: 'success',
                 }
-            }
-                
+            }       
         }
     }
 ]

@@ -12,6 +12,7 @@ import RadioProps from './Radio/ComponentProps';
 import Checkbox from './Checkbox/Component';
 import CheckboxProps from './Checkbox/ComponentProps';
 import RadioStats from './Radio/StatsComponent';
+import CheckboxStats from './Checkbox/StatsComponent';
 
 type ComponentConfigs = {
   [key: string]: React.FC<any>;
@@ -39,6 +40,7 @@ const componentPropsConfigs: ComponentConfigs = {
 
 const statsComponentMap: ComponentConfigs = {
   radio: RadioStats,
+  checkbox: CheckboxStats,
   // 在这里添加其他组件类型和对应的组件
 };
 

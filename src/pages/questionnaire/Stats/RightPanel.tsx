@@ -4,6 +4,7 @@ import { StatsData } from '../../../components/questionnaire/type';
 import { getStatsComponentByType } from '../../../components/questionnaire/config';
 import { Typography } from 'antd';
 import PVStats from './PVStats';
+import { LoadingSpin } from '../../../components/common';
 
 const { Text } = Typography;
 
@@ -16,15 +17,18 @@ type Props = {
 const RightPanel: FC<Props> = (props: Props) => {
   const { questionnaireId, selectedId, selectedType } = props;
   const [statsData, setStatsData] = useState<StatsData>([]);
+  const [loading, setLoading] = useState<boolean>();
 
   useEffect(() => {
     async function get() {
+      setLoading(true);
       const data = await getStats({
         questionnaireId,
         userQuestionComponentId: selectedId,
         type: selectedType,
       });
       setStatsData(data);
+      setLoading(false);
     }
     if (selectedId) {
       get();
@@ -46,7 +50,8 @@ const RightPanel: FC<Props> = (props: Props) => {
 
   return (
     <>
-      <StatsComponent data={statsData} />
+      {loading && <LoadingSpin />}
+      {!loading && <StatsComponent data={statsData} />}
     </>
   );
 };

@@ -80,6 +80,6 @@ export interface RadioStatsPair {
 }
 
 export interface CheckboxStatsPair {
-  name: string;
+  option: string;
   value: number;
 }
